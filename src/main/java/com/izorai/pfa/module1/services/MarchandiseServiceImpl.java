@@ -1,11 +1,12 @@
 package com.izorai.pfa.module1.services;
 
+import com.izorai.pfa.module1.entities.marchandises.Categorie;
 import com.izorai.pfa.module1.entities.marchandises.Marchandise;
-import org.springframework.stereotype.Service;
+import com.izorai.pfa.module1.entities.marchandises.Unite;
 
 import java.util.List;
 import java.util.Optional;
-@Service
+
 public class MarchandiseServiceImpl implements MarchandiseService {
     @Override
     public Marchandise addNewMarchandise(Marchandise marchandise) {
@@ -29,6 +30,56 @@ public class MarchandiseServiceImpl implements MarchandiseService {
 
     @Override
     public void deleteMarchandise(int id) {
+
+    }
+
+    @Override
+    public Categorie addNewCategorie(Categorie categorie) {
+        return null;
+    }
+
+    @Override
+    public List<Categorie> getAllCategories() {
+        return List.of();
+    }
+
+    @Override
+    public Optional<Categorie> getCategorieById(int id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Categorie updateCategorie(int id, Categorie categorieDetails) {
+        return null;
+    }
+
+    @Override
+    public void deleteCategorie(int id) {
+
+    }
+
+    @Override
+    public Unite addNewUnite(Unite unite) {
+        return null;
+    }
+
+    @Override
+    public List<Unite> getAllUnites() {
+        return List.of();
+    }
+
+    @Override
+    public Optional<Unite> getUniteById(int id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Unite updateUnite(int id, Unite uniteDetails) {
+        return null;
+    }
+
+    @Override
+    public void deleteUnite(int id) {
 
     }
 }

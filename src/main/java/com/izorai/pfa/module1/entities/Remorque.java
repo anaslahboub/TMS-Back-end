@@ -5,11 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Remorque  extends Camion {
+public class Remorque  extends Camion implements Serializable {
     private String typeRemorque;
     private int volumesStockage;
     private int poidsVide;
