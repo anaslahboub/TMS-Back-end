@@ -4,6 +4,11 @@ import com.izorai.pfa.module1.entities.Camion;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface CamionRepository extends JpaRepository<Camion, Long> {
+    Optional<Camion> findByImmatriculation(String immatriculation);
+
+    void deleteByImmatriculation(String immatriculation);
 }

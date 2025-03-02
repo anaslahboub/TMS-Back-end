@@ -12,15 +12,21 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"voyage_id", "marchandise_id"})
+})
 public class Qte implements Serializable {
-    @EmbeddedId
-    private QteId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private int quantite;
 
     @ManyToOne
+    @JoinColumn(name = "voyage_id")
     private Voyage voyage;
 
     @ManyToOne
+    @JoinColumn(name = "marchandise_id")
     private Marchandise marchandise;
 }
