@@ -107,22 +107,22 @@ public class camionServiceImpl implements camionService {
     }
 
     @Override
-    public Carburan createCarburan(Carburan carburan) {
+    public Carburant createCarburan(Carburant carburan) {
         return null;
     }
 
     @Override
-    public List<Carburan> getAllCarburans() {
+    public List<Carburant> getAllCarburans() {
         return List.of();
     }
 
     @Override
-    public Optional<Carburan> getCarburanById(Long id) {
+    public Optional<Carburant> getCarburanById(Long id) {
         return Optional.empty();
     }
 
     @Override
-    public Carburan updateCarburan(Long id, Carburan carburanDetails) {
+    public Carburant updateCarburan(Long id, Carburant carburanDetails) {
         return null;
     }
 

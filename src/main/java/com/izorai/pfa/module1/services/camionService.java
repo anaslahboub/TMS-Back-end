@@ -40,10 +40,10 @@ public interface camionService {
 
 
     /// carburan sevice CRUD
-    public Carburan createCarburan(Carburan carburan);
-    public List<Carburan> getAllCarburans();
-    public Optional<Carburan> getCarburanById(Long id);
-    public Carburan updateCarburan(Long id, Carburan carburanDetails);
+    public Carburant createCarburan(Carburant carburan);
+    public List<Carburant> getAllCarburans();
+    public Optional<Carburant> getCarburanById(Long id);
+    public Carburant updateCarburan(Long id, Carburant carburanDetails);
     public void deleteCarburan(Long id);
 
     /// CARTE GRISE SERVICE CRUD
