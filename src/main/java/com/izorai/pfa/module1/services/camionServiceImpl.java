@@ -1,6 +1,6 @@
 package com.izorai.pfa.module1.services;
 
-import com.izorai.pfa.module1.entities.*;
+import com.izorai.pfa.module1.entities.camion.*;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.izorai.pfa.module1.entities;
+package com.izorai.pfa.module1.entities.camion;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

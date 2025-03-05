@@ -1,5 +1,6 @@
-package com.izorai.pfa.module1.entities;
+package com.izorai.pfa.module1.entities.camion;
 
+import com.izorai.pfa.module1.entities.partenaire.Adress;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

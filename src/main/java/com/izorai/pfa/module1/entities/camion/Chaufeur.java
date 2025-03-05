@@ -1,5 +1,6 @@
-package com.izorai.pfa.module1.entities;
+package com.izorai.pfa.module1.entities.camion;
 
+import com.izorai.pfa.module1.entities.partenaire.Physique;
 import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,5 +16,5 @@ import java.time.LocalDate;
 public class Chaufeur extends Physique implements Serializable {
     private String cnss;
     private LocalDate dateRecrutement;
-    private String disponnibilite;
+    private String disponibilite;
 }

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface VoyageService {
     public Voyage createVoyage(Voyage voyage);
     public List<Voyage> getAllVoyages();
-    public Optional<Voyage> getVoyageById(int id);
-    public Voyage updateVoyage(int id, Voyage voyageDetails);
+    public Voyage getVoyageById(int id);
+    public Voyage updateVoyage(Voyage voyageDetails);
     public void deleteVoyage(int id);
 }

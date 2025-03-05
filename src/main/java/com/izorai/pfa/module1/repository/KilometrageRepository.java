@@ -1,6 +1,6 @@
 package com.izorai.pfa.module1.repository;
 
-import com.izorai.pfa.module1.entities.Kilometrage;
+import com.izorai.pfa.module1.entities.camion.Kilometrage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

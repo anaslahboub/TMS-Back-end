@@ -1,55 +1,64 @@
 package com.izorai.pfa.module1.services;
 
-import com.izorai.pfa.module1.entities.*;
+import com.izorai.pfa.module1.DTO.paretenaire.Morale.MoraleCreateDTO;
+import com.izorai.pfa.module1.DTO.paretenaire.Morale.MoraleRespDTO;
+import com.izorai.pfa.module1.DTO.paretenaire.chaufeur.ChaufeurCreateDTO;
+import com.izorai.pfa.module1.DTO.paretenaire.chaufeur.ChaufeurRespDTO;
+import com.izorai.pfa.module1.DTO.paretenaire.paretenaire.PartenaireRespDTO;
+import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
+import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
+import com.izorai.pfa.module1.DTO.paretenaire.typePartenaire.TypePartenaireCreateDTO;
+import com.izorai.pfa.module1.DTO.paretenaire.typePartenaire.TypePartenaireRespDTO;
+import com.izorai.pfa.module1.entities.partenaire.*;
+import com.izorai.pfa.module1.DTO.paretenaire.paretenaire.PartenaireCreateDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PartenaireService {
-    Partenaire createPartenaire(Partenaire partenaire);
-    List<Partenaire> getAllPartenaires();
-    Optional<Partenaire> getPartenaireById(Long idPartenaire);
-    Partenaire updatePartenaire(Long idPartenaire, Partenaire partenaireDetails);
+    PartenaireCreateDTO createPartenaire(PartenaireCreateDTO partenaire);
+    List<PartenaireRespDTO> getAllPartenaires();
+    PartenaireRespDTO getPartenaireById(Long idPartenaire);
+    Partenaire updatePartenaire(Partenaire partenaireDetails);
     void deletePartenaire(Long idPartenaire);
 
 
     /// MORALE SERVICE CRUD
-    public Morale addNewMorale(Morale morale);
-    public List<Morale> getAllMorales();
-    public Optional<Morale> getMoraleById(int ICE);
-    public Morale updateMorale(int ICE, Morale moraleDetails);
-    public void deleteMorale(int ICE);
+    public MoraleRespDTO addNewMorale(MoraleCreateDTO morale);
+    public List<MoraleRespDTO> getAllMorales();
+    public MoraleRespDTO getMoraleById(Long idPartenaire); // Utilisation de idPartenaire
+    public MoraleRespDTO updateMorale(Long id,MoraleCreateDTO moraleDetails);
+    public void deleteMorale(Long idPartenaire);
 
     /// PHYSIQUE SERVICE CRUD
-    public Physique addNewPhysique(Physique physique);
-    public List<Physique> getAllPhysiques();
-    public  Optional<Physique> getPhysiqueById(int CIN);
-    public  Physique updatePhysique(int CIN, Physique moraleDetails);
-    public void deletePhysique(int CIN);
+    public PhysiqueRespDTO addNewPhysique(PhysiqueCreateDTO physique);
+    public List<PhysiqueRespDTO> getAllPhysiques();
+    public PhysiqueRespDTO getPhysiqueById(Long idPartenaire); // Utilisation de idPartenaire
+    public PhysiqueRespDTO updatePhysique(Long id,  PhysiqueCreateDTO physiqueDetails);
+    public void deletePhysique(Long idPartenaire);
 
     /// CHAUFEUR SERVICE
 
-    Chaufeur addNewChaufeur(Chaufeur chaufeur);
-    List<Chaufeur> getAllChaufeurs();
-    Optional<Chaufeur> getChaufeurById(Long id);
-    Chaufeur updateChaufeur(Long id, Chaufeur chaufeurDetails);
+    ChaufeurRespDTO addNewChaufeur(ChaufeurCreateDTO chaufeur);
+    List<ChaufeurRespDTO> getAllChaufeurs();
+    ChaufeurRespDTO getChaufeurById(Long id);
+    ChaufeurRespDTO updateChaufeur( Long id,ChaufeurCreateDTO chaufeurDetails);
     void deleteChaufeur(Long id);
 
     /// TYPE PARETANAIRE SERVICE
     ///
     ///
-    TypePartenaire addNewTypePartenaire(TypePartenaire typePartenaire);
-    List<TypePartenaire> getAllTypePartenaires();
-    Optional<TypePartenaire> getTypePartenaireById(Long idTypePartenaire);
-    TypePartenaire updateTypePartenaire(Long idTypePartenaire, TypePartenaire typePartenaireDetails);
+    TypePartenaireRespDTO addNewTypePartenaire(TypePartenaireCreateDTO typePartenaire);
+    List<TypePartenaireRespDTO> getAllTypePartenaires();
+    TypePartenaireRespDTO getTypePartenaireById(Long idTypePartenaire);
+    TypePartenaireRespDTO updateTypePartenaire(Long id ,TypePartenaireCreateDTO typePartenaireDetails);
     void deleteTypePartenaire(Long idTypePartenaire);
 
 
     /// ADRESS  SERVICE CRUD
     public Adress addNewAdress(Adress adress);
     public List<Adress> getAllAdresses();
-    public Optional<Adress> getAdressById(Long idAdress);
-    public Adress updateAdress(Long idAdress, Adress adressDetails);
+    public Adress getAdressById(Long idAdress);
+    public Adress updateAdress(Adress adressDetails);
     public void deleteAdress(Long idAdress);
 
 

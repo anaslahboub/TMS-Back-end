@@ -1,4 +1,4 @@
-package com.izorai.pfa.module1.entities;
+package com.izorai.pfa.module1.entities.partenaire;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -8,18 +8,19 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@MappedSuperclass
 
 public class Partenaire implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idPartenaire;
     private String nom;
     private String email;
-    private int telephone;
+    private String telephone;
     @OneToMany
     private List<Adress> adresses;
     @OneToMany

@@ -1,4 +1,4 @@
-package com.izorai.pfa.module1.entities;
+package com.izorai.pfa.module1.entities.partenaire;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,6 +18,7 @@ public class TypePartenaire implements Serializable {
     private String libelle;
     private String definition;
     private String genre;
+
     @ManyToOne
     private Morale morale;
 

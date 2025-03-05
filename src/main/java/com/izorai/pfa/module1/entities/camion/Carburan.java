@@ -1,4 +1,4 @@
-package com.izorai.pfa.module1.entities;
+package com.izorai.pfa.module1.entities.camion;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,15 +11,15 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Entretien implements Serializable {
+public class Carburan implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate dateEntretien;
-    private String typeEntretien;
-    private String description;
-    private int cout;
-    private LocalDate dateProchainEntretien;
+    private LocalDate dateRemplissage;
+    private int quantity;
+    private int prixParLitre;
+    private int kilometrageActuel;
+    private String typeCarburant;
     @OneToOne
     private Camion camion;
 }

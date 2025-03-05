@@ -1,5 +1,8 @@
 package com.izorai.pfa.module1.entities;
 
+import com.izorai.pfa.module1.entities.camion.Chaufeur;
+import com.izorai.pfa.module1.entities.camion.Remorque;
+import com.izorai.pfa.module1.entities.camion.Truck;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

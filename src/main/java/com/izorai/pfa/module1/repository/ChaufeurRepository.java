@@ -1,6 +1,6 @@
 package com.izorai.pfa.module1.repository;
 
-import com.izorai.pfa.module1.entities.Chaufeur;
+import com.izorai.pfa.module1.entities.camion.Chaufeur;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
