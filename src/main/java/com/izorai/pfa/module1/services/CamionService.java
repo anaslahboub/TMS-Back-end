@@ -1,34 +1,36 @@
 package com.izorai.pfa.module1.services;
 
+import com.izorai.pfa.module1.entities.*;
 import com.izorai.pfa.module1.entities.camion.*;
+import com.izorai.pfa.module1.entities.camion.Carburant;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 
-public interface camionService {
+public interface CamionService {
 
     ///camion service
     public Camion addNewCamion(Camion camion);
     public List<Camion> getAllCamions();
-    public Optional<Camion> getCamionById(Long immatriculation);
-    public Camion updateCamion(Long immatriculation, Camion camionDetails);
-    public void deleteCamion(Long immatriculation);
+    public Optional<Camion> getCamionById(String immatriculation);
+    public Camion updateCamion(String immatriculation, Camion camionDetails);
+    public void deleteCamion(String immatriculation);
 
     /// TRUCK SERVICE
     public Truck addNewTruck(Truck truck);
     public List<Truck> getAllTrucks();
-    public Optional<Truck> getTruckById(Long immatriculation);
-    public Truck updateTruck(Long immatriculation, Truck truckDetails);
-    public void deleteTruck(Long immatriculation);
+    public Optional<Truck> getTruckById(String immatriculation);
+    public Truck updateTruck(String immatriculation, Truck truckDetails);
+    public void deleteTruck(String immatriculation);
 
     ///  REMORQUE SERVICE
     public Remorque addNewRemorque(Remorque remorque);
     public List<Remorque> getAllRemorques();
-    public Optional<Remorque> getRemorqueById(Long immatriculation);
-    public Remorque updateRemorque(Long immatriculation, Remorque remorqueDetails);
-    public void deleteRemorque(Long immatriculation);
-
+    public Optional<Remorque> getRemorqueById(String immatriculation);
+    public Remorque updateRemorque(String immatriculation, Remorque remorqueDetails);
+    public void deleteRemorque(String immatriculation);
 
 
     /// Asurrance CRUD
@@ -39,12 +41,12 @@ public interface camionService {
     public void deleteAssurance(int numeroContrat);
 
 
-    /// carburan sevice CRUD
-    public Carburant createCarburan(Carburant carburan);
-    public List<Carburant> getAllCarburans();
-    public Optional<Carburant> getCarburanById(Long id);
-    public Carburant updateCarburan(Long id, Carburant carburanDetails);
-    public void deleteCarburan(Long id);
+    /// Carburant sevice CRUD
+    public Carburant createCarburant(Carburant Carburant);
+    public List<Carburant> getAllCarburants();
+    public Optional<Carburant> getCarburantById(Long id);
+    public Carburant updateCarburant(Long id, Carburant CarburantDetails);
+    public void deleteCarburant(Long id);
 
     /// CARTE GRISE SERVICE CRUD
 

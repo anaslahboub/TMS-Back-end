@@ -15,8 +15,7 @@ import java.io.Serializable;
 
 public class Camion implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long immatriculation;
+    private String immatriculation;
     @OneToOne(cascade = CascadeType.ALL)
     private CarteGrise carteGrise;
     @OneToOne(cascade = CascadeType.ALL)

@@ -1,15 +1,13 @@
 package com.izorai.pfa.module1.services;
 
 import com.izorai.pfa.module1.entities.*;
-import com.izorai.pfa.module1.entities.camion.*;
-import com.izorai.pfa.module1.entities.camion.Carburant;
 import com.izorai.pfa.module1.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 @Service
-public class CamionServiceImpl implements CamionService {
+public class CamionServiceImpl implements camionService {
     private CamionRepository camionRepository;
     private TruckRepository truckRepository;
     private RemorqueRepository remorqueRepository;
@@ -199,7 +197,7 @@ public class CamionServiceImpl implements CamionService {
     }
 
     @Override
-    public Optional<com.izorai.pfa.module1.entities.camion.Carburant> getCarburantById(Long id) {
+    public Optional<Carburant> getCarburantById(Long id) {
         return carburantRepository.findById(id);
     }
 
