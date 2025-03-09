@@ -2,7 +2,7 @@ package com.izorai.pfa.module1.controllers.partenaire;
 
 import com.izorai.pfa.module1.DTO.paretenaire.chaufeur.ChaufeurCreateDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.chaufeur.ChaufeurRespDTO;
-import com.izorai.pfa.module1.services.PartenaireService;
+import com.izorai.pfa.module1.services.partenaire.chaufeur.ChaufeurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +14,10 @@ import java.util.List;
 @RequestMapping("/api/chauffeurs")
 public class ChaufeurController {
 
-    private final PartenaireService chaufeurService;
+    private final ChaufeurService chaufeurService;
 
     @Autowired
-    public ChaufeurController(PartenaireService chaufeurService) {
+    public ChaufeurController(ChaufeurService chaufeurService) {
         this.chaufeurService = chaufeurService;
     }
 

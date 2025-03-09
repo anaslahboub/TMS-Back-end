@@ -19,7 +19,6 @@ public class TypePartenaire implements Serializable {
     private String definition;
     private String genre;
 
-    @ManyToOne
-    private Morale morale;
+
 
 }

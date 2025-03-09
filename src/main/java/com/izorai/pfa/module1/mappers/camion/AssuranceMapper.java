@@ -8,6 +8,8 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface AssuranceMapper {
     AssuranceMapper INSTANCE = Mappers.getMapper(AssuranceMapper.class);
+
     AssuranceDTO toAssuranceDto(Assurance assurance);
-    Assurance froAssuranceDto(AssuranceDTO assuranceDTO);
+    Assurance fromAssuranceDto(AssuranceDTO assuranceDTO);
 }
+

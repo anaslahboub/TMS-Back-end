@@ -1,5 +1,6 @@
 package com.izorai.pfa.module1.entities.camion;
 
+import com.izorai.pfa.module1.entities.enumerations.StatusEntretien;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,9 @@ public class Entretien implements Serializable {
     private String description;
     private int cout;
     private LocalDate dateProchainEntretien;
-    @OneToOne
+    @Enumerated(EnumType.STRING)
+    private StatusEntretien statusEntretien;
+
+    @ManyToOne
     private Camion camion;
 }

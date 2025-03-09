@@ -30,6 +30,7 @@ public class CarteGrise implements Serializable {
     private int poidsAutorise;
     private LocalDate dateDelivrance;
 
+
     @OneToOne
     private Adress adress;
 }
