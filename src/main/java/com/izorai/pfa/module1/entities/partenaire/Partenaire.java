@@ -1,5 +1,6 @@
 package com.izorai.pfa.module1.entities.partenaire;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,9 +22,9 @@ public class Partenaire implements Serializable {
     private String nom;
     private String email;
     private String telephone;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true)
     private List<Adress> adresses;
-    @OneToMany
+    @OneToMany(orphanRemoval = true)
     private List<TypePartenaire> typePartenaires;
 
 }
