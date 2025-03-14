@@ -19,6 +19,4 @@ public class TypePartenaire implements Serializable {
     private String definition;
     private String genre;
 
-
-
 }

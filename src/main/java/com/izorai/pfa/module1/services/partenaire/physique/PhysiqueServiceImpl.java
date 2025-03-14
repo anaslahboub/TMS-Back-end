@@ -1,5 +1,6 @@
 package com.izorai.pfa.module1.services.partenaire.physique;
 
+import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateAdressDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
 import com.izorai.pfa.module1.entities.partenaire.Physique;
@@ -33,6 +34,13 @@ public class PhysiqueServiceImpl implements PhysiqueService {
     }
 
     @Override
+    public PhysiqueRespDTO addNewPhysiqueAdress(PhysiqueCreateAdressDTO physiqueCreateAdressDTO) {
+        Physique physique = physiqueMapper.fromPhysiqueCreateAdressDTO(physiqueCreateAdressDTO);
+        physique = physiqueRepository.save(physique);
+        return physiqueMapper.toPhysiqueRespDTO(physique);
+    }
+
+    @Override
     public List<PhysiqueRespDTO> getAllPhysiques() {
         List<Physique> physiques = physiqueRepository.findAll();  // Récupère la liste des entités Physique
         return physiques.stream()
@@ -57,11 +65,11 @@ public class PhysiqueServiceImpl implements PhysiqueService {
         );
 
         // Met à jour les champs de l'entité avec les détails du DTO
-        physique.setCNI(physiqueDetails.CNI());
-        physique.setNom(physiqueDetails.nom());
-        physique.setPrenom(physiqueDetails.prenom());
-        physique.setTelephone(physiqueDetails.telephone());
-        physique.setEmail(physiqueDetails.email());
+        physique.setCNI(physiqueDetails.getCNI());
+        physique.setNom(physiqueDetails.getNom());
+        physique.setPrenom(physiqueDetails.getPrenom());
+        physique.setTelephone(physiqueDetails.getTelephone());
+        physique.setEmail(physiqueDetails.getEmail());
 
         // Sauvegarde l'entité mise à jour dans la base de données
         Physique updatedPhysique = physiqueRepository.save(physique);

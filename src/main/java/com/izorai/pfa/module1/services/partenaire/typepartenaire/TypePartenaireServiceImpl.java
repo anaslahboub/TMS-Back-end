@@ -1,6 +1,7 @@
 package com.izorai.pfa.module1.services.partenaire.typepartenaire;
 
 import com.izorai.pfa.module1.DTO.paretenaire.typePartenaire.TypePartenaireCreateDTO;
+import com.izorai.pfa.module1.DTO.paretenaire.typePartenaire.TypePartenaireNomDto;
 import com.izorai.pfa.module1.DTO.paretenaire.typePartenaire.TypePartenaireRespDTO;
 import com.izorai.pfa.module1.entities.partenaire.TypePartenaire;
 import com.izorai.pfa.module1.mappers.partenaire.TypePartenaireMapper;
@@ -47,8 +48,15 @@ public class TypePartenaireServiceImpl implements TypePartenaireService {
 
     @Transactional
     public TypePartenaireRespDTO updateTypePartenaire(Long id, TypePartenaireCreateDTO typePartenaireCreateDTO) {
+        // Vérifier si le TypePartenaire existe
+        TypePartenaire existingTypePartenaire = typePartenaireRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("TypePartenaire avec l'ID " + id + " non trouvé"));
 
-        return null;
+        existingTypePartenaire.setGenre(typePartenaireCreateDTO.genre());
+        existingTypePartenaire.setDefinition(typePartenaireCreateDTO.definition());
+        existingTypePartenaire.setLibelle(typePartenaireCreateDTO.libelle());
+        typePartenaireRepository.save(existingTypePartenaire);
+        return typePartenaireMapper.toTypePartenaireRespDTO(existingTypePartenaire);
     }
 
     @Override
@@ -56,5 +64,15 @@ public class TypePartenaireServiceImpl implements TypePartenaireService {
     public void deleteTypePartenaire(Long id) {
         typePartenaireRepository.findById(id)
                 .ifPresent(typePartenaire -> typePartenaireRepository.delete(typePartenaire));
+    }
+
+    @Override
+    public List<TypePartenaireNomDto> getAllTypePartenaireNoms() {
+        return typePartenaireRepository.findAll().stream().map(typePartenaireMapper::fromEntityTypePartenaire).collect(Collectors.toList());
+    }
+
+    @Override
+    public TypePartenaire getPartenaireByLibelle(String nom) {
+        return typePartenaireRepository.findByLibelle(nom);
     }
 }

@@ -12,17 +12,17 @@ public interface ChaufeurService {
 
     ChaufeurRespDTO addNewChaufeur(ChaufeurCreateDTO chaufeur);
     List<ChaufeurRespDTO> getAllChaufeurs();
-    ChaufeurRespDTO getChaufeurById(Long id);
+    ChaufeurRespDTO getChaufeurById(Long idPartenaire);
     ChaufeurRespDTO updateChaufeur( Long id,ChaufeurCreateDTO chaufeurDetails);
     void deleteChaufeur(Long id);
 
     // Opérations spécifiques
     List<Chaufeur> getChaufeursDisponibles();
-    void setDisponibilite(Long id, String disponibilite);
+    void setDisponibilite(Long idPartenaire, String disponibilite);
 
     // Assignation
-    void assignerChaufeurACamion(Long idChaufeur, String immatriculationCamion);
-    void desassignerChaufeur(Long idChaufeur);
+    void assignerChaufeurACamion(Long idPartenaire, String immatriculationCamion);
+    void desassignerChaufeur(Long idPartenaire);
 
     // Statistiques
     int getNombreChaufeursActifs();

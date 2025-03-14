@@ -1,5 +1,6 @@
 package com.izorai.pfa.module1.controllers.partenaire;
 
+import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateAdressDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
 import com.izorai.pfa.module1.services.partenaire.physique.PhysiqueService;
@@ -20,12 +21,29 @@ public class PhysiqueController {
     }
 
 
-    // Endpoint pour ajouter une nouvelle Personne Physique
-    @PostMapping
-    public ResponseEntity<PhysiqueRespDTO> addPhysique(@RequestBody PhysiqueCreateDTO physiqueCreateDTO) {
-        PhysiqueRespDTO physiqueRespDTO = physiqueService.addNewPhysique(physiqueCreateDTO);
-        return new ResponseEntity<>(physiqueRespDTO, HttpStatus.CREATED);
-    }
+//    // Endpoint pour ajouter une nouvelle Personne Physique
+//    @PostMapping
+//    public ResponseEntity<PhysiqueRespDTO> addPhysique(@RequestBody PhysiqueCreateDTO physiqueCreateDTO) {
+//        PhysiqueRespDTO physiqueRespDTO = physiqueService.addNewPhysique(physiqueCreateDTO);
+//        return new ResponseEntity<>(physiqueRespDTO, HttpStatus.CREATED);
+//    }
+//
+       @PostMapping
+    public ResponseEntity<PhysiqueRespDTO> addPhysique(@RequestBody PhysiqueCreateAdressDTO physiqueCreateDTO) {
+        PhysiqueRespDTO physiqueRespDTO = physiqueService.addNewPhysiqueAdress(physiqueCreateDTO);
+        return new ResponseEntity<>(physiqueRespDTO, HttpStatus.CREATED);}
+
+//
+//    @PostMapping
+//    public ResponseEntity<PhysiqueRespDTO> addPhysique(@RequestBody PhysiqueCreateDTO physiqueCreateDTO) {
+//        PhysiqueRespDTO physiqueRespDTO;
+//        if (physiqueCreateDTO instanceof PhysiqueCreateAdressDTO) {
+//            physiqueRespDTO = physiqueService.addNewPhysiqueAdress((PhysiqueCreateAdressDTO) physiqueCreateDTO);
+//        } else {
+//            physiqueRespDTO = physiqueService.addNewPhysique(physiqueCreateDTO);
+//        }
+//        return new ResponseEntity<>(physiqueRespDTO, HttpStatus.CREATED);
+//    }
 
     // Endpoint pour récupérer toutes les Personnes Physiques
     @GetMapping
@@ -33,6 +51,8 @@ public class PhysiqueController {
         List<PhysiqueRespDTO> physiques = physiqueService.getAllPhysiques();
         return ResponseEntity.ok(physiques);
     }
+
+
 
     // Endpoint pour récupérer une Personne Physique par son ID
     @GetMapping("/{id}")

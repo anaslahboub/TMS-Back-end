@@ -23,5 +23,18 @@ public class Adress implements Serializable {
     private String codePostal;
 
 
+    @Override
+    public String toString() {
+        return "Adress{" +
+                "idAdress=" + idAdress +
+                ", type='" + type + '\'' +
+                ", rue='" + rue + '\'' +
+                ", ville='" + ville + '\'' +
+                ", pays='" + pays + '\'' +
+                ", codePostal='" + codePostal + '\'' +
+                '}';
+    }
+
+
 
 }

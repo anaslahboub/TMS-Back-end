@@ -36,24 +36,24 @@ public class ChaufeurController {
     }
 
     // Endpoint pour récupérer un chauffeur par son ID
-    @GetMapping("/{id}")
-    public ResponseEntity<ChaufeurRespDTO> getChaufeurById(@PathVariable Long idChauffeur) {
-        ChaufeurRespDTO chaufeurRespDTO = chaufeurService.getChaufeurById(idChauffeur);
+    @GetMapping("/{idPartenaire}")
+    public ResponseEntity<ChaufeurRespDTO> getChaufeur(@PathVariable Long idPartenaire) {
+        ChaufeurRespDTO chaufeurRespDTO = chaufeurService.getChaufeurById(idPartenaire);
         return ResponseEntity.ok(chaufeurRespDTO);
     }
 
     // Endpoint pour mettre à jour un chauffeur
-    @PutMapping("/{id}")
-    public ResponseEntity<ChaufeurRespDTO> updateChaufeur(@PathVariable Long id,
+    @PutMapping("/{idPartenaire}")
+    public ResponseEntity<ChaufeurRespDTO> updateChaufeur(@PathVariable Long idPartenaire,
                                                           @RequestBody ChaufeurCreateDTO chaufeurCreateDTO) {
-        ChaufeurRespDTO chaufeurRespDTO = chaufeurService.updateChaufeur(id, chaufeurCreateDTO);
+        ChaufeurRespDTO chaufeurRespDTO = chaufeurService.updateChaufeur(idPartenaire, chaufeurCreateDTO);
         return ResponseEntity.ok(chaufeurRespDTO);
     }
 
     // Endpoint pour supprimer un chauffeur
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteChaufeur(@PathVariable Long idChauffeur) {
-        chaufeurService.deleteChaufeur(idChauffeur);
+    @DeleteMapping("/{idPartenaire}")
+    public ResponseEntity<Void> deleteChaufeur(@PathVariable Long idPartenaire) {
+        chaufeurService.deleteChaufeur(idPartenaire);
         return ResponseEntity.noContent().build();
     }
 }

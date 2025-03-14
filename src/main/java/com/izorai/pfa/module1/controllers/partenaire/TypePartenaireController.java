@@ -1,7 +1,9 @@
 package com.izorai.pfa.module1.controllers.partenaire;
 
 import com.izorai.pfa.module1.DTO.paretenaire.typePartenaire.TypePartenaireCreateDTO;
+import com.izorai.pfa.module1.DTO.paretenaire.typePartenaire.TypePartenaireNomDto;
 import com.izorai.pfa.module1.DTO.paretenaire.typePartenaire.TypePartenaireRespDTO;
+import com.izorai.pfa.module1.entities.partenaire.TypePartenaire;
 import com.izorai.pfa.module1.services.partenaire.typepartenaire.TypePartenaireService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,17 @@ public class TypePartenaireController {
         List<TypePartenaireRespDTO> typePartenaires = typePartenaireService.getAllTypePartenaires();
         return ResponseEntity.ok(typePartenaires);
     }
+    @GetMapping("/noms")
+    public ResponseEntity<List<TypePartenaireNomDto>> getAllTypePartenaireNoms() {
+        List<TypePartenaireNomDto> typePartenaires = typePartenaireService.getAllTypePartenaireNoms();
+        return ResponseEntity.ok(typePartenaires);
+    }
+    @GetMapping("/nom/{nom}")
+    public ResponseEntity<TypePartenaire> getTypePartenaireByyNom(@RequestBody String nom) {
+        TypePartenaire typePartenaires = typePartenaireService.getPartenaireByLibelle(nom);
+        return ResponseEntity.ok(typePartenaires);
+    }
+
 
     // Endpoint pour récupérer un TypePartenaire par son ID
     @GetMapping("/{id}")

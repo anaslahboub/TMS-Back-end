@@ -36,73 +36,73 @@ public class DataInitializer implements CommandLineRunner {
 
     public void run(String... args) throws Exception {
 
-        Adress adress1 = new Adress();
-        adress1.setType("Principale");
-        adress1.setRue("123 Rue de Paris");
-        adress1.setVille("Paris");
-        adress1.setPays("France");
-        adress1.setCodePostal("75001");
-        adressRepository.save(adress1);
-
-        Adress adress2 = new Adress();
-        adress2.setType("Secondaire");
-        adress2.setRue("456 Avenue des Champs-Élysées");
-        adress2.setVille("Paris");
-        adress2.setPays("France");
-        adress2.setCodePostal("75008");
-        adressRepository.save(adress2);
-
-        // Créer des types de partenaires
-        TypePartenaire type1 = new TypePartenaire();
-        type1.setLibelle("Partenaire A");
-        type1.setDefinition("Description du partenaire A");
-        type1.setGenre("Type A");
-        typePartenaireRepository.save(type1);
-
-        TypePartenaire type2 = new TypePartenaire();
-        type2.setLibelle("Partenaire B");
-        type2.setDefinition("Description du partenaire B");
-        type2.setGenre("Type B");
-        typePartenaireRepository.save(type2);
-
-        TypePartenaire type3 = new TypePartenaire();
-        type3.setLibelle("Partenaire C");
-        type3.setDefinition("Description du partenaire C");
-        type3.setGenre("Type C");
-        typePartenaireRepository.save(type3);
+//        Adress adress1 = new Adress();
+//        adress1.setType("Principale");
+//        adress1.setRue("123 Rue de Paris");
+//        adress1.setVille("Paris");
+//        adress1.setPays("France");
+//        adress1.setCodePostal("75001");
+//        adressRepository.save(adress1);
+//
+//        Adress adress2 = new Adress();
+//        adress2.setType("Secondaire");
+//        adress2.setRue("456 Avenue des Champs-Élysées");
+//        adress2.setVille("Paris");
+//        adress2.setPays("France");
+//        adress2.setCodePostal("75008");
+//        adressRepository.save(adress2);
+//
+//        // Créer des types de partenaires
+//        TypePartenaire type1 = new TypePartenaire();
+//        type1.setLibelle("Partenaire A");
+//        type1.setDefinition("Description du partenaire A");
+//        type1.setGenre("Type A");
+//        typePartenaireRepository.save(type1);
+//
+//        TypePartenaire type2 = new TypePartenaire();
+//        type2.setLibelle("Partenaire B");
+//        type2.setDefinition("Description du partenaire B");
+//        type2.setGenre("Type B");
+//        typePartenaireRepository.save(type2);
+//
+//        TypePartenaire type3 = new TypePartenaire();
+//        type3.setLibelle("Partenaire C");
+//        type3.setDefinition("Description du partenaire C");
+//        type3.setGenre("Type C");
+//        typePartenaireRepository.save(type3);
 
         // Créer des partenaires physiques
-        Physique physique1 = new Physique();
-        physique1.setNom("Dupont");
-        physique1.setEmail("dupont@example.com");
-        physique1.setTelephone("0123456789");
-        physique1.setCNI("123456789");
-        physique1.setPrenom("Jean");
-        physiqueRepository.save(physique1);
+//        Physique physique1 = new Physique();
+//        physique1.setNom("Dupont");
+//        physique1.setEmail("dupont@example.com");
+//        physique1.setTelephone("0123456789");
+//        physique1.setCNI("123456789");
+//        physique1.setPrenom("Jean");
+//        physiqueRepository.save(physique1);
 
-        PhysiqueCreateDTO physique2 = new PhysiqueCreateDTO("Martin","martin@example.com","0682582462","123456","ahmed");
-        PhysiqueRespDTO physiqueRespDTO= physiqueService.addNewPhysique(physique2);
+//        PhysiqueCreateDTO physique2 = new PhysiqueCreateDTO("Martin","martin@example.com","0682582462","123456","ahmed");
+//        PhysiqueRespDTO physiqueRespDTO= physiqueService.addNewPhysique(physique2);
 
-        // Créer des partenaires moraux
-        Morale morale1 = new Morale();
-        morale1.setNom("ABC Corp");
-        morale1.setEmail("abc@example.com");
-        morale1.setTelephone("0112233445");
-        morale1.setICE(123456);
-        morale1.setNumeroRC(987654321L);
-        morale1.setAbreviation("ABC");
-        morale1.setFormeJuridique("SARL");
-        partenaireRepository.save(morale1);
+//        // Créer des partenaires moraux
+//        Morale morale1 = new Morale();
+//        morale1.setNom("ABC Corp");
+//        morale1.setEmail("abc@example.com");
+//        morale1.setTelephone("0112233445");
+//        morale1.setICE(123456);
+//        morale1.setNumeroRC(987654321L);
+//        morale1.setAbreviation("ABC");
+//        morale1.setFormeJuridique("SARL");
+//        partenaireRepository.save(morale1);
 
-        Morale morale2 = new Morale();
-        morale2.setNom("XYZ Corp");
-        morale2.setEmail("xyz@example.com");
-        morale2.setTelephone("0555666777");
-        morale2.setICE(654321);
-        morale2.setNumeroRC(123456789L);
-        morale2.setAbreviation("XYZ");
-        morale2.setFormeJuridique("SA");
-        partenaireRepository.save(morale2);
+//        Morale morale2 = new Morale();
+//        morale2.setNom("XYZ Corp");
+//        morale2.setEmail("xyz@example.com");
+//        morale2.setTelephone("0555666777");
+//        morale2.setICE(654321);
+//        morale2.setNumeroRC(123456789L);
+//        morale2.setAbreviation("XYZ");
+//        morale2.setFormeJuridique("SA");
+//        partenaireRepository.save(morale2);
 
         // Associer des adresses et des types de partenaires
 //        physique1.getAdresses().add(adress1);
@@ -112,10 +112,10 @@ public class DataInitializer implements CommandLineRunner {
 //        physique1.getTypePartenaires().add(type1);
 //        morale1.getTypePartenaires().add(type3);
 //        morale2.getTypePartenaires().add(type1);
-
-        partenaireRepository.save(physique1);
-        partenaireRepository.save(morale1);
-        partenaireRepository.save(morale2);
+//
+//        partenaireRepository.save(physique1);
+//        partenaireRepository.save(morale1);
+//        partenaireRepository.save(morale2);
 
 
 

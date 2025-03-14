@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ChaufeurRepository extends JpaRepository<Chaufeur, Long> {
+    Chaufeur findByIdPartenaire(Long idPartenaire);
 }

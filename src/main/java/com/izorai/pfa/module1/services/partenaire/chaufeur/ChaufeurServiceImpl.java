@@ -39,16 +39,15 @@ public class ChaufeurServiceImpl implements ChaufeurService {
     }
 
     @Override
-    public ChaufeurRespDTO getChaufeurById(Long idChauffeur) {
-        Chaufeur chauffeur = chaufeurRepository.findById(idChauffeur)
-                .orElseThrow(() -> new RuntimeException("Chauffeur not found"));
+    public ChaufeurRespDTO getChaufeurById(Long idPartenaire) {
+        Chaufeur chauffeur = chaufeurRepository.findByIdPartenaire(idPartenaire);
         return chaufeurMapper.toChaufeurRespDTO(chauffeur);
     }
 
     @Override
     @Transactional
-    public ChaufeurRespDTO updateChaufeur(Long id, ChaufeurCreateDTO chauffeurCreateDTO) {
-        Chaufeur chauffeur = chaufeurRepository.findById(id)
+    public ChaufeurRespDTO updateChaufeur(Long idPartenaire, ChaufeurCreateDTO chauffeurCreateDTO) {
+        Chaufeur chauffeur = chaufeurRepository.findById(idPartenaire)
                 .orElseThrow(() -> new RuntimeException("Chauffeur not found"));
         chauffeur.setNom(chauffeurCreateDTO.nom());
         chauffeur.setPrenom(chauffeurCreateDTO.prenom());
@@ -65,8 +64,8 @@ public class ChaufeurServiceImpl implements ChaufeurService {
 
     @Override
     @Transactional
-    public void deleteChaufeur(Long idChauffeur) {
-        chaufeurRepository.findById(idChauffeur)
+    public void deleteChaufeur(Long idPartenaire) {
+        chaufeurRepository.findById(idPartenaire)
                 .ifPresent(chauffeur -> chaufeurRepository.delete(chauffeur));
     }
 
@@ -76,17 +75,17 @@ public class ChaufeurServiceImpl implements ChaufeurService {
     }
 
     @Override
-    public void setDisponibilite(Long id, String disponibilite) {
+    public void setDisponibilite(Long idPartenaire, String disponibilite) {
 
     }
 
     @Override
-    public void assignerChaufeurACamion(Long idChaufeur, String immatriculationCamion) {
+    public void assignerChaufeurACamion(Long idPartenaire, String immatriculationCamion) {
 
     }
 
     @Override
-    public void desassignerChaufeur(Long idChaufeur) {
+    public void desassignerChaufeur(Long idPartenaire) {
 
     }
 

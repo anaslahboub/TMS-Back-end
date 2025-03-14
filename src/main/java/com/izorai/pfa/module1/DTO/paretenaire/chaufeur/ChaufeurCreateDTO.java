@@ -1,6 +1,9 @@
 package com.izorai.pfa.module1.DTO.paretenaire.chaufeur;
 
+import com.izorai.pfa.module1.entities.partenaire.Adress;
+
 import java.time.LocalDate;
+import java.util.List;
 
 public record ChaufeurCreateDTO(
         String nom,
@@ -10,7 +13,8 @@ public record ChaufeurCreateDTO(
         String prenom,
         String cnss,
         LocalDate dateRecrutement,
-        String disponibilite
+        String disponibilite,
+        List<Adress> adresses
 
 ) {
 }

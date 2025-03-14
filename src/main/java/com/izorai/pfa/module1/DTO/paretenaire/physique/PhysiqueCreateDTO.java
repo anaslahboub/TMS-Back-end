@@ -1,11 +1,16 @@
 package com.izorai.pfa.module1.DTO.paretenaire.physique;
 
-public record PhysiqueCreateDTO(
-        String nom,
-        String email,
-        String telephone,
-        String CNI,
-        String prenom
-)
-{
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class PhysiqueCreateDTO {
+    private String nom;
+    private String email;
+    private String telephone;
+    private String CNI;
+    private String prenom;
 }
