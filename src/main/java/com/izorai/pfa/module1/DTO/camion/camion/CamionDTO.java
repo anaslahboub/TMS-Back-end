@@ -8,9 +8,7 @@ public record CamionDTO(
         String immatriculation,
         String typeCabine,
         int poidsMax,
-        int consommation,
-        CarteGriseDTO carteGrise,
-        AssuranceDTO assurance
+        int consommation
         ) {}
 
 

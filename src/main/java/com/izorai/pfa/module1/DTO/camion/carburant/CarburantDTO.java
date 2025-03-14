@@ -16,8 +16,7 @@ public record CarburantDTO (
      int quantity,
      int prixParLitre,
      int kilometrageActuel,
-     TypeCarburant typeCarburant,
-     String immatriculation){
+     TypeCarburant typeCarburant){
 }
 
 

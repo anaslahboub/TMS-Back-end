@@ -10,7 +10,5 @@ import org.mapstruct.factory.Mappers;
 public interface CarburantMapper {
     CarburantMapper INSTANCE = Mappers.getMapper(CarburantMapper.class);
     Carburant fromCarburantDTO(CarburantDTO carburantDTO);
-    @Mapping(target = "immatriculation", source = "camion.immatriculation")
-
     CarburantDTO toCarburantDTO(Carburant carburant);
 }

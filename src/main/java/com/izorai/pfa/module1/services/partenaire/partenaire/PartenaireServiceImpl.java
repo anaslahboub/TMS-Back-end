@@ -50,7 +50,7 @@ public class PartenaireServiceImpl implements PartenaireService {
         partenaire.setEmail(partenaireDetails.getEmail());
         partenaire.setTelephone(partenaireDetails.getTelephone());
         partenaire.setAdresses(partenaireDetails.getAdresses());
-        partenaire.setTypePartenaires(partenaireDetails.getTypePartenaires());
+        partenaire.setTypePartenaire(partenaireDetails.getTypePartenaire());
         return partenaire;
     }
 

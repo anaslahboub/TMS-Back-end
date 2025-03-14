@@ -24,7 +24,9 @@ public class Partenaire implements Serializable {
     private String telephone;
     @OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true)
     private List<Adress> adresses;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<TypePartenaire> typePartenaires;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private TypePartenaire typePartenaire;
 
 }
