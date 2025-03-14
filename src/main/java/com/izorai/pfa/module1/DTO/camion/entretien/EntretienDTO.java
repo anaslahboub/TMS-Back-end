@@ -24,5 +24,5 @@ public record EntretienDTO(
         String description,
         int cout,
         LocalDate dateProchainEntretien,
-        Camion camion
+        String immatriculation
 ) {}

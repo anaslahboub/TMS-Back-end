@@ -4,7 +4,7 @@ import com.izorai.pfa.module1.DTO.camion.assurance.AssuranceDTO;
 import com.izorai.pfa.module1.DTO.camion.cartegrise.CarteGriseDTO;
 
 public record RemorqueDTO(
-        Long immatriculation,
+        Long idRemorque,
         String typeRemorque,
         int volumesStockage,
         int poidsVide,

@@ -1,5 +1,6 @@
 package com.izorai.pfa.module1.services.camion.remorque;
 
+import com.izorai.pfa.module1.DTO.camion.remorque.RemorqueCreateDto;
 import com.izorai.pfa.module1.DTO.camion.remorque.RemorqueDTO;
 import com.izorai.pfa.module1.entities.camion.Remorque;
 import com.izorai.pfa.module1.mappers.camion.RemorqueMapper;
@@ -21,8 +22,8 @@ public class RemorqueServiceImpl implements RemorqueService {
 
 
     @Override
-    public RemorqueDTO addNewRemorque(RemorqueDTO remorqueDTO) {
-        Remorque remorque = remorqueMapper.fromRemorqueDTO(remorqueDTO); // Convertit le DTO en entité
+    public RemorqueDTO addNewRemorque(RemorqueCreateDto remorqueDTO) {
+        Remorque remorque = remorqueMapper.fromRemorqueCreateDto(remorqueDTO); // Convertit le DTO en entité
         remorqueRepository.save(remorque);
         return remorqueMapper.toRemorqueDTO(remorque); // Retourne le DTO après la sauvegarde
     }
@@ -39,8 +40,8 @@ public class RemorqueServiceImpl implements RemorqueService {
     }
 
     @Override
-    public RemorqueDTO updateRemorque(Long immatriculation, RemorqueDTO remorqueDTO) {
-        Remorque updatedRemorque = remorqueRepository.findById(immatriculation).map(remorque -> {
+    public RemorqueDTO updateRemorque(Long idRemorque, RemorqueDTO remorqueDTO) {
+        Remorque updatedRemorque = remorqueRepository.findById(idRemorque).map(remorque -> {
             remorque.setTypeRemorque(remorqueDTO.typeRemorque());
             remorque.setPoidsVide(remorqueDTO.poidsVide());
             remorque.setPoidsChargeMax(remorqueDTO.poidsChargeMax());
@@ -52,8 +53,8 @@ public class RemorqueServiceImpl implements RemorqueService {
     }
 
     @Override
-    public void deleteRemorque(Long immatriculation) {
-        remorqueRepository.deleteById(immatriculation);
+    public void deleteRemorque(Long idRemorque) {
+        remorqueRepository.deleteById(idRemorque);
     }
 
 

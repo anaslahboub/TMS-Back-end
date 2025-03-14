@@ -52,7 +52,6 @@ public class EntrtienServiceImpl implements EntrtienService {
             entretien.setDescription(entretienDTO.description());
             entretien.setCout(entretienDTO.cout());
             entretien.setDateProchainEntretien(entretienDTO.dateProchainEntretien());
-            entretien.setCamion(entretienDTO.camion());
             return entretienRepository.save(entretien);
         }).orElseThrow(() -> new RuntimeException("Entretien non trouvé"));
 
