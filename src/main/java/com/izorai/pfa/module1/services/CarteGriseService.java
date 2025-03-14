@@ -11,4 +11,5 @@ public interface CarteGriseService {
     Optional<CarteGrise> getCarteGriseById(Long id);
     CarteGrise updateCarteGrise(Long id, CarteGrise carteGriseDetails);
     void deleteCarteGrise(Long id);
+
 }
