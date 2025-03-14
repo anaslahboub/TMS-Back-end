@@ -1,5 +1,6 @@
 package com.izorai.pfa.module1.controllers.camion;
 
+import com.izorai.pfa.module1.DTO.camion.remorque.RemorqueCreateDto;
 import com.izorai.pfa.module1.DTO.camion.remorque.RemorqueDTO;
 import com.izorai.pfa.module1.entities.camion.Remorque;
 import com.izorai.pfa.module1.services.camion.remorque.RemorqueService;
@@ -22,7 +23,7 @@ public class RemorqueController {
     }
 
     @PostMapping
-    public ResponseEntity<RemorqueDTO> addNewRemorque(@RequestBody RemorqueDTO remorqueDTO) {
+    public ResponseEntity<RemorqueDTO> addNewRemorque(@RequestBody RemorqueCreateDto remorqueDTO) {
         RemorqueDTO createdRemorque = remorqueService.addNewRemorque(remorqueDTO);
         return new ResponseEntity<>(createdRemorque, HttpStatus.CREATED);
     }
@@ -33,22 +34,22 @@ public class RemorqueController {
         return new ResponseEntity<>(remorques, HttpStatus.OK);
     }
 
-    @GetMapping("/{immatriculation}")
-    public ResponseEntity<RemorqueDTO> getRemorqueById(@PathVariable Long immatriculation) {
-        Optional<RemorqueDTO> remorque = remorqueService.getRemorqueById(immatriculation);
+    @GetMapping("/{idRemorque}")
+    public ResponseEntity<RemorqueDTO> getRemorqueById(@PathVariable Long idRemorque) {
+        Optional<RemorqueDTO> remorque = remorqueService.getRemorqueById(idRemorque);
         return remorque.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @PutMapping("/{immatriculation}")
-    public ResponseEntity<RemorqueDTO> updateRemorque(@PathVariable Long immatriculation, @RequestBody RemorqueDTO remorqueDTO) {
-        RemorqueDTO updatedRemorque = remorqueService.updateRemorque(immatriculation, remorqueDTO);
+    @PutMapping("/{idRemorque}")
+    public ResponseEntity<RemorqueDTO> updateRemorque(@PathVariable Long idRemorque, @RequestBody RemorqueDTO remorqueDTO) {
+        RemorqueDTO updatedRemorque = remorqueService.updateRemorque(idRemorque, remorqueDTO);
         return new ResponseEntity<>(updatedRemorque, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{immatriculation}")
-    public ResponseEntity<Void> deleteRemorque(@PathVariable Long immatriculation) {
-        remorqueService.deleteRemorque(immatriculation);
+    @DeleteMapping("/{idRemorque}")
+    public ResponseEntity<Void> deleteRemorque(@PathVariable Long idRemorque) {
+        remorqueService.deleteRemorque(idRemorque);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
