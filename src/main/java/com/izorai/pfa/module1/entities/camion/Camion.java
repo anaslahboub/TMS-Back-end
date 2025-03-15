@@ -33,5 +33,4 @@ public class Camion implements Serializable {
     @OneToMany(mappedBy = "camion", cascade = CascadeType.ALL)
     private List<Carburant> carburants;
 
-
 }
