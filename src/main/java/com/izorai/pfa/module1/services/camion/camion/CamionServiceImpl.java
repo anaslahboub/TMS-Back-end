@@ -54,6 +54,10 @@ public class CamionServiceImpl implements CamionService {
     @Override
     public CamionDTO updateCamion(String immatriculation, CamionDTO camionDTO) {
         Camion updatedCamion = camionRepository.findByImmatriculation(immatriculation).map(camion -> {
+            camion.setImmatriculation(camionMapper.fromCamionDTO(camionDTO).getImmatriculation());
+            camion.setConsommation(camionMapper.fromCamionDTO(camionDTO).getConsommation());
+            camion.setPoidsMax(camionMapper.fromCamionDTO(camionDTO).getPoidsMax());
+            camion.setTypeCabine(camionMapper.fromCamionDTO(camionDTO).getTypeCabine());
             camion.setAssurance(camionMapper.fromCamionDTO(camionDTO).getAssurance());
             camion.setCarteGrise(camionMapper.fromCamionDTO(camionDTO).getCarteGrise());
             return camionRepository.save(camion);
