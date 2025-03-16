@@ -14,7 +14,7 @@ public record MoraleCreateDTO(
         String abreviation,
         String formeJuridique,
         List<Adress> adresses,
-        List<TypePartenaire> typePartenaires
+        TypePartenaire typePartenaire
         ) {
 
 }
