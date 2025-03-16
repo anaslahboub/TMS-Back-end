@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Component
 @AllArgsConstructor
@@ -70,19 +71,19 @@ public class DataInitializer implements CommandLineRunner {
 //        type3.setDefinition("Description du partenaire C");
 //        type3.setGenre("Type C");
 //        typePartenaireRepository.save(type3);
-
-        // Créer des partenaires physiques
+//
 //        Physique physique1 = new Physique();
 //        physique1.setNom("Dupont");
 //        physique1.setEmail("dupont@example.com");
 //        physique1.setTelephone("0123456789");
 //        physique1.setCNI("123456789");
 //        physique1.setPrenom("Jean");
+//        physique1.setAdresses(new ArrayList<Adress>());
 //        physiqueRepository.save(physique1);
-
+//
 //        PhysiqueCreateDTO physique2 = new PhysiqueCreateDTO("Martin","martin@example.com","0682582462","123456","ahmed");
 //        PhysiqueRespDTO physiqueRespDTO= physiqueService.addNewPhysique(physique2);
-
+//
 //        // Créer des partenaires moraux
 //        Morale morale1 = new Morale();
 //        morale1.setNom("ABC Corp");
@@ -92,8 +93,9 @@ public class DataInitializer implements CommandLineRunner {
 //        morale1.setNumeroRC(987654321L);
 //        morale1.setAbreviation("ABC");
 //        morale1.setFormeJuridique("SARL");
+//        morale1.setAdresses(new ArrayList<Adress>());
 //        partenaireRepository.save(morale1);
-
+//
 //        Morale morale2 = new Morale();
 //        morale2.setNom("XYZ Corp");
 //        morale2.setEmail("xyz@example.com");
@@ -102,25 +104,25 @@ public class DataInitializer implements CommandLineRunner {
 //        morale2.setNumeroRC(123456789L);
 //        morale2.setAbreviation("XYZ");
 //        morale2.setFormeJuridique("SA");
+//        morale2.setAdresses(new ArrayList<Adress>());
 //        partenaireRepository.save(morale2);
-
-        // Associer des adresses et des types de partenaires
+//
 //        physique1.getAdresses().add(adress1);
 //        morale1.getAdresses().add(adress1);
 //        morale2.getAdresses().add(adress2);
-
-//        physique1.getTypePartenaires().add(type1);
-//        morale1.getTypePartenaires().add(type3);
-//        morale2.getTypePartenaires().add(type1);
+//
+//        physique1.setTypePartenaire(type1);
+//        morale1.setTypePartenaire(type2);
+//        morale2.setTypePartenaire(type3);
 //
 //        partenaireRepository.save(physique1);
 //        partenaireRepository.save(morale1);
 //        partenaireRepository.save(morale2);
-
-
-
-
-
+//
+//
+//
+//
+//
 //       for ( int i =1;i<=6;i++){
 //        CarteGrise carteGrise = new CarteGrise();
 //        carteGrise.setDateMiseEnCirculation(LocalDate.of(2015 + i, 5, 10));
@@ -202,11 +204,11 @@ public class DataInitializer implements CommandLineRunner {
 //
 //
 //       }
-
-
-
-
-
-        System.out.println("✅ 6 camions, 6 cartes grises, 6 assurances et 36 enregistrements de carburant insérés !");
-    }
+//
+//
+//
+//
+//
+//        System.out.println("✅ 6 camions, 6 cartes grises, 6 assurances et 36 enregistrements de carburant insérés !");
+   }
 }

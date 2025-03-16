@@ -23,15 +23,14 @@ public class Camion implements Serializable {
 
     private boolean disponible;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private CarteGrise carteGrise;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Assurance assurance;
 
-    @OneToMany(mappedBy = "camion", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "camion")
     private List<Entretien> entretiens;
-    @OneToMany(mappedBy = "camion", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "camion")
     private List<Carburant> carburants;
-
 
 }

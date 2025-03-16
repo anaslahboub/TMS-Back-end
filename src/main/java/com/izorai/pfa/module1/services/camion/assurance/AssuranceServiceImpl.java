@@ -27,8 +27,8 @@ public class AssuranceServiceImpl implements AssuranceService {
 
     @Override
     public AssuranceDTO addNewAssurance(AssuranceDTO assurance) {
-        Assurance ass = assuranceRepository.save(assuranceMapper.fromAssuranceDto(assurance));
-        return assuranceMapper.toAssuranceDto(ass);
+        Assurance ass = assuranceMapper.fromAssuranceDto(assurance);
+        return assuranceMapper.toAssuranceDto(assuranceRepository.save(ass));
     }
 
     @Override

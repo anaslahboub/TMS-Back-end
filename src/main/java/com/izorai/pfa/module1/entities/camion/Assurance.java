@@ -23,7 +23,5 @@ public class Assurance implements Serializable {
     private int primeAnnuelle;
     private Long numCarteVerte;
     private boolean active=true;
-    @OneToOne
-    Camion camion;
 
 }
