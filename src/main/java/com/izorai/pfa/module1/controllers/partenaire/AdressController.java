@@ -1,5 +1,7 @@
 package com.izorai.pfa.module1.controllers.partenaire;
 
+import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressCreateDto;
+import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressUpdateDto;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.services.partenaire.adress.AdressService;
 import com.izorai.pfa.module1.services.partenaire.partenaire.PartenaireService;
@@ -10,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/adresses")
+@RequestMapping("/api/adresses")
 public class AdressController {
 
     private final AdressService adressService;
@@ -21,7 +23,7 @@ public class AdressController {
 
 
         @PostMapping
-        public ResponseEntity<Adress> addNewAdress(@RequestBody Adress adress) {
+        public ResponseEntity<Adress> addNewAdress(@RequestBody AdressCreateDto adress) {
             Adress newAdress = adressService.addNewAdress(adress);
             return ResponseEntity.status(HttpStatus.CREATED).body(newAdress);
         }
@@ -42,8 +44,8 @@ public class AdressController {
 
         // Mettre à jour une adresse
         @PutMapping("/{id}")
-        public ResponseEntity<Adress> updateAdress(@PathVariable Long id, @RequestBody Adress adressDetails) {
-            Adress updatedAdress = adressService.updateAdress( adressDetails);
+        public ResponseEntity<Adress> updateAdress(@PathVariable Long id, @RequestBody AdressUpdateDto adressDetails) {
+            Adress updatedAdress = adressService.updateAdress(id, adressDetails);
             return updatedAdress != null ? ResponseEntity.ok(updatedAdress) : ResponseEntity.notFound().build();
         }
 

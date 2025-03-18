@@ -1,27 +1,30 @@
 package com.izorai.pfa.module1.services.partenaire.physique;
 
+import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressCreateDto;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateAdressDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
+import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.entities.partenaire.Physique;
 import com.izorai.pfa.module1.mappers.partenaire.PhysiqueMapper;
 import com.izorai.pfa.module1.repository.partenaire.PhysiqueRepository;
+import com.izorai.pfa.module1.services.partenaire.adress.AdressService;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class PhysiqueServiceImpl implements PhysiqueService {
     private final PhysiqueMapper physiqueMapper;
     private final PhysiqueRepository physiqueRepository;
+    private final AdressService adressService;
 
 
-    public PhysiqueServiceImpl(PhysiqueMapper physiqueMapper, PhysiqueRepository physiqueRepository) {
-        this.physiqueMapper = physiqueMapper;
-        this.physiqueRepository = physiqueRepository;
-    }
+
 
 
     @Override
@@ -65,7 +68,7 @@ public class PhysiqueServiceImpl implements PhysiqueService {
         );
 
         // Met à jour les champs de l'entité avec les détails du DTO
-        physique.setCNI(physiqueDetails.getCNI());
+        physique.setCni(physiqueDetails.getCni());
         physique.setNom(physiqueDetails.getNom());
         physique.setPrenom(physiqueDetails.getPrenom());
         physique.setTelephone(physiqueDetails.getTelephone());
@@ -85,6 +88,22 @@ public class PhysiqueServiceImpl implements PhysiqueService {
                 () -> new RuntimeException("La personne Physique avec l'id " + idPartenaire + " n'a pas été trouvée")
         );
         physiqueRepository.delete(physique);  // Supprime l'entité Physique
+    }
+
+    @Override
+    public List<Adress> getAdressesPhysique(Long idPartenaire) {
+        Physique physique = physiqueRepository.findById(idPartenaire).orElseThrow();
+        return physique.getAdresses();
+    }
+
+    @Override
+    @Transactional
+    public Adress addAdressPhysique(Long idPartenaire, AdressCreateDto adress) {
+        Adress adress1 = adressService.addNewAdress(adress);
+
+        Physique physique = physiqueRepository.findById(idPartenaire).get();
+        physique.getAdresses().add(adress1);
+        return adress1;
     }
 
 }

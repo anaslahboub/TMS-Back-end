@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/typePartenaires")
+@RequestMapping("/api/typePartenaires")
 public class TypePartenaireController {
 
     private final TypePartenaireService typePartenaireService;

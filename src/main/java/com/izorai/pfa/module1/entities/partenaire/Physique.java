@@ -17,7 +17,7 @@ import java.io.Serializable;
 
 public class Physique extends Partenaire {
     @Column(unique = true)
-    private String CNI;
+    private String cni;
     private String prenom;
 
 }

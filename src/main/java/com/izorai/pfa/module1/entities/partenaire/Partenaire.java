@@ -22,11 +22,10 @@ public class Partenaire implements Serializable {
     private String nom;
     private String email;
     private String telephone;
-    @OneToMany(cascade = CascadeType.ALL ,orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Adress> adresses;
 
-
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private TypePartenaire typePartenaire;
 
 }

@@ -2,6 +2,7 @@ package com.izorai.pfa.module1.controllers.partenaire;
 
 import com.izorai.pfa.module1.DTO.paretenaire.chaufeur.ChaufeurCreateDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.chaufeur.ChaufeurRespDTO;
+import com.izorai.pfa.module1.DTO.paretenaire.chaufeur.ChaufeurUpdateDto;
 import com.izorai.pfa.module1.services.partenaire.chaufeur.ChaufeurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,7 +46,7 @@ public class ChaufeurController {
     // Endpoint pour mettre à jour un chauffeur
     @PutMapping("/{idPartenaire}")
     public ResponseEntity<ChaufeurRespDTO> updateChaufeur(@PathVariable Long idPartenaire,
-                                                          @RequestBody ChaufeurCreateDTO chaufeurCreateDTO) {
+                                                          @RequestBody ChaufeurUpdateDto chaufeurCreateDTO) {
         ChaufeurRespDTO chaufeurRespDTO = chaufeurService.updateChaufeur(idPartenaire, chaufeurCreateDTO);
         return ResponseEntity.ok(chaufeurRespDTO);
     }

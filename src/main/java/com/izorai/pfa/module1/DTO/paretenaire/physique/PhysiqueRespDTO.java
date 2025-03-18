@@ -1,17 +1,22 @@
 package com.izorai.pfa.module1.DTO.paretenaire.physique;
 
 import com.izorai.pfa.module1.entities.partenaire.Adress;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class PhysiqueRespDTO{
+        Long idPartenaire;
+        String nom;
+        String email;
+        String telephone;
+        String cni;
+        String prenom;
+        List<Adress> adresses;
 
-public record PhysiqueRespDTO(
-        Long idPartenaire,
-        String nom,
-        String email,
-        String telephone,
-        String CNI,
-        String prenom,
-        List<Adress> adresses
 
-) {
 }

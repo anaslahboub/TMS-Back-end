@@ -1,8 +1,10 @@
 package com.izorai.pfa.module1.controllers.partenaire;
 
+import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressCreateDto;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateAdressDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
+import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.services.partenaire.physique.PhysiqueService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/physiques")
+@RequestMapping("/api/physiques")
 public class PhysiqueController {
     private final PhysiqueService physiqueService;
 
@@ -21,29 +23,12 @@ public class PhysiqueController {
     }
 
 
-//    // Endpoint pour ajouter une nouvelle Personne Physique
-//    @PostMapping
-//    public ResponseEntity<PhysiqueRespDTO> addPhysique(@RequestBody PhysiqueCreateDTO physiqueCreateDTO) {
-//        PhysiqueRespDTO physiqueRespDTO = physiqueService.addNewPhysique(physiqueCreateDTO);
-//        return new ResponseEntity<>(physiqueRespDTO, HttpStatus.CREATED);
-//    }
-//
+
        @PostMapping
     public ResponseEntity<PhysiqueRespDTO> addPhysique(@RequestBody PhysiqueCreateAdressDTO physiqueCreateDTO) {
         PhysiqueRespDTO physiqueRespDTO = physiqueService.addNewPhysiqueAdress(physiqueCreateDTO);
-        return new ResponseEntity<>(physiqueRespDTO, HttpStatus.CREATED);}
-
-//
-//    @PostMapping
-//    public ResponseEntity<PhysiqueRespDTO> addPhysique(@RequestBody PhysiqueCreateDTO physiqueCreateDTO) {
-//        PhysiqueRespDTO physiqueRespDTO;
-//        if (physiqueCreateDTO instanceof PhysiqueCreateAdressDTO) {
-//            physiqueRespDTO = physiqueService.addNewPhysiqueAdress((PhysiqueCreateAdressDTO) physiqueCreateDTO);
-//        } else {
-//            physiqueRespDTO = physiqueService.addNewPhysique(physiqueCreateDTO);
-//        }
-//        return new ResponseEntity<>(physiqueRespDTO, HttpStatus.CREATED);
-//    }
+        return new ResponseEntity<>(physiqueRespDTO, HttpStatus.CREATED);
+    }
 
     // Endpoint pour récupérer toutes les Personnes Physiques
     @GetMapping
@@ -73,5 +58,16 @@ public class PhysiqueController {
     public ResponseEntity<Void> deletePhysique(@PathVariable Long id) {
         physiqueService.deletePhysique(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/adresses")
+    public ResponseEntity<List<Adress>> getPhysiqueAddresses(@PathVariable Long id) {
+        List<Adress> physiqueRespDTO = physiqueService.getAdressesPhysique(id);
+        return ResponseEntity.ok(physiqueRespDTO);
+
+    }
+    @PostMapping("/{id}/addAddresses")
+    public ResponseEntity<Adress> addPhysiqueAdress(@PathVariable Long id, @RequestBody AdressCreateDto adressCreateDto){
+        return ResponseEntity.ok(physiqueService.addAdressPhysique(id, adressCreateDto));
     }
 }

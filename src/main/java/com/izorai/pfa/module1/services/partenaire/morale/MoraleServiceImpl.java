@@ -2,30 +2,44 @@ package com.izorai.pfa.module1.services.partenaire.morale;
 
 import com.izorai.pfa.module1.DTO.paretenaire.Morale.MoraleCreateDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.Morale.MoraleRespDTO;
+import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.entities.partenaire.Morale;
+import com.izorai.pfa.module1.entities.partenaire.TypePartenaire;
 import com.izorai.pfa.module1.mappers.partenaire.MoraleMapper;
+import com.izorai.pfa.module1.repository.partenaire.AdressRepository;
 import com.izorai.pfa.module1.repository.partenaire.MoraleRepository;
+import com.izorai.pfa.module1.repository.partenaire.TypePartenaireRepository;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class MoraleServiceImpl implements MoraleService {
     private final MoraleRepository moraleRepository;
     private final MoraleMapper moraleMapper;
+    private final TypePartenaireRepository typePartenaireRepository;
 
-    public MoraleServiceImpl(MoraleRepository moraleRepository, MoraleMapper moraleMapper) {
-        this.moraleRepository = moraleRepository;
-        this.moraleMapper = moraleMapper;
-    }
+
 
     @Override
     public MoraleRespDTO addNewMorale(MoraleCreateDTO moraleCreateDTO) {
         Morale morale = moraleMapper.fromMoraleCreateDTO(moraleCreateDTO);
+
+        // Charger l'objet complet TypePartenaire depuis la base
+        TypePartenaire typePartenaire = typePartenaireRepository.findById(moraleCreateDTO.getTypePartenaireId())
+                .orElseThrow(() -> new RuntimeException("TypePartenaire introuvable !"));
+
+        morale.setTypePartenaire(typePartenaire);
+
         Morale savedMorale = moraleRepository.save(morale);
         return moraleMapper.toMoraleRespDTO(savedMorale);
     }
+
+
 
     @Override
     public List<MoraleRespDTO> getAllMorales() {
@@ -45,25 +59,46 @@ public class MoraleServiceImpl implements MoraleService {
     }
 
     @Override
-    public MoraleRespDTO updateMorale(Long id,MoraleCreateDTO moraleDetails) {
+    @Transactional
+    public MoraleRespDTO updateMorale(Long id, MoraleCreateDTO moraleDetails) {
+        // Récupérer la personne morale existante
         Morale morale = moraleRepository.findById(id).orElseThrow(() ->
                 new RuntimeException("La personne Morale avec l'id " + id + " n'a pas été trouvée")
         );
-        morale.setICE(moraleDetails.ICE());
-        morale.setNom(moraleDetails.nom());
-        morale.setAbreviation(moraleDetails.abreviation());
-        morale.setNumeroRC(moraleDetails.numeroRC());
-        morale.setFormeJuridique(moraleDetails.formeJuridique());
-        morale.setEmail(moraleDetails.email());
-        morale.setTelephone(moraleDetails.telephone());
+
+        // Mettre à jour les champs
+        morale.setIce(moraleDetails.getIce());
+        morale.setNom(moraleDetails.getNom());
+        morale.setAbreviation(moraleDetails.getAbreviation());
+        morale.setNumeroRC(moraleDetails.getNumeroRC());
+        morale.setFormeJuridique(moraleDetails.getFormeJuridique());
+        morale.setEmail(moraleDetails.getEmail());
+        morale.setTelephone(moraleDetails.getTelephone());
+
+        // Récupérer et mettre à jour TypePartenaire
+        if (moraleDetails.getTypePartenaireId() != null) {
+            TypePartenaire typePartenaire = typePartenaireRepository.findById(moraleDetails.getTypePartenaireId())
+                    .orElseThrow(() -> new RuntimeException("TypePartenaire introuvable !"));
+            morale.setTypePartenaire(typePartenaire);
+        }
+
+        // Sauvegarde des modifications
         Morale updatedMorale = moraleRepository.save(morale);
 
         return moraleMapper.toMoraleRespDTO(updatedMorale);
     }
 
+
     @Override
     public void deleteMorale(Long idPartenaire) {
         moraleRepository.findById(idPartenaire).ifPresent(morale -> moraleRepository.deleteById(idPartenaire));
+    }
+
+    @Override
+    public List<Adress> getAdressesMorale(Long idPartenaire) {
+        MoraleRespDTO moraleRespDTO=getMoraleById(idPartenaire);
+        Morale morale =moraleMapper.fromMoraleRespDTO(moraleRespDTO);
+        return morale.getAdresses();
     }
 
 }

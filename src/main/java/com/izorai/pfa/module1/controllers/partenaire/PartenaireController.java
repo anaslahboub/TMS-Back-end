@@ -33,6 +33,11 @@ public class PartenaireController {
         return ResponseEntity.ok(partenaireService.createPartenaire(dto));
     }
 
+    @GetMapping
+    public ResponseEntity<List<PartenaireRespDTO>> listPartenaires() {
+        return ResponseEntity.ok(partenaireService.getAllPartenaires());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<PartenaireRespDTO> getPartenaireById(@PathVariable Long id) {
         return ResponseEntity.ok(partenaireService.getPartenaireById(id));
@@ -43,6 +48,8 @@ public class PartenaireController {
         partenaireService.deletePartenaire(id);
         return ResponseEntity.noContent().build(); // Retourne 204 No Content
     }
+
+
 
 
     // Gestion des Personnes Physiques

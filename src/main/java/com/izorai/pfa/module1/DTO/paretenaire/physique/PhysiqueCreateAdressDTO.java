@@ -15,7 +15,7 @@ public class PhysiqueCreateAdressDTO  {
     private String nom;
     private String email;
     private String telephone;
-    private String CNI;
+    private String cni;
     private String prenom;
     private List<Adress> adresses;
 

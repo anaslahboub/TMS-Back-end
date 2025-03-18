@@ -1,24 +1,36 @@
 package com.izorai.pfa.module1.services.partenaire.adress;
 
+import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressCreateDto;
+import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressUpdateDto;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
+import com.izorai.pfa.module1.entities.partenaire.Morale;
+import com.izorai.pfa.module1.entities.partenaire.Partenaire;
+import com.izorai.pfa.module1.entities.partenaire.Physique;
+import com.izorai.pfa.module1.mappers.partenaire.AdressMapper;
 import com.izorai.pfa.module1.repository.partenaire.AdressRepository;
+import com.izorai.pfa.module1.repository.partenaire.MoraleRepository;
+import com.izorai.pfa.module1.repository.partenaire.PartenaireRepository;
+import com.izorai.pfa.module1.repository.partenaire.PhysiqueRepository;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class AdressServiceImpl implements AdressService {
     private final AdressRepository adressRepository;
+    private final AdressMapper adressMapper;
+    private final PhysiqueRepository physiqueRepository;
+    private final MoraleRepository moraleRepository;
 
-    public AdressServiceImpl(AdressRepository adressRepository) {
-        this.adressRepository = adressRepository;
-    }
 
 
 
     @Override
-    public Adress addNewAdress(Adress adress) {
-        return adressRepository.save(adress);
+    public Adress addNewAdress(AdressCreateDto adress) {
+        return adressRepository.save(adressMapper.fromAdressCreateDto(adress));
     }
 
     @Override
@@ -35,18 +47,37 @@ public class AdressServiceImpl implements AdressService {
     }
 
     @Override
-    public Adress updateAdress(Adress adressDetails) {
-        Adress adress = getAdressById(adressDetails.getIdAdress());
+    @Transactional
+    public Adress updateAdress(Long idAdress, AdressUpdateDto adressDetails) {
+        Adress adress = getAdressById(idAdress);
         adress.setPays(adressDetails.getPays());
         adress.setVille(adressDetails.getVille());
         adress.setCodePostal(adressDetails.getCodePostal());
         adress.setRue(adressDetails.getRue());
-        adress.setType(adressDetails.getType());
+        adressRepository.save(adress);
         return adress;
     }
 
     @Override
+    @Transactional
     public void deleteAdress(Long idAdress) {
-        adressRepository.findById(idAdress).ifPresent(adress -> adressRepository.deleteById(idAdress));
+        // Rechercher dans les partenaires Physique
+        Physique partenairePhysique = physiqueRepository.findByAdressesIdAdress(idAdress);
+        if (partenairePhysique != null) {
+            partenairePhysique.getAdresses().removeIf(adresse -> adresse.getIdAdress().equals(idAdress));
+            physiqueRepository.save(partenairePhysique); // Sauvegarder les modifications
+            return;
+        }
+
+        // Rechercher dans les partenaires Morale
+        Morale partenaireMorale = moraleRepository.findByAdressesIdAdress(idAdress);
+        if (partenaireMorale != null) {
+            partenaireMorale.getAdresses().removeIf(adresse -> adresse.getIdAdress().equals(idAdress));
+            moraleRepository.save(partenaireMorale); // Sauvegarder les modifications
+            return;
+        }
+
+        // Si l'adresse n'est trouvée dans aucun partenaire
+        throw new RuntimeException("Adresse non trouvée dans aucun Partenaire");
     }
 }

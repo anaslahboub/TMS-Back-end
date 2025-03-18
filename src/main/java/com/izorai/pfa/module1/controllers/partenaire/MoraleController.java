@@ -2,6 +2,7 @@ package com.izorai.pfa.module1.controllers.partenaire;
 
 import com.izorai.pfa.module1.DTO.paretenaire.Morale.MoraleCreateDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.Morale.MoraleRespDTO;
+import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.services.partenaire.morale.MoraleService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/morales")
+@RequestMapping("/api/morales")
 public class MoraleController {
 
     private final MoraleService moraleService;
@@ -53,4 +54,11 @@ public class MoraleController {
         moraleService.deleteMorale(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/{id}/addresses")
+    public ResponseEntity<List<Adress>> getMoraleAddresses(@PathVariable Long id) {
+        List<Adress> moraleRespDTO = moraleService.getAdressesMorale(id);
+        return ResponseEntity.ok(moraleRespDTO);
+    }
+
 }

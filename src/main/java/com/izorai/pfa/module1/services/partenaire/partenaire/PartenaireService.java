@@ -2,6 +2,7 @@ package com.izorai.pfa.module1.services.partenaire.partenaire;
 
 import com.izorai.pfa.module1.DTO.paretenaire.paretenaire.PartenaireCreateDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.paretenaire.PartenaireRespDTO;
+import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.entities.partenaire.Partenaire;
 
 import java.util.List;
