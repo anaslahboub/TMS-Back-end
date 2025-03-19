@@ -11,9 +11,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface EntretienMapper {
     EntretienMapper INSTANCE = Mappers.getMapper(EntretienMapper.class);
-    @Mapping(source = "camion.immatriculation", target = "immatriculation")
     EntretienDTO toEntretienDTO(Entretien entretien);
 
-    @Mapping(source = "immatriculation", target = "camion.immatriculation")
     Entretien fromEntretienDTO(EntretienDTO entretienDTO);
 }

@@ -3,7 +3,9 @@ package com.izorai.pfa.module1.services.camion.carburant;
 import com.izorai.pfa.module1.DTO.camion.carburant.CarburantDTO;
 import com.izorai.pfa.module1.entities.camion.Camion;
 import com.izorai.pfa.module1.entities.camion.Carburant;
+import com.izorai.pfa.module1.mappers.camion.CamionMapper;
 import com.izorai.pfa.module1.mappers.camion.CarburantMapper;
+import com.izorai.pfa.module1.mappers.camion.TypeCarburantMapper;
 import com.izorai.pfa.module1.repository.camion.CamionRepository;
 import com.izorai.pfa.module1.repository.camion.CarburantRepository;
 import lombok.AllArgsConstructor;
@@ -22,6 +24,8 @@ public class CarburantServiceImpl implements CarburantService {
     private final CarburantRepository carburantRepository;
     private final CarburantMapper carburantMapper;
     private final CamionRepository camionRepository;
+    private final TypeCarburantMapper typeCarburantMapper;
+    private final CamionMapper camionMapper ;
 
 
 
@@ -48,11 +52,12 @@ public class CarburantServiceImpl implements CarburantService {
     public CarburantDTO updateCarburant(Long id, CarburantDTO carburantDTO) {
         Carburant updatedCarburant = carburantRepository.findById(id).map(carburant -> {
             carburant.setCamion(carburantMapper.fromCarburantDTO(carburantDTO).getCamion());
-            carburant.setTypeCarburant(carburantDTO.typeCarburant());
+            carburant.setTypeCarburant(typeCarburantMapper.fromTypeCarburantDTO(carburantDTO.typeCarburant()));
             carburant.setQuantiteLitres(carburantDTO.quantity());
             carburant.setDateRemplissage(carburantDTO.dateRemplissage());
             carburant.setKilometrageActuel(carburantDTO.kilometrageActuel());
             carburant.setPrixParLitre(carburantDTO.prixParLitre());
+            carburant.setCamion(camionMapper.fromCamionDTO(carburantDTO.camion()));
             return carburantRepository.save(carburant);
         }).orElseThrow(() -> new RuntimeException("Carburant non trouvé"));
 

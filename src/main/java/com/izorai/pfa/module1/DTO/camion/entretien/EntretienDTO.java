@@ -1,5 +1,6 @@
 package com.izorai.pfa.module1.DTO.camion.entretien;
 
+import com.izorai.pfa.module1.DTO.camion.camion.CamionDTO;
 import com.izorai.pfa.module1.entities.camion.Camion;
 import java.time.LocalDate;
 
@@ -24,5 +25,5 @@ public record EntretienDTO(
         String description,
         int cout,
         LocalDate dateProchainEntretien,
-        String immatriculation
+        CamionDTO camion
 ) {}

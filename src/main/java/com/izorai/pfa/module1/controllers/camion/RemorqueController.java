@@ -23,7 +23,7 @@ public class RemorqueController {
     }
 
     @PostMapping
-    public ResponseEntity<RemorqueDTO> addNewRemorque(@RequestBody RemorqueCreateDto remorqueDTO) {
+    public ResponseEntity<RemorqueDTO> addNewRemorque(@RequestBody RemorqueDTO remorqueDTO) {
         RemorqueDTO createdRemorque = remorqueService.addNewRemorque(remorqueDTO);
         return new ResponseEntity<>(createdRemorque, HttpStatus.CREATED);
     }
