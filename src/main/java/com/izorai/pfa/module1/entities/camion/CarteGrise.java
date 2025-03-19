@@ -28,9 +28,4 @@ public class CarteGrise implements Serializable {
     private String proprietaire;
     private int poidsVide;
     private int poidsAutorise;
-    private LocalDate dateDelivrance;
-
-
-    @OneToOne
-    private Adress adress;
-}
+    private LocalDate dateDelivrance;}
