@@ -17,7 +17,6 @@ import java.util.List;
 public class Camion implements Serializable {
     @Id
     private String immatriculation;
-    private String typeCabine;
     private int poidsMax;
     private int consommation;
 
@@ -32,5 +31,7 @@ public class Camion implements Serializable {
     private List<Entretien> entretiens;
     @OneToMany(mappedBy = "camion")
     private List<Carburant> carburants;
+    @ManyToOne
+    TypeCamion typeCamion;
 
 }

@@ -1,8 +1,10 @@
 package com.izorai.pfa.module1.DTO.camion.carburant;
 
 
+import com.izorai.pfa.module1.DTO.camion.camion.CamionDTO;
+import com.izorai.pfa.module1.DTO.camion.typeCarburant.TypeCarburantDTO;
 import com.izorai.pfa.module1.entities.camion.Camion;
-import com.izorai.pfa.module1.entities.enumerations.TypeCarburant;
+import com.izorai.pfa.module1.entities.camion.TypeCarburant;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +18,9 @@ public record CarburantDTO (
      int quantity,
      int prixParLitre,
      int kilometrageActuel,
-     TypeCarburant typeCarburant){
+     TypeCarburantDTO typeCarburant,
+     CamionDTO camion
+){
 }
 
 

@@ -3,6 +3,7 @@ package com.izorai.pfa.module1.services.camion.entretien;
 import com.izorai.pfa.module1.DTO.camion.entretien.EntretienDTO;
 import com.izorai.pfa.module1.entities.camion.Camion;
 import com.izorai.pfa.module1.entities.camion.Entretien;
+import com.izorai.pfa.module1.mappers.camion.CamionMapper;
 import com.izorai.pfa.module1.mappers.camion.EntretienMapper;
 import com.izorai.pfa.module1.repository.camion.CamionRepository;
 import com.izorai.pfa.module1.repository.camion.EntretienRepository;
@@ -22,7 +23,7 @@ public class EntrtienServiceImpl implements EntrtienService {
     private final EntretienRepository entretienRepository;
     private final EntretienMapper entretienMapper;
     private final CamionRepository camionRepository;
-
+private final CamionMapper camionMapper;
 
 
     @Override
@@ -52,6 +53,7 @@ public class EntrtienServiceImpl implements EntrtienService {
             entretien.setDescription(entretienDTO.description());
             entretien.setCout(entretienDTO.cout());
             entretien.setDateProchainEntretien(entretienDTO.dateProchainEntretien());
+            entretien.setCamion(camionMapper.fromCamionDTO(entretienDTO.camion()));
             return entretienRepository.save(entretien);
         }).orElseThrow(() -> new RuntimeException("Entretien non trouvé"));
 

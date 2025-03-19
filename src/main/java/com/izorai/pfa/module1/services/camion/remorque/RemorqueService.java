@@ -10,7 +10,7 @@ import java.util.Optional;
 public interface RemorqueService {
 
     ///  REMORQUE SERVICE
-    public RemorqueDTO addNewRemorque(RemorqueCreateDto remorque);
+    public RemorqueDTO addNewRemorque(RemorqueDTO remorque);
     public List<RemorqueDTO> getAllRemorques();
     public Optional<RemorqueDTO> getRemorqueById(Long id);
     public RemorqueDTO updateRemorque(Long id, RemorqueDTO remorqueDetails);

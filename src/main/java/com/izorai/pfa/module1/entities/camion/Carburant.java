@@ -1,6 +1,5 @@
 package com.izorai.pfa.module1.entities.camion;
 
-import com.izorai.pfa.module1.entities.enumerations.TypeCarburant;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,7 +19,7 @@ public class Carburant implements Serializable {
     private int quantiteLitres;
     private int prixParLitre;
     private int kilometrageActuel;
-    @Enumerated(EnumType.STRING)
+    @ManyToOne
     private TypeCarburant typeCarburant;
     @ManyToOne
     private Camion camion;

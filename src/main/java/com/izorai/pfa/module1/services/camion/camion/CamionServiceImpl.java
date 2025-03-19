@@ -57,7 +57,7 @@ public class CamionServiceImpl implements CamionService {
             camion.setImmatriculation(camionMapper.fromCamionDTO(camionDTO).getImmatriculation());
             camion.setConsommation(camionMapper.fromCamionDTO(camionDTO).getConsommation());
             camion.setPoidsMax(camionMapper.fromCamionDTO(camionDTO).getPoidsMax());
-            camion.setTypeCabine(camionMapper.fromCamionDTO(camionDTO).getTypeCabine());
+            camion.setTypeCamion(camionMapper.fromCamionDTO(camionDTO).getTypeCamion());
             camion.setAssurance(camionMapper.fromCamionDTO(camionDTO).getAssurance());
             camion.setCarteGrise(camionMapper.fromCamionDTO(camionDTO).getCarteGrise());
             return camionRepository.save(camion);
