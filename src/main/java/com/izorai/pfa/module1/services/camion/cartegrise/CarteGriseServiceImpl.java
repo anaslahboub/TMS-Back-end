@@ -53,7 +53,6 @@ public class CarteGriseServiceImpl implements CarteGriseService {
             carteGrise.setPoidsVide(carteGriseDetails.poidsVide());
             carteGrise.setPoidsAutorise(carteGriseDetails.poidsAutorise());
             carteGrise.setDateDelivrance(carteGriseDetails.dateDelivrance());
-            carteGrise.setAdress(carteGriseDetails.adress());
             return carteGriseRepository.save(carteGrise);
         }).orElseThrow(() -> new RuntimeException("Carte grise non trouvée"));
 
