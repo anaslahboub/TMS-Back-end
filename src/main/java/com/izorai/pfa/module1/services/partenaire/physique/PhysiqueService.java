@@ -1,7 +1,6 @@
 package com.izorai.pfa.module1.services.partenaire.physique;
 
 import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressCreateDto;
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateAdressDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
@@ -12,7 +11,6 @@ public interface PhysiqueService {
 
     /// PHYSIQUE SERVICE CRUD
     public PhysiqueRespDTO addNewPhysique(PhysiqueCreateDTO physique);
-    public PhysiqueRespDTO addNewPhysiqueAdress(PhysiqueCreateAdressDTO physiqueCreateAdressDTO);
 
     public List<PhysiqueRespDTO> getAllPhysiques();
     public PhysiqueRespDTO getPhysiqueById(Long idPartenaire); // Utilisation de idPartenaire

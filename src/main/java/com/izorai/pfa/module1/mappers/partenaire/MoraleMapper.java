@@ -11,7 +11,6 @@ import org.mapstruct.factory.Mappers;
 public interface MoraleMapper {
     MoraleMapper INSTANCE = Mappers.getMapper(MoraleMapper.class);
 
-    @Mapping(target = "typePartenaire", ignore = true) // On l'ignore pour le gérer manuellement
     Morale fromMoraleCreateDTO(MoraleCreateDTO moraleCreateDTO);
     MoraleCreateDTO toMoraleCreateDTO(Morale morale);
     Morale fromMoraleRespDTO(MoraleRespDTO moraleCreateDTO);

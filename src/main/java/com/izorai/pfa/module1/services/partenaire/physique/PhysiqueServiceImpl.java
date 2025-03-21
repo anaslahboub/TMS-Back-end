@@ -1,13 +1,14 @@
 package com.izorai.pfa.module1.services.partenaire.physique;
 
 import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressCreateDto;
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateAdressDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.entities.partenaire.Physique;
+import com.izorai.pfa.module1.entities.partenaire.TypePartenaire;
 import com.izorai.pfa.module1.mappers.partenaire.PhysiqueMapper;
 import com.izorai.pfa.module1.repository.partenaire.PhysiqueRepository;
+import com.izorai.pfa.module1.repository.partenaire.TypePartenaireRepository;
 import com.izorai.pfa.module1.services.partenaire.adress.AdressService;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -22,24 +23,12 @@ public class PhysiqueServiceImpl implements PhysiqueService {
     private final PhysiqueMapper physiqueMapper;
     private final PhysiqueRepository physiqueRepository;
     private final AdressService adressService;
-
-
-
+    private final TypePartenaireRepository typePartenaireRepository;
 
 
     @Override
-    @Transactional
     public PhysiqueRespDTO addNewPhysique(PhysiqueCreateDTO physiqueCreateDTO) {
-        // Mapping du DTO vers l'entité Physique
-        Physique physique = physiqueMapper.fromPhysiqueCreateDTO(physiqueCreateDTO);
-        physique = physiqueRepository.save(physique);  // Sauvegarde dans la base
-        return physiqueMapper.toPhysiqueRespDTO(physique);  // Retour du DTO avec l'ID généré
-    }
-
-    @Override
-    public PhysiqueRespDTO addNewPhysiqueAdress(PhysiqueCreateAdressDTO physiqueCreateAdressDTO) {
-        Physique physique = physiqueMapper.fromPhysiqueCreateAdressDTO(physiqueCreateAdressDTO);
-        physique = physiqueRepository.save(physique);
+        Physique physique =physiqueRepository.save( physiqueMapper.fromPhysiqueCreateDTO(physiqueCreateDTO));
         return physiqueMapper.toPhysiqueRespDTO(physique);
     }
 
@@ -73,6 +62,7 @@ public class PhysiqueServiceImpl implements PhysiqueService {
         physique.setPrenom(physiqueDetails.getPrenom());
         physique.setTelephone(physiqueDetails.getTelephone());
         physique.setEmail(physiqueDetails.getEmail());
+        physique.setTypePartenaire(physiqueDetails.getTypePartenaire());
 
         // Sauvegarde l'entité mise à jour dans la base de données
         Physique updatedPhysique = physiqueRepository.save(physique);

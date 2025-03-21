@@ -19,6 +19,6 @@ public class MoraleCreateDTO{
         String abreviation;
         String formeJuridique;
         List<Adress> adresses;
-        private Long typePartenaireId;  // Utiliser l'ID au lieu de l'objet complet
+        TypePartenaire typePartenaire;  // Utiliser l'ID au lieu de l'objet complet
 
 }
