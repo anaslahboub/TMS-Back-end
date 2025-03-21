@@ -1,6 +1,7 @@
 package com.izorai.pfa.module1.DTO.paretenaire.physique;
 
 import com.izorai.pfa.module1.entities.partenaire.Adress;
+import com.izorai.pfa.module1.entities.partenaire.TypePartenaire;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,5 @@ public class PhysiqueRespDTO{
         String cni;
         String prenom;
         List<Adress> adresses;
-
-
+        TypePartenaire typePartenaire;
 }

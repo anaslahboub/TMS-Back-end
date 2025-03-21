@@ -28,13 +28,6 @@ public class MoraleServiceImpl implements MoraleService {
     @Override
     public MoraleRespDTO addNewMorale(MoraleCreateDTO moraleCreateDTO) {
         Morale morale = moraleMapper.fromMoraleCreateDTO(moraleCreateDTO);
-
-        // Charger l'objet complet TypePartenaire depuis la base
-        TypePartenaire typePartenaire = typePartenaireRepository.findById(moraleCreateDTO.getTypePartenaireId())
-                .orElseThrow(() -> new RuntimeException("TypePartenaire introuvable !"));
-
-        morale.setTypePartenaire(typePartenaire);
-
         Morale savedMorale = moraleRepository.save(morale);
         return moraleMapper.toMoraleRespDTO(savedMorale);
     }
@@ -74,15 +67,8 @@ public class MoraleServiceImpl implements MoraleService {
         morale.setFormeJuridique(moraleDetails.getFormeJuridique());
         morale.setEmail(moraleDetails.getEmail());
         morale.setTelephone(moraleDetails.getTelephone());
+        morale.setTypePartenaire(moraleDetails.getTypePartenaire());
 
-        // Récupérer et mettre à jour TypePartenaire
-        if (moraleDetails.getTypePartenaireId() != null) {
-            TypePartenaire typePartenaire = typePartenaireRepository.findById(moraleDetails.getTypePartenaireId())
-                    .orElseThrow(() -> new RuntimeException("TypePartenaire introuvable !"));
-            morale.setTypePartenaire(typePartenaire);
-        }
-
-        // Sauvegarde des modifications
         Morale updatedMorale = moraleRepository.save(morale);
 
         return moraleMapper.toMoraleRespDTO(updatedMorale);

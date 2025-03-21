@@ -1,16 +1,11 @@
 package com.izorai.pfa.module1.mappers.partenaire;
 
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateAdressDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
-import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.entities.partenaire.Physique;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 
@@ -22,8 +17,8 @@ public interface    PhysiqueMapper {
     @Mapping(source = "idPartenaire", target = "idPartenaire")
     PhysiqueRespDTO toPhysiqueRespDTO(Physique physique);
 
-    PhysiqueCreateAdressDTO toPhysiqueCreateAdressDTO(Physique physique);
-    Physique fromPhysiqueCreateAdressDTO(PhysiqueCreateAdressDTO physiqueCreateAdressDTO);
+    PhysiqueCreateDTO toPhysiqueCreateAdressDTO(Physique physique);
+    Physique fromPhysiqueCreateAdressDTO(PhysiqueCreateDTO physiqueCreateAdressDTO);
 
 
 }

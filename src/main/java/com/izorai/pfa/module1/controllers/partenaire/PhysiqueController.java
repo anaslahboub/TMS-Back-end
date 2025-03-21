@@ -1,14 +1,12 @@
 package com.izorai.pfa.module1.controllers.partenaire;
 
 import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressCreateDto;
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateAdressDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
 import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.services.partenaire.physique.PhysiqueService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +23,8 @@ public class PhysiqueController {
 
 
        @PostMapping
-    public ResponseEntity<PhysiqueRespDTO> addPhysique(@RequestBody PhysiqueCreateAdressDTO physiqueCreateDTO) {
-        PhysiqueRespDTO physiqueRespDTO = physiqueService.addNewPhysiqueAdress(physiqueCreateDTO);
+    public ResponseEntity<PhysiqueRespDTO> addPhysique(@RequestBody PhysiqueCreateDTO physiqueCreateDTO) {
+        PhysiqueRespDTO physiqueRespDTO = physiqueService.addNewPhysique(physiqueCreateDTO);
         return new ResponseEntity<>(physiqueRespDTO, HttpStatus.CREATED);
     }
 
