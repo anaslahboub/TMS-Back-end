@@ -1,13 +1,17 @@
 package com.izorai.pfa.module2.services;
 
-import com.izorai.pfa.module2.entities.Voyage;
+import com.izorai.pfa.module2.DTO.voyage.VoyageDTO;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface VoyageService {
-    public Voyage createVoyage(Voyage voyage);
-    public List<Voyage> getAllVoyages();
-    public Voyage getVoyageById(int id);
-    public Voyage updateVoyage(Voyage voyageDetails);
-    public void deleteVoyage(int id);
+    VoyageDTO createVoyage(VoyageDTO voyageDTO);
+    List<VoyageDTO> getAllVoyages();
+    Optional<VoyageDTO> getVoyageById(Long id);
+    List<VoyageDTO> getVoyagesByDateRange(LocalDateTime start, LocalDateTime end);
+    List<VoyageDTO> getVoyagesByStatut(String statut);
+    VoyageDTO updateVoyage(Long id, VoyageDTO voyageDTO);
+    void deleteVoyage(Long id);
 }

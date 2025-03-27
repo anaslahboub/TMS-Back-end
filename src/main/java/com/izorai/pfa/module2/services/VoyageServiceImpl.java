@@ -1,55 +1,85 @@
 package com.izorai.pfa.module2.services;
 
+import com.izorai.pfa.module2.DTO.voyage.VoyageDTO;
 import com.izorai.pfa.module2.entities.Voyage;
+import com.izorai.pfa.module2.mappers.VoyageMapper;
 import com.izorai.pfa.module2.repository.VoyageRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class VoyageServiceImpl implements VoyageService {
 
     private final VoyageRepository voyageRepository;
-    public VoyageServiceImpl(VoyageRepository voyageRepository) {
+    private final VoyageMapper voyageMapper;
+
+    public VoyageServiceImpl(VoyageRepository voyageRepository,
+                             VoyageMapper voyageMapper) {
         this.voyageRepository = voyageRepository;
-    }
-    @Override
-    public Voyage createVoyage(Voyage voyage) {
-        return voyageRepository.save(voyage);
+        this.voyageMapper = voyageMapper;
     }
 
     @Override
-    public List<Voyage> getAllVoyages() {
-        return voyageRepository.findAll();
+    public VoyageDTO createVoyage(VoyageDTO voyageDTO) {
+        Voyage voyage = voyageMapper.toEntity(voyageDTO);
+        Voyage saved = voyageRepository.save(voyage);
+        return voyageMapper.toDto(saved);
     }
 
     @Override
-    public Voyage getVoyageById(int id) {
-
-        return voyageRepository.findById((id)).orElseThrow(() ->
-                new IllegalArgumentException("Voyage with id " + id + " not found")
-        );
-
+    @Transactional(readOnly = true)
+    public List<VoyageDTO> getAllVoyages() {
+        return voyageRepository.findAll().stream()
+                .map(voyageMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Voyage updateVoyage(Voyage voyageDetails) {
-        Voyage voyage = getVoyageById(voyageDetails.getId());
-        voyage.setChaufeur(voyageDetails.getChaufeur());
-        voyage.setEtat(voyageDetails.getEtat());
-        voyage.setDistance(voyageDetails.getDistance());
-        voyage.setDateArrivePrevue(voyageDetails.getDateArrivePrevue());
-        voyage.setDateDepart(voyageDetails.getDateDepart());
-        voyage.setDateArriveRelle(voyageDetails.getDateArriveRelle());
-        voyage.setLieuArrive(voyageDetails.getLieuArrive());
-        voyage.setLieuDepart(voyageDetails.getLieuDepart());
-        voyage.setRemorque(voyageDetails.getRemorque());
+    @Transactional(readOnly = true)
+    public Optional<VoyageDTO> getVoyageById(Long id) {
+        return voyageRepository.findById(id)
+                .map(voyageMapper::toDto);
+    }
 
-        return voyage;
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<VoyageDTO> getVoyagesByDateRange(LocalDateTime start, LocalDateTime end) {
+        return voyageRepository.findByDateDepartBetween(start, end).stream()
+                .map(voyageMapper::toDto)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void deleteVoyage(int id) {
+    @Transactional(readOnly = true)
+    public List<VoyageDTO> getVoyagesByStatut(String statut) {
+        return voyageRepository.findByEtat(statut).stream()
+                .map(voyageMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public VoyageDTO updateVoyage(Long id, VoyageDTO voyageDTO) {
+        return voyageRepository.findById(id)
+                .map(existing -> {
+                    Voyage updated = voyageMapper.toEntity(voyageDTO);
+                    updated.setId(id);
+                    Voyage saved = voyageRepository.save(updated);
+                    return voyageMapper.toDto(saved);
+                })
+                .orElseThrow(() -> new RuntimeException("Voyage not found with id: " + id));
+    }
+
+    @Override
+    public void deleteVoyage(Long id) {
         voyageRepository.deleteById(id);
     }
+
+
 }
