@@ -2,6 +2,7 @@ package com.izorai.pfa.module2.entities;
 
 import com.izorai.pfa.module1.entities.camion.Chaufeur;
 import com.izorai.pfa.module1.entities.camion.Remorque;
+import com.izorai.pfa.module2.entities.marchandises.Marchandise;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,10 +18,10 @@ import java.time.LocalDate;
 public class Voyage implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private LocalDate dateDepart;
     private LocalDate dateArrivePrevue;
-    private LocalDate dateArriveRelle;
+    private LocalDate dateArriveReelle;
     private String lieuDepart;
     private String lieuArrive;
     private int distance;
@@ -30,8 +31,6 @@ public class Voyage implements Serializable {
     private Chaufeur chaufeur;
     @ManyToOne
     private Remorque remorque;
-
-
 
 
 }

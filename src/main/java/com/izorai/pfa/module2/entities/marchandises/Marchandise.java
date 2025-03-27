@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 public class Marchandise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
+    private String libelle;
     private String description;
     private String codeMarchandise; // Code unique pour la marchandise
 

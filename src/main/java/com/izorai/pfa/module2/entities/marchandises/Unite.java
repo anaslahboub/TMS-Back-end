@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class Unite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String titre;
+    private Long id;
+    private String unite;
     private String description;
 }
