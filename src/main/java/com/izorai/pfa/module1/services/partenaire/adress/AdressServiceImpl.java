@@ -1,15 +1,13 @@
 package com.izorai.pfa.module1.services.partenaire.adress;
 
-import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressCreateDto;
-import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressUpdateDto;
+import com.izorai.pfa.module1.DTO.partenaire.adress.AdressCreateDto;
+import com.izorai.pfa.module1.DTO.partenaire.adress.AdressUpdateDto;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.entities.partenaire.Morale;
-import com.izorai.pfa.module1.entities.partenaire.Partenaire;
 import com.izorai.pfa.module1.entities.partenaire.Physique;
 import com.izorai.pfa.module1.mappers.partenaire.AdressMapper;
 import com.izorai.pfa.module1.repository.partenaire.AdressRepository;
 import com.izorai.pfa.module1.repository.partenaire.MoraleRepository;
-import com.izorai.pfa.module1.repository.partenaire.PartenaireRepository;
 import com.izorai.pfa.module1.repository.partenaire.PhysiqueRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;

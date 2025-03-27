@@ -1,16 +1,8 @@
 package com.izorai.pfa.module1.controllers.partenaire;
 
-import com.izorai.pfa.module1.DTO.paretenaire.Morale.MoraleCreateDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.Morale.MoraleRespDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.paretenaire.PartenaireCreateDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.paretenaire.PartenaireRespDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.typePartenaire.TypePartenaireCreateDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.typePartenaire.TypePartenaireRespDTO;
-import com.izorai.pfa.module1.entities.partenaire.Adress;
+import com.izorai.pfa.module1.DTO.partenaire.paretenaire.PartenaireCreateDTO;
+import com.izorai.pfa.module1.DTO.partenaire.paretenaire.PartenaireRespDTO;
 import com.izorai.pfa.module1.services.partenaire.partenaire.PartenaireService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

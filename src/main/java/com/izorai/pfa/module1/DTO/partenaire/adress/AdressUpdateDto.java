@@ -1,4 +1,4 @@
-package com.izorai.pfa.module1.DTO.paretenaire.adress;
+package com.izorai.pfa.module1.DTO.partenaire.adress;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdressCreateDto {
-    private String type;
+public class AdressUpdateDto {
     private String rue;
     private String ville;
     private String pays;

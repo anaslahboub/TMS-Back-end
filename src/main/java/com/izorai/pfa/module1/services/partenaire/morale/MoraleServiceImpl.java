@@ -1,12 +1,10 @@
 package com.izorai.pfa.module1.services.partenaire.morale;
 
-import com.izorai.pfa.module1.DTO.paretenaire.Morale.MoraleCreateDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.Morale.MoraleRespDTO;
+import com.izorai.pfa.module1.DTO.partenaire.Morale.MoraleCreateDTO;
+import com.izorai.pfa.module1.DTO.partenaire.Morale.MoraleRespDTO;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.entities.partenaire.Morale;
-import com.izorai.pfa.module1.entities.partenaire.TypePartenaire;
 import com.izorai.pfa.module1.mappers.partenaire.MoraleMapper;
-import com.izorai.pfa.module1.repository.partenaire.AdressRepository;
 import com.izorai.pfa.module1.repository.partenaire.MoraleRepository;
 import com.izorai.pfa.module1.repository.partenaire.TypePartenaireRepository;
 import jakarta.transaction.Transactional;

@@ -1,8 +1,8 @@
 package com.izorai.pfa.module1.mappers.partenaire;
 
-import com.izorai.pfa.module1.DTO.paretenaire.chaufeur.ChaufeurCreateDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.chaufeur.ChaufeurRespDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.chaufeur.ChaufeurUpdateDto;
+import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurCreateDTO;
+import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurRespDTO;
+import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurUpdateDto;
 import com.izorai.pfa.module1.entities.camion.Chaufeur;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

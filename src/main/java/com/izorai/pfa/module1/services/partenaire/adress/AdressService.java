@@ -1,7 +1,7 @@
 package com.izorai.pfa.module1.services.partenaire.adress;
 
-import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressCreateDto;
-import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressUpdateDto;
+import com.izorai.pfa.module1.DTO.partenaire.adress.AdressCreateDto;
+import com.izorai.pfa.module1.DTO.partenaire.adress.AdressUpdateDto;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import java.util.List;
 

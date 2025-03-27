@@ -29,7 +29,20 @@ public interface CarburantService {
 
     //Calcule le coût total de carburant consommé par le camion sur une période donnée.
     //Utile pour estimer les coûts de transport et la gestion du budget carburant.
-    double getCoutTotalCarburant(String immatriculationCamion);
+    double getCoutTotalCarburant();
+
+    /**
+     * retourner la distance totale parcorue
+     */
+
+    double getDistanceTotalParcourue();
+
+    /**
+     * get la quantite totale
+      */
+
+    double getQuantityTotal();
+
 
 
 }

@@ -1,21 +1,14 @@
 package com.izorai.pfa;
 
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
-import com.izorai.pfa.module1.entities.camion.*;
-import com.izorai.pfa.module1.entities.enumerations.StatusEntretien;
-import com.izorai.pfa.module1.entities.enumerations.TypeCarburant;
-import com.izorai.pfa.module1.entities.partenaire.*;
 import com.izorai.pfa.module1.repository.camion.*;
 import com.izorai.pfa.module1.repository.partenaire.*;
+import com.izorai.pfa.module1.services.partenaire.chaufeur.ChaufeurService;
 import com.izorai.pfa.module1.services.partenaire.physique.PhysiqueService;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Component
 @AllArgsConstructor
@@ -32,10 +25,51 @@ public class DataInitializer implements CommandLineRunner {
     private final  PhysiqueRepository physiqueRepository;
     private MoraleRepository moraleRepository;
     private final PhysiqueService physiqueService;
+    private final ChaufeurService chaufeurService;
 
 
 
     public void run(String... args) throws Exception {
+
+        // Villes marocaines pour varier les adresses
+//        String[] villesMaroc = {"Casablanca", "Rabat", "Marrakech", "Fès", "Tanger",
+//                "Agadir", "Meknès", "Oujda", "Kénitra", "Tétouan"};
+//
+//        // Génération des 15 chauffeurs
+//        for (int i = 1; i <= 15; i++) {
+//            // Création d'une adresse aléatoire
+//            Adress adresse = new Adress();
+//            adresse.setRue((i+100) + " Rue " + getRandomStreetName());
+//            adresse.setVille(villesMaroc[i % villesMaroc.length]);
+//            adresse.setCodePostal("1000" + i);
+//            adresse.setPays("Maroc");
+//
+//            // Création du chauffeur
+//            ChaufeurCreateDTO chauffeur = new ChaufeurCreateDTO();
+//            chauffeur.setNom(getRandomLastName());
+//            chauffeur.setPrenom(getRandomFirstName());
+//            chauffeur.setEmail(chauffeur.getPrenom().toLowerCase() + "." +
+//                    chauffeur.getNom().toLowerCase() + "@example.com");
+//            chauffeur.setTelephone("06" + (10000000 + i));
+//            chauffeur.setCni("JC" + (100000 + i));
+//            chauffeur.setCnss("CN" + (1000000 + i));
+//
+//            // Date de recrutement aléatoire (entre 1 mois et 5 ans dans le passé)
+//            chauffeur.setDateRecrutement(LocalDate.now()
+//                    .minusMonths(ThreadLocalRandom.current().nextLong(1, 61)));
+//
+//            // Date d'expiration variée (entre 1 mois et 3 ans dans le futur)
+//            chauffeur.setDateExpirationAssurance(LocalDate.now()
+//                    .plusMonths(ThreadLocalRandom.current().nextLong(1, 37)));
+//
+//            // Disponibilité alternée (true/false)
+//            chauffeur.setDisponibilite(i % 2 == 0 ? "true" : "false");
+//
+//            chauffeur.setAdresses(List.of(adresse));
+//
+//            chaufeurService.addNewChaufeur(chauffeur);
+//        }
+//        System.out.println("15 chauffeurs de test ont été créés");
 
 //        Adress adress1 = new Adress();
 //        adress1.setType("Principale");
@@ -211,4 +245,26 @@ public class DataInitializer implements CommandLineRunner {
 //
 //        System.out.println("✅ 6 camions, 6 cartes grises, 6 assurances et 36 enregistrements de carburant insérés !");
    }
+
+
+    // Méthodes utilitaires pour générer des noms aléatoires
+    private String getRandomFirstName() {
+        String[] firstNames = {"Mohamed", "Fatima", "Ahmed", "Amina", "Youssef",
+                "Khadija", "Mehdi", "Houda", "Omar", "Leila",
+                "Hassan", "Zahra", "Ibrahim", "Samira", "Adil"};
+        return firstNames[ThreadLocalRandom.current().nextInt(firstNames.length)];
+    }
+
+    private String getRandomLastName() {
+        String[] lastNames = {"Alaoui", "Benali", "El Mansouri", "Bouzidi", "Cherkaoui",
+                "Amrani", "Rachidi", "Saidi", "Tazi", "Belhaj",
+                "Daoudi", "Khalfi", "Lahlou", "Moujtahid", "Naciri"};
+        return lastNames[ThreadLocalRandom.current().nextInt(lastNames.length)];
+    }
+
+    private String getRandomStreetName() {
+        String[] streets = {"Mohammed V", "Hassan II", "Ibn Sina", "Al Massira", "Fès",
+                "Atlas", "Zerktouni", "Moulay Ismail", "Oued Eddahab", "Liberté"};
+        return streets[ThreadLocalRandom.current().nextInt(streets.length)];
+    }
 }

@@ -1,7 +1,7 @@
 package com.izorai.pfa.module1.services.partenaire.morale;
 
-import com.izorai.pfa.module1.DTO.paretenaire.Morale.MoraleCreateDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.Morale.MoraleRespDTO;
+import com.izorai.pfa.module1.DTO.partenaire.Morale.MoraleCreateDTO;
+import com.izorai.pfa.module1.DTO.partenaire.Morale.MoraleRespDTO;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 
 import java.util.List;

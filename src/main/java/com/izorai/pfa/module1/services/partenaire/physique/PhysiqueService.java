@@ -1,8 +1,8 @@
 package com.izorai.pfa.module1.services.partenaire.physique;
 
-import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressCreateDto;
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
+import com.izorai.pfa.module1.DTO.partenaire.adress.AdressCreateDto;
+import com.izorai.pfa.module1.DTO.partenaire.physique.PhysiqueCreateDTO;
+import com.izorai.pfa.module1.DTO.partenaire.physique.PhysiqueRespDTO;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 
 import java.util.List;

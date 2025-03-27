@@ -101,11 +101,21 @@ public class CarburantServiceImpl implements CarburantService {
     }
 
     @Override
-    public double getCoutTotalCarburant(String immatriculationCamion) {
-        List<Carburant> carburants = this.getCarburantsByCamion(immatriculationCamion).
+    public double getCoutTotalCarburant() {
+        List<Carburant> carburants = this.getAllCarburants().
                 stream().map(carburantMapper::fromCarburantDTO).collect(Collectors.toList());
         return carburants.stream()
                 .mapToDouble(carburant -> carburant.getQuantiteLitres() * carburant.getPrixParLitre())
                 .sum();
+    }
+
+    @Override
+    public double getDistanceTotalParcourue() {
+        return 0;
+    }
+
+    @Override
+    public double getQuantityTotal() {
+        return 0;
     }
 }

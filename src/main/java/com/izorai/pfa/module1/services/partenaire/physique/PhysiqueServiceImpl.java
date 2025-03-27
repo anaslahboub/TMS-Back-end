@@ -1,11 +1,10 @@
 package com.izorai.pfa.module1.services.partenaire.physique;
 
-import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressCreateDto;
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
+import com.izorai.pfa.module1.DTO.partenaire.adress.AdressCreateDto;
+import com.izorai.pfa.module1.DTO.partenaire.physique.PhysiqueCreateDTO;
+import com.izorai.pfa.module1.DTO.partenaire.physique.PhysiqueRespDTO;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.entities.partenaire.Physique;
-import com.izorai.pfa.module1.entities.partenaire.TypePartenaire;
 import com.izorai.pfa.module1.mappers.partenaire.PhysiqueMapper;
 import com.izorai.pfa.module1.repository.partenaire.PhysiqueRepository;
 import com.izorai.pfa.module1.repository.partenaire.TypePartenaireRepository;

@@ -1,7 +1,7 @@
 package com.izorai.pfa.module1.mappers.partenaire;
 
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueCreateDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.physique.PhysiqueRespDTO;
+import com.izorai.pfa.module1.DTO.partenaire.physique.PhysiqueCreateDTO;
+import com.izorai.pfa.module1.DTO.partenaire.physique.PhysiqueRespDTO;
 import com.izorai.pfa.module1.entities.partenaire.Physique;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

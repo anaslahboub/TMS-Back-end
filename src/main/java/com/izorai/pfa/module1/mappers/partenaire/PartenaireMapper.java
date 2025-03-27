@@ -1,8 +1,8 @@
 package com.izorai.pfa.module1.mappers.partenaire;
 
-import com.izorai.pfa.module1.DTO.paretenaire.paretenaire.PartenaireRespDTO;
+import com.izorai.pfa.module1.DTO.partenaire.paretenaire.PartenaireRespDTO;
 import com.izorai.pfa.module1.entities.partenaire.Partenaire;
-import com.izorai.pfa.module1.DTO.paretenaire.paretenaire.PartenaireCreateDTO;
+import com.izorai.pfa.module1.DTO.partenaire.paretenaire.PartenaireCreateDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

@@ -76,8 +76,8 @@ public class CarburantController {
 
     // Récupérer le coût total de carburant d'un camion
     @GetMapping("/cout-total/{immatriculationCamion}")
-    public ResponseEntity<Double> getCoutTotalCarburant(@PathVariable String immatriculationCamion) {
-        double coutTotal = carburantService.getCoutTotalCarburant(immatriculationCamion);
+    public ResponseEntity<Double> getCoutTotalCarburant() {
+        double coutTotal = carburantService.getCoutTotalCarburant();
         return new ResponseEntity<>(coutTotal, HttpStatus.OK);
     }
 }

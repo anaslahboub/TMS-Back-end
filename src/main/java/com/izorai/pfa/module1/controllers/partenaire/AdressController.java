@@ -1,10 +1,9 @@
 package com.izorai.pfa.module1.controllers.partenaire;
 
-import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressCreateDto;
-import com.izorai.pfa.module1.DTO.paretenaire.adress.AdressUpdateDto;
+import com.izorai.pfa.module1.DTO.partenaire.adress.AdressCreateDto;
+import com.izorai.pfa.module1.DTO.partenaire.adress.AdressUpdateDto;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.services.partenaire.adress.AdressService;
-import com.izorai.pfa.module1.services.partenaire.partenaire.PartenaireService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

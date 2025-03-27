@@ -2,6 +2,7 @@ package com.izorai.pfa.module1.entities.camion;
 
 import com.izorai.pfa.module1.entities.partenaire.Physique;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,4 +21,12 @@ public class Chaufeur extends Physique implements Serializable {
     private String cnss;
     private LocalDate dateRecrutement;
     private String disponibilite;
+    private LocalDate dateExpirationPermis;
+
+
+    @Lob
+    private byte[] photoPermisRecto;
+
+    @Lob
+    private byte[] photoPermisVerso;
 }

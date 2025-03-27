@@ -1,8 +1,8 @@
 package com.izorai.pfa.module1.services.partenaire.typepartenaire;
 
-import com.izorai.pfa.module1.DTO.paretenaire.typePartenaire.TypePartenaireCreateDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.typePartenaire.TypePartenaireNomDto;
-import com.izorai.pfa.module1.DTO.paretenaire.typePartenaire.TypePartenaireRespDTO;
+import com.izorai.pfa.module1.DTO.partenaire.typePartenaire.TypePartenaireCreateDTO;
+import com.izorai.pfa.module1.DTO.partenaire.typePartenaire.TypePartenaireNomDto;
+import com.izorai.pfa.module1.DTO.partenaire.typePartenaire.TypePartenaireRespDTO;
 import com.izorai.pfa.module1.entities.partenaire.TypePartenaire;
 import com.izorai.pfa.module1.mappers.partenaire.TypePartenaireMapper;
 import com.izorai.pfa.module1.repository.partenaire.TypePartenaireRepository;

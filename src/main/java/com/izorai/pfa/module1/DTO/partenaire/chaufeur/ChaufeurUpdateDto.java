@@ -1,4 +1,4 @@
-package com.izorai.pfa.module1.DTO.paretenaire.chaufeur;
+package com.izorai.pfa.module1.DTO.partenaire.chaufeur;
 
 import lombok.*;
 
@@ -16,4 +16,6 @@ public class ChaufeurUpdateDto {
     private String cnss;
     private LocalDate dateRecrutement;
     private String disponibilite;
+    private LocalDate dateExpirationPermis;
+
 }

@@ -1,21 +1,27 @@
 package com.izorai.pfa.module1.services.partenaire.chaufeur;
 
-import com.izorai.pfa.module1.DTO.paretenaire.chaufeur.ChaufeurCreateDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.chaufeur.ChaufeurRespDTO;
-import com.izorai.pfa.module1.DTO.paretenaire.chaufeur.ChaufeurUpdateDto;
+import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurCreateDTO;
+import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurPermisDto;
+import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurRespDTO;
+import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurUpdateDto;
 import com.izorai.pfa.module1.entities.camion.Chaufeur;
+import com.izorai.pfa.module1.exceptions.partenaire.chaufeur.ChaufeurNotFoundException;
 import com.izorai.pfa.module1.mappers.partenaire.ChaufeurMapper;
 import com.izorai.pfa.module1.repository.partenaire.ChaufeurRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class ChaufeurServiceImpl implements ChaufeurService {
+    private static final Logger logger = LoggerFactory.getLogger(ChaufeurServiceImpl.class);
     private final ChaufeurMapper chaufeurMapper;
     private final ChaufeurRepository chaufeurRepository;
 
@@ -57,6 +63,7 @@ public class ChaufeurServiceImpl implements ChaufeurService {
         chauffeur.setCnss(chauffeurCreateDTO.getCnss());
         chauffeur.setDisponibilite(chauffeurCreateDTO.getDisponibilite());
         chauffeur.setDateRecrutement(chauffeurCreateDTO.getDateRecrutement());
+        chauffeur.setDateExpirationPermis(chauffeurCreateDTO.getDateExpirationPermis());
         chauffeur = chaufeurRepository.save(chauffeur);
         return chaufeurMapper.toChaufeurRespDTO(chauffeur);
     }
@@ -68,34 +75,118 @@ public class ChaufeurServiceImpl implements ChaufeurService {
                 .ifPresent(chauffeur -> chaufeurRepository.delete(chauffeur));
     }
 
+
+    // Availability Operations
     @Override
-    public List<Chaufeur> getChaufeursDisponibles() {
-        return List.of();
+    @Transactional
+    public List<ChaufeurRespDTO> getChaufeursDisponibles() {
+        logger.info("Fetching all available drivers");
+        return chaufeurRepository.findByDisponibilite("true")
+                .stream()
+                .map(chaufeurMapper::toChaufeurRespDTO)
+                .collect(Collectors.toList());
     }
 
     @Override
-    public void setDisponibilite(Long idPartenaire, String disponibilite) {
+    @Transactional
+    public void changeDisponibilite(Long idPartenaire) {
+        logger.info("Toggling availability for driver {}", idPartenaire);
 
+        Chaufeur chaufeur = chaufeurRepository.findById(idPartenaire)
+                .orElseThrow(() -> new ChaufeurNotFoundException(idPartenaire));
+
+        // Toggle the disponibilite value
+        String newAvailability = "true".equalsIgnoreCase(chaufeur.getDisponibilite())
+                ? "false"
+                : "true";
+
+        chaufeur.setDisponibilite(newAvailability);
+        chaufeurRepository.save(chaufeur);
+
+        logger.debug("Driver {} availability changed from {} to {}",
+                idPartenaire,
+                chaufeur.getDisponibilite(),
+                newAvailability);
+    }
+
+
+
+    // Insurance Management
+    @Override
+    public boolean isPermisValid(Long idPartenaire) {
+        logger.info("Checking permis  validity for driver {}", idPartenaire);
+
+        Chaufeur chaufeur = chaufeurRepository.findById(idPartenaire)
+                .orElseThrow(() -> new ChaufeurNotFoundException(idPartenaire));
+
+        return chaufeur.getDateExpirationPermis() != null &&
+                !chaufeur.getDateExpirationPermis().isBefore(LocalDate.now());
     }
 
     @Override
-    public void assignerChaufeurACamion(Long idPartenaire, String immatriculationCamion) {
+    public List<ChaufeurRespDTO> findDriversWithExpiredPermis() {
+        logger.info("Fetching drivers with expired permis");
 
+        return chaufeurRepository.findAll().stream()
+                .filter(chaufeur ->
+                        chaufeur.getDateExpirationPermis() == null ||
+                                chaufeur.getDateExpirationPermis().isBefore(LocalDate.now())
+                )
+                .map(chaufeurMapper::toChaufeurRespDTO)
+                .collect(Collectors.toList());
     }
+
 
     @Override
-    public void desassignerChaufeur(Long idPartenaire) {
+    @Transactional
+    public Chaufeur updatePermisExpirationDate(Long id, LocalDate newExpirationDate) {
+        logger.info("Updating insurance expiration date for driver {}", id);
 
+        // Validate input date
+        if (newExpirationDate == null) {
+            throw new IllegalArgumentException("Expiration date cannot be null");
+        }
+
+        if (newExpirationDate.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Expiration date cannot be in the past");
+        }
+
+        return chaufeurRepository.findById(id)
+                .map(chaufeur -> {
+                    chaufeur.setDateExpirationPermis(newExpirationDate);
+                    return chaufeurRepository.save(chaufeur);
+                })
+                .orElseThrow(() -> new ChaufeurNotFoundException(id));
     }
 
+
+
+    // Statistical Operations
     @Override
     public int getNombreChaufeursActifs() {
-        return 0;
+        logger.info("Counting active drivers");
+        // Assuming "true" in disponibilite means active/available
+        return chaufeurRepository.countByDisponibilite("true");
     }
 
     @Override
     public int getNombreChaufeursEnMission() {
-        return 0;
+        logger.info("Counting drivers on mission");
+        // Assuming "false" in disponibilite means on mission/unavailable
+        return chaufeurRepository.countByDisponibilite("false");
     }
+    @Override
+    public  ChaufeurPermisDto getPermisPhoto(Long idChaufeur){
+        Chaufeur chaufeur=chaufeurRepository.findByIdPartenaire(idChaufeur);
+        ChaufeurPermisDto chaufeurPermisDto=new ChaufeurPermisDto();
+        chaufeurPermisDto.setIdPartenaire(chaufeur.getIdPartenaire());
+        chaufeurPermisDto.setPhotoPermisVerso(chaufeur.getPhotoPermisVerso());
+        chaufeurPermisDto.setPhotoPermisRecto(chaufeur.getPhotoPermisRecto());
+
+        return chaufeurPermisDto;
+    }
+
+
+
 
 }
