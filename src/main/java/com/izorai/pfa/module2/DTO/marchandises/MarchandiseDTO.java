@@ -1,7 +1,7 @@
 package com.izorai.pfa.module2.DTO.marchandises;
 
 public record MarchandiseDTO(
-        int id,
+        Long id,
         String libelle,
         String description,
         String codeMarchandise,

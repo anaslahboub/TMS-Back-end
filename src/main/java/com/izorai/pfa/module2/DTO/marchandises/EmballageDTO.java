@@ -1,4 +1,4 @@
 package com.izorai.pfa.module2.DTO.marchandises;
 
-public record EmballageDTO(long id, String nom, long capacite) {}
+public record EmballageDTO(Long id, String nom, long capacite) {}
 
