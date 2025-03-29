@@ -19,12 +19,13 @@ public class Partenaire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long idPartenaire;
+    @Column(nullable = false)
     private String nom;
     private String email;
+    @Column(nullable = false)
     private String telephone;
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Adress> adresses;
-
     @ManyToOne
     private TypePartenaire typePartenaire;
 

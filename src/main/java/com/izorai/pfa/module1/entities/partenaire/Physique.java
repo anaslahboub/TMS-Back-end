@@ -16,8 +16,9 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 
 public class Physique extends Partenaire {
-    @Column(unique = true)
+    @Column(unique = true,nullable = false)
     private String cni;
+    @Column(nullable = false)
     private String prenom;
 
 }

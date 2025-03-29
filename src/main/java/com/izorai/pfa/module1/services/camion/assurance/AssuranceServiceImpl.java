@@ -67,6 +67,7 @@ public class AssuranceServiceImpl implements AssuranceService {
 
 
     @Override
+    @Transactional
     public void deleteAssurance(Long numeroContrat) {
         assuranceRepository.deleteByNumeroContrat(numeroContrat);
     }

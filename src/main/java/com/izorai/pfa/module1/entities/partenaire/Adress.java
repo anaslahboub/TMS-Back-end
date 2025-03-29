@@ -16,10 +16,15 @@ public class Adress implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAdress;
+    @Column(nullable = false)
     private String type;
+    @Column(nullable = false)
     private String rue;
+    @Column(nullable = false)
     private String ville;
+    @Column(nullable = false)
     private String pays;
+    @Column(nullable = false)
     private String codePostal;
 
 
