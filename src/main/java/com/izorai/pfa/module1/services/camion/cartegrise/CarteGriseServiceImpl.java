@@ -41,18 +41,21 @@ public class CarteGriseServiceImpl implements CarteGriseService {
     @Override
     public CarteGriseDTO updateCarteGrise(Long id, CarteGriseDTO carteGriseDetails) {
         CarteGrise carte = carteGriseRepository.findById(id).map(carteGrise -> {
-            carteGrise.setDateMiseEnCirculation(carteGriseDetails.dateMiseEnCirculation());
-            carteGrise.setMarque(carteGriseDetails.marque());
-            carteGrise.setGenre(carteGriseDetails.genre());
-            carteGrise.setNumeroSerie(carteGriseDetails.numeroSerie());
-            carteGrise.setCouleur(carteGriseDetails.couleur());
-            carteGrise.setNombrePlace(carteGriseDetails.nombrePlace());
-            carteGrise.setPuissanceFiscale(carteGriseDetails.puissanceFiscale());
-            carteGrise.setEnergie(carteGriseDetails.energie());
-            carteGrise.setProprietaire(carteGriseDetails.proprietaire());
-            carteGrise.setPoidsVide(carteGriseDetails.poidsVide());
-            carteGrise.setPoidsAutorise(carteGriseDetails.poidsAutorise());
-            carteGrise.setDateDelivrance(carteGriseDetails.dateDelivrance());
+            carteGrise.setDateMiseEnCirculation(carteGriseDetails.getDateMiseEnCirculation());
+            carteGrise.setMarque(carteGriseDetails.getMarque());
+            carteGrise.setGenre(carteGriseDetails.getGenre());
+            carteGrise.setNumeroSerie(carteGriseDetails.getNumeroSerie());
+            carteGrise.setCouleur(carteGriseDetails.getCouleur());
+            carteGrise.setNombrePlace(carteGriseDetails.getNombrePlace());
+            carteGrise.setPuissanceFiscale(carteGriseDetails.getPuissanceFiscale());
+            carteGrise.setEnergie(carteGriseDetails.getEnergie());
+            carteGrise.setProprietaire(carteGriseDetails.getProprietaire());
+            carteGrise.setPoidsVide(carteGriseDetails.getPoidsVide());
+            carteGrise.setPoidsAutorise(carteGriseDetails.getPoidsAutorise());
+            carteGrise.setDateDelivrance(carteGriseDetails.getDateDelivrance());
+            carteGrise.setPhotoCarteGrise(
+                    carteGriseDetails.getPhotoCarteGrise()
+            );
             return carteGriseRepository.save(carteGrise);
         }).orElseThrow(() -> new RuntimeException("Carte grise non trouvée"));
 
