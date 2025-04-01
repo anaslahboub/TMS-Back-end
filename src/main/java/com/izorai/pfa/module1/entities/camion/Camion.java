@@ -18,7 +18,6 @@ public class Camion implements Serializable {
     @Id
     private String immatriculation;
     private int poidsMax;
-    private int consommation;
 
     private boolean disponible;
 

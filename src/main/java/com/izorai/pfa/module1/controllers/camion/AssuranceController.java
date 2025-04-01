@@ -1,6 +1,6 @@
 package com.izorai.pfa.module1.controllers.camion;
 
-import com.izorai.pfa.module1.DTO.camion.assurance.AssuranceDTO;
+import com.izorai.pfa.module1.DTO.camion.remorque.assurance.AssuranceDTO;
 import com.izorai.pfa.module1.services.camion.assurance.AssuranceService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/assurances")
 public class AssuranceController {

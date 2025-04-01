@@ -1,24 +1,7 @@
 package com.izorai.pfa.module1.services.camion.camion;
 
-import com.izorai.pfa.module1.DTO.camion.assurance.AssuranceDTO;
-import com.izorai.pfa.module1.DTO.camion.camion.CamionDTO;
-import com.izorai.pfa.module1.DTO.camion.cartegrise.CarteGriseDTO;
-import com.izorai.pfa.module1.entities.camion.*;
-import com.izorai.pfa.module1.entities.partenaire.Adress;
-import com.izorai.pfa.module1.mappers.camion.CamionMapper;
-import com.izorai.pfa.module1.repository.camion.CamionRepository;
-import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class CamionServiceImplTest {
