@@ -1,6 +1,6 @@
 package com.izorai.pfa.module1.services.camion.assurance;
 
-import com.izorai.pfa.module1.DTO.camion.remorque.assurance.AssuranceDTO;
+import com.izorai.pfa.module1.DTO.camion.assurance.AssuranceDTO;
 
 import java.time.LocalDate;
 import java.util.List;

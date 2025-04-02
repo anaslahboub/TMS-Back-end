@@ -11,5 +11,6 @@ public interface CarteGriseMapper {
     CarteGriseMapper INSTANCE = Mappers.getMapper(CarteGriseMapper.class);
     CarteGrise fromCarteGriseDTO(CarteGriseDTO carteGriseDTO);
 
+    @Mapping(target = "photoCarteGrise", source = "photoCarteGrise")
     CarteGriseDTO toCarteGriseDTO(CarteGrise carteGrise);
 }

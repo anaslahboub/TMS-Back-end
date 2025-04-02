@@ -1,6 +1,6 @@
 package com.izorai.pfa.module1.services.camion.assurance;
 
-import com.izorai.pfa.module1.DTO.camion.remorque.assurance.AssuranceDTO;
+import com.izorai.pfa.module1.DTO.camion.assurance.AssuranceDTO;
 import com.izorai.pfa.module1.entities.camion.Assurance;
 import com.izorai.pfa.module1.entities.camion.Camion;
 import com.izorai.pfa.module1.mappers.camion.AssuranceMapper;
@@ -53,13 +53,14 @@ public class AssuranceServiceImpl implements AssuranceService {
         Assurance assurance = assuranceRepository.findById(numeroContrat).get();
 
         // Mise à jour des valeurs de l'entité avec les valeurs du DTO
-        assurance.setCompany(assuranceDetails.company());
-        assurance.setMontant(assuranceDetails.montant());
-        assurance.setDateDebut(assuranceDetails.dateDebut());
-        assurance.setDateExpiration(assuranceDetails.dateExpiration());
-        assurance.setPrimeAnnuelle(assuranceDetails.primeAnnuelle());
-        assurance.setTypeCouverture(assuranceDetails.typeCouverture());
-        assurance.setNumCarteVerte(assuranceDetails.numCarteVerte());
+        assurance.setCompany(assuranceDetails.getCompany());
+        assurance.setMontant(assuranceDetails.getMontant());
+        assurance.setDateDebut(assuranceDetails.getDateDebut());
+        assurance.setDateExpiration(assuranceDetails.getDateExpiration());
+        assurance.setPrimeAnnuelle(assuranceDetails.getPrimeAnnuelle());
+        assurance.setTypeCouverture(assuranceDetails.getTypeCouverture());
+        assurance.setNumCarteVerte(assuranceDetails.getNumCarteVerte());
+        assurance.setPhotoAssurance(assuranceDetails.getPhotoAssurance());
 
         // Mapper l'entité mise à jour en DTO pour le renvoyer
         return assuranceMapper.toAssuranceDto((assurance));  // Assurez-vous d'avoir un mapper pour cela
@@ -67,7 +68,13 @@ public class AssuranceServiceImpl implements AssuranceService {
 
 
     @Override
+    @Transactional
     public void deleteAssurance(Long numeroContrat) {
+        Camion camion = camionRepository.findByAssuranceNumeroContrat(numeroContrat);
+        if (camion != null) {
+            camion.setAssurance(null);
+            camionRepository.save(camion);
+        }
         assuranceRepository.deleteByNumeroContrat(numeroContrat);
     }
 

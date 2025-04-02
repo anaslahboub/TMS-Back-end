@@ -59,6 +59,7 @@ public class CamionServiceImpl implements CamionService {
             camion.setTypeCamion(camionMapper.fromCamionDTO(camionDTO).getTypeCamion());
             camion.setAssurance(camionMapper.fromCamionDTO(camionDTO).getAssurance());
             camion.setCarteGrise(camionMapper.fromCamionDTO(camionDTO).getCarteGrise());
+            camion.setStatus(camionMapper.fromCamionDTO(camionDTO).getStatus());
             return camionRepository.save(camion);
         }).orElseThrow(() -> new RuntimeException("Camion non trouvé"));
 
@@ -76,17 +77,12 @@ public class CamionServiceImpl implements CamionService {
 
     @Override
     public int getNombreCamionsActifs() {
-        return (int) camionRepository.findAll().stream()
-                .filter(Camion::isDisponible) // Assurez-vous que le camion est disponible
-                .count();
+        return 0;
     }
 
     @Override
     public int getNombreCamionsEnMaintenance() {
-        return (int) camionRepository.findAll().stream()
-                .filter(camion -> camion.getEntretiens().stream()
-                        .anyMatch(entretien -> entretien.getDateProchainEntretien().isAfter(LocalDate.now())))
-                .count(); // Comptabilise les camions ayant un entretien prévu
+        return 0; // Comptabilise les camions ayant un entretien prévu
     }
 
     @Override

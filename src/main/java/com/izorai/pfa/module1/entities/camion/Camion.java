@@ -1,6 +1,7 @@
 package com.izorai.pfa.module1.entities.camion;
 
 
+import com.izorai.pfa.module1.entities.enumerations.StatusCamion;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,7 +20,8 @@ public class Camion implements Serializable {
     private String immatriculation;
     private int poidsMax;
 
-    private boolean disponible;
+    @Enumerated(EnumType.STRING)
+    private StatusCamion status;
 
     @OneToOne
     private CarteGrise carteGrise;

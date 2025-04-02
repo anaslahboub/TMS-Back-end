@@ -22,7 +22,7 @@ public interface EntrtienService {
 
 
     // Statistiques
-    double getCoutTotalEntretiensByCamion(String immatriculationCamion);
+    double getCoutTotalEntretiensByCamion(String immatriculationCamion  );
     double getCoutTotalEntretiensByPeriode(LocalDate debut, LocalDate fin);
 
     double calculateCoutEntretiens(String immatriculation);

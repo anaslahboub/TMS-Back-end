@@ -82,6 +82,7 @@ public class CarburantServiceImpl implements CarburantService {
             carburant.setKilometrageActuel(carburantDTO.getKilometrageActuel());
             carburant.setPrixParLitre(carburantDTO.getPrixParLitre());
             carburant.setPhotoCarburant(carburantDTO.getPhotoCarburant());
+            carburant.setStation(carburantDTO.getStation());
             return carburantRepository.save(carburant);
         }).orElseThrow(() -> new RuntimeException("Carburant non trouvé"));
 

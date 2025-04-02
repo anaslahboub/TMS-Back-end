@@ -1,24 +1,25 @@
 package com.izorai.pfa.module1.services.camion.cartegrise;
 
 import com.izorai.pfa.module1.DTO.camion.cartegrise.CarteGriseDTO;
+import com.izorai.pfa.module1.entities.camion.Camion;
 import com.izorai.pfa.module1.entities.camion.CarteGrise;
 import com.izorai.pfa.module1.mappers.camion.CarteGriseMapper;
+import com.izorai.pfa.module1.repository.camion.CamionRepository;
 import com.izorai.pfa.module1.repository.camion.CarteGriseRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 @Service
+@AllArgsConstructor
 public class CarteGriseServiceImpl implements CarteGriseService {
 
     private final CarteGriseRepository carteGriseRepository;
     private final CarteGriseMapper carteGriseMapper;
-
-    public CarteGriseServiceImpl(CarteGriseRepository carteGriseRepository, CarteGriseMapper carteGriseMapper) {
-        this.carteGriseRepository = carteGriseRepository;
-        this.carteGriseMapper = carteGriseMapper;
-    }
+    private final CamionRepository CamionRepository;
+    private final CamionRepository camionRepository;
 
 
     @Override
@@ -64,6 +65,11 @@ public class CarteGriseServiceImpl implements CarteGriseService {
 
     @Override
     public void deleteCarteGrise(Long id) {
+        Camion camion = camionRepository.findByCarteGriseId(id);
+        if (camion!=null){
+            camion.setCarteGrise(null);
+            camionRepository.save(camion);
+        }
         carteGriseRepository.deleteById(id); // Supprime la carte grise par son ID
     }
 

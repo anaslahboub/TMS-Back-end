@@ -23,5 +23,7 @@
         private int primeAnnuelle;
         private Long numCarteVerte;
         private boolean active=true;
+        @Lob
+        private byte[] photoAssurance;
 
     }

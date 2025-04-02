@@ -15,5 +15,7 @@ public interface CamionRepository extends JpaRepository<Camion, Long> {
     boolean existsByImmatriculation(String immatriculation);
     void deleteByImmatriculation(String immatriculation);
     Camion findByAssurance(Assurance assurance);
+    Camion findByCarteGriseId(Long carteGriseId);
+    Camion findByAssuranceNumeroContrat(Long assuranceId);
 
 }
