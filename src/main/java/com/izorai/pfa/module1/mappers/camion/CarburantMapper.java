@@ -1,6 +1,8 @@
 package com.izorai.pfa.module1.mappers.camion;
 
 import com.izorai.pfa.module1.DTO.camion.carburant.CarburantDTO;
+import com.izorai.pfa.module1.DTO.camion.carburant.CarburantRespDto;
+import com.izorai.pfa.module1.DTO.camion.carburant.CarburantViewDto;
 import com.izorai.pfa.module1.entities.camion.Carburant;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,4 +13,9 @@ public interface CarburantMapper {
     CarburantMapper INSTANCE = Mappers.getMapper(CarburantMapper.class);
     Carburant fromCarburantDTO(CarburantDTO carburantDTO);
     CarburantDTO toCarburantDTO(Carburant carburant);
+    CarburantRespDto toCarburantRespDto(Carburant carburant);
+    Carburant fromCarburantRespDto(CarburantRespDto carburantRespDto);
+    CarburantViewDto toCarburantViewDto(Carburant carburant);
+    Carburant fromCarburantViewDto(CarburantViewDto carburantViewDto);
+
 }

@@ -1,6 +1,7 @@
 package com.izorai.pfa.module1.controllers.camion;
 
 import com.izorai.pfa.module1.DTO.camion.carburant.CarburantDTO;
+import com.izorai.pfa.module1.DTO.camion.carburant.CarburantRespDto;
 import com.izorai.pfa.module1.services.camion.carburant.CarburantService;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
@@ -23,27 +24,27 @@ public class CarburantController {
     }
 
     @PostMapping
-    public ResponseEntity<CarburantDTO> createCarburant(@RequestBody CarburantDTO carburantDTO) {
-        CarburantDTO createdCarburant = carburantService.createCarburant(carburantDTO);
+    public ResponseEntity<CarburantRespDto> createCarburant(@RequestBody CarburantDTO carburantDTO) {
+        CarburantRespDto createdCarburant = carburantService.createCarburant(carburantDTO);
         return new ResponseEntity<>(createdCarburant, HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<CarburantDTO>> getAllCarburants() {
-        List<CarburantDTO> carburants = carburantService.getAllCarburants();
+    public ResponseEntity<List<CarburantRespDto>> getAllCarburants() {
+        List<CarburantRespDto> carburants = carburantService.getAllCarburants();
         return new ResponseEntity<>(carburants, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CarburantDTO> getCarburantById(@PathVariable Long id) {
-        Optional<CarburantDTO> carburant = carburantService.getCarburantById(id);
+    public ResponseEntity<CarburantRespDto> getCarburantById(@PathVariable Long id) {
+        Optional<CarburantRespDto> carburant = carburantService.getCarburantById(id);
         return carburant.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CarburantDTO> updateCarburant(@PathVariable Long id, @RequestBody CarburantDTO carburantDTO) {
-        CarburantDTO updatedCarburant = carburantService.updateCarburant(id, carburantDTO);
+    public ResponseEntity<CarburantRespDto> updateCarburant(@PathVariable Long id, @RequestBody CarburantDTO carburantDTO) {
+        CarburantRespDto updatedCarburant = carburantService.updateCarburant(id, carburantDTO);
         return new ResponseEntity<>(updatedCarburant, HttpStatus.OK);
     }
 
@@ -55,29 +56,51 @@ public class CarburantController {
 
     // Récupérer les carburants associés à un camion par son immatriculation
     @GetMapping("/camion/{immatriculationCamion}")
-    public ResponseEntity<List<CarburantDTO>> getCarburantsByCamion(@PathVariable String immatriculationCamion) {
-        List<CarburantDTO> carburants = carburantService.getCarburantsByCamion(immatriculationCamion);
+    public ResponseEntity<List<CarburantRespDto>> getCarburantsByCamion(@PathVariable String immatriculationCamion) {
+        List<CarburantRespDto> carburants = carburantService.getCarburantsByCamion(immatriculationCamion);
         return new ResponseEntity<>(carburants, HttpStatus.OK);
     }
 
-    // Récupérer les carburants dans un intervalle de dates
-        @GetMapping("/date-range")
-        public ResponseEntity<List<CarburantDTO>> getCarburantsByDateRange(@RequestParam LocalDate debut, @RequestParam LocalDate fin) {
-            List<CarburantDTO> carburants = carburantService.getCarburantsByDateRange(debut, fin);
-            return new ResponseEntity<>(carburants, HttpStatus.OK);
-        }
-
-    // Récupérer la consommation moyenne de carburant d'un camion (en litres/100 km)
-    @GetMapping("/consommation-moyenne/{immatriculationCamion}")
+    // Consommation moyenne d'un camion
+    @GetMapping("/consommation/{immatriculationCamion}")
     public ResponseEntity<Double> getConsommationMoyenneByCamion(@PathVariable String immatriculationCamion) {
         double consommationMoyenne = carburantService.getConsommationMoyenneByCamion(immatriculationCamion);
         return new ResponseEntity<>(consommationMoyenne, HttpStatus.OK);
     }
 
-    // Récupérer le coût total de carburant d'un camion
-    @GetMapping("/cout-total/{immatriculationCamion}")
+    // Coût total du carburant
+    @GetMapping("/cout-total")
     public ResponseEntity<Double> getCoutTotalCarburant() {
         double coutTotal = carburantService.getCoutTotalCarburant();
         return new ResponseEntity<>(coutTotal, HttpStatus.OK);
     }
+
+    // Distance totale parcourue
+    @GetMapping("/distance-total")
+    public ResponseEntity<Double> getDistanceTotalParcourue() {
+        double distanceTotal = carburantService.getDistanceTotalParcourue();
+        return new ResponseEntity<>(distanceTotal, HttpStatus.OK);
+    }
+
+    // Quantité totale de carburant consommée
+    @GetMapping("/quantite-total")
+    public ResponseEntity<Double> getQuantityTotal() {
+        double quantiteTotal = carburantService.getQuantityTotal();
+        return new ResponseEntity<>(quantiteTotal, HttpStatus.OK);
+    }
+
+    // Prix moyen du carburant
+    @GetMapping("/prix-moyen")
+    public ResponseEntity<Double> getPrixMoyenne() {
+        double prixMoyen = carburantService.getPrixMoyenne();
+        return new ResponseEntity<>(prixMoyen, HttpStatus.OK);
+    }
+
+    // Taux de consommation moyenne
+    @GetMapping("/taux-consommation")
+    public ResponseEntity<Double> getTauxConsommationMoyenne() {
+        double tauxConsommation = carburantService.getTauxConsommationMoyenne();
+        return new ResponseEntity<>(tauxConsommation, HttpStatus.OK);
+    }
+
 }

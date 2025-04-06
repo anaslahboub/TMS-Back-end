@@ -5,7 +5,7 @@ import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurPermisDto;
 import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurRespDTO;
 import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurUpdateDto;
 import com.izorai.pfa.module1.entities.camion.Chaufeur;
-import com.izorai.pfa.module1.exceptions.partenaire.chaufeur.ChaufeurNotFoundException;
+import com.izorai.pfa.module1.exceptions.partenaire.ChaufeurNotFoundException;
 
 import java.time.LocalDate;
 import java.util.List;

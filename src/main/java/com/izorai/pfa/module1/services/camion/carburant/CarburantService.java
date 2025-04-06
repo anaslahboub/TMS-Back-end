@@ -1,6 +1,7 @@
 package com.izorai.pfa.module1.services.camion.carburant;
 
 import com.izorai.pfa.module1.DTO.camion.carburant.CarburantDTO;
+import com.izorai.pfa.module1.DTO.camion.carburant.CarburantRespDto;
 import com.izorai.pfa.module1.entities.camion.Carburant;
 
 import java.time.LocalDate;
@@ -9,17 +10,17 @@ import java.util.Optional;
 
 public interface CarburantService {
     /// Carburant sevice CRUD
-    public CarburantDTO createCarburant(CarburantDTO Carburant);
-    public List<CarburantDTO> getAllCarburants();
-    public Optional<CarburantDTO> getCarburantById(Long id);
-    public CarburantDTO updateCarburant(Long id, CarburantDTO CarburantDetails);
+    public CarburantRespDto createCarburant(CarburantDTO Carburant);
+    public List<CarburantRespDto> getAllCarburants();
+    public Optional<CarburantRespDto> getCarburantById(Long id);
+    public CarburantRespDto updateCarburant(Long id, CarburantDTO CarburantDetails);
     public void deleteCarburant(Long id);
 
 
 
     // Opérations spécifiques
-    List<CarburantDTO> getCarburantsByCamion(String immatriculationCamion);
-    List<CarburantDTO> getCarburantsByDateRange(LocalDate debut, LocalDate fin);
+    List<CarburantRespDto> getCarburantsByCamion(String immatriculationCamion);
+    List<CarburantRespDto> getCarburantsByDateRange(LocalDate debut, LocalDate fin);
 
     // Statistiques
     //Calcule la consommation moyenne en litres par 100 km du camion pour une période donnée.
@@ -42,6 +43,13 @@ public interface CarburantService {
       */
 
     double getQuantityTotal();
+
+    /**
+     * prix unitaire moyenne
+     */
+    double getPrixMoyenne();
+
+    double getTauxConsommationMoyenne();
 
 
 

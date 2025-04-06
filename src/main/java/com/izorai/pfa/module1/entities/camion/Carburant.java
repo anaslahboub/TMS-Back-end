@@ -20,8 +20,17 @@ public class  Carburant implements Serializable {
     private int quantiteLitres;
     private int prixParLitre;
     private int kilometrageActuel;
+    private int montantActuel;
+    private int consommation;
+
     @ManyToOne
     private TypeCarburant typeCarburant;
     @ManyToOne
     private Camion camion;
+    @ManyToOne
+    private Station station;
+
+    @Lob
+    private byte[] photoCarburant;
+
 }

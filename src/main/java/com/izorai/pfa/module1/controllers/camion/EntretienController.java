@@ -1,6 +1,7 @@
 package com.izorai.pfa.module1.controllers.camion;
 
 import com.izorai.pfa.module1.DTO.camion.entretien.EntretienDTO;
+import com.izorai.pfa.module1.DTO.camion.entretien.EntretienViewResp;
 import com.izorai.pfa.module1.services.camion.entretien.EntrtienService;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.HttpStatus;
@@ -29,14 +30,14 @@ public class EntretienController {
     }
 
     @GetMapping
-    public ResponseEntity<List<EntretienDTO>> getAllEntretiens() {
-        List<EntretienDTO> entretiens = entretienService.getAllEntretiens();
+    public ResponseEntity<List<EntretienViewResp>> getAllEntretiens() {
+        List<EntretienViewResp> entretiens = entretienService.getAllEntretiens();
         return new ResponseEntity<>(entretiens, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EntretienDTO> getEntretienById(@PathVariable Long id) {
-        Optional<EntretienDTO> entretien = entretienService.getEntretienById(id);
+    public ResponseEntity<EntretienViewResp> getEntretienById(@PathVariable Long id) {
+        Optional<EntretienViewResp> entretien = entretienService.getEntretienById(id);
         return entretien.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
@@ -54,24 +55,24 @@ public class EntretienController {
     }
 
     @GetMapping("/camion/{immatriculation}")
-    public ResponseEntity<List<EntretienDTO>> getEntretiensByCamion(@PathVariable String immatriculation) {
-        List<EntretienDTO> entretiens = entretienService.getEntretiensByCamion(immatriculation);
+    public ResponseEntity<List<EntretienViewResp>> getEntretiensByCamion(@PathVariable String immatriculation) {
+        List<EntretienViewResp> entretiens = entretienService.getEntretiensByCamion(immatriculation);
         return new ResponseEntity<>(entretiens, HttpStatus.OK);
     }
 
     @GetMapping("/date-range")
-    public ResponseEntity<List<EntretienDTO>> getEntretiensByDateRange(
+    public ResponseEntity<List<EntretienViewResp>> getEntretiensByDateRange(
             @RequestParam("debut") String debut,
             @RequestParam("fin") String fin) {
         LocalDate startDate = LocalDate.parse(debut);
         LocalDate endDate = LocalDate.parse(fin);
-        List<EntretienDTO> entretiens = entretienService.getEntretiensByDateRange(startDate, endDate);
+        List<EntretienViewResp> entretiens = entretienService.getEntretiensByDateRange(startDate, endDate);
         return new ResponseEntity<>(entretiens, HttpStatus.OK);
     }
 
     @GetMapping("/type/{typeEntretien}")
-    public ResponseEntity<List<EntretienDTO>> getEntretiensByType(@PathVariable String typeEntretien) {
-        List<EntretienDTO> entretiens = entretienService.getEntretiensByType(typeEntretien);
+    public ResponseEntity<List<EntretienViewResp>> getEntretiensByType(@PathVariable String typeEntretien) {
+        List<EntretienViewResp> entretiens = entretienService.getEntretiensByType(typeEntretien);
         return new ResponseEntity<>(entretiens, HttpStatus.OK);
     }
 

@@ -1,6 +1,8 @@
 package com.izorai.pfa.module1.services.camion.entretien;
 
+import com.izorai.pfa.module1.DTO.camion.camion.CamionDTO;
 import com.izorai.pfa.module1.DTO.camion.entretien.EntretienDTO;
+import com.izorai.pfa.module1.DTO.camion.entretien.EntretienViewResp;
 import com.izorai.pfa.module1.entities.camion.Camion;
 import com.izorai.pfa.module1.entities.camion.Entretien;
 import com.izorai.pfa.module1.mappers.camion.CamionMapper;
@@ -34,26 +36,26 @@ private final CamionMapper camionMapper;
     }
 
     @Override
-    public List<EntretienDTO> getAllEntretiens() {
+    public List<EntretienViewResp> getAllEntretiens() {
         return entretienRepository.findAll().stream()
-                .map(entretienMapper::toEntretienDTO)
+                .map(entretienMapper::toEntretienViewResp)
                 .collect(Collectors.toList()); // Retourne tous les entretiens
     }
 
     @Override
-    public Optional<EntretienDTO> getEntretienById(Long id) {
-        return entretienRepository.findById(id).map(entretienMapper::toEntretienDTO); // Retourne l'entretien par son ID
+    public Optional<EntretienViewResp> getEntretienById(Long id) {
+        return entretienRepository.findById(id).map(entretienMapper::toEntretienViewResp); // Retourne l'entretien par son ID
     }
 
     @Override
     public EntretienDTO updateEntretien(Long id, EntretienDTO entretienDTO) {
         Entretien updatedEntretien = entretienRepository.findById(id).map(entretien -> {
-            entretien.setDateEntretien(entretienDTO.dateEntretien());
-            entretien.setTypeEntretien(entretienDTO.typeEntretien());
-            entretien.setDescription(entretienDTO.description());
-            entretien.setCout(entretienDTO.cout());
-            entretien.setDateProchainEntretien(entretienDTO.dateProchainEntretien());
-            entretien.setCamion(camionMapper.fromCamionDTO(entretienDTO.camion()));
+            entretien.setDateEntretien(entretienDTO.getDateEntretien());
+            entretien.setTypeEntretien(entretienDTO.getTypeEntretien());
+            entretien.setDescription(entretienDTO.getDescription());
+            entretien.setCout(entretienDTO.getCout());
+            entretien.setDateProchainEntretien(entretienDTO.getDateProchainEntretien());
+            entretien.setCamion(entretienDTO.getCamion());
             return entretienRepository.save(entretien);
         }).orElseThrow(() -> new RuntimeException("Entretien non trouvé"));
 
@@ -67,22 +69,30 @@ private final CamionMapper camionMapper;
     }
 
     @Override
-    public List<EntretienDTO> getEntretiensByCamion(String immatriculationCamion) {
+    public CamionDTO getCamionByIdEntretiens(Long id) {
+        Entretien entretien = entretienRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+
+        return camionMapper.toCamionDto(entretien.getCamion());
+
+    }
+
+    @Override
+    public List<EntretienViewResp> getEntretiensByCamion(String immatriculationCamion) {
         Camion camion = camionRepository.findByImmatriculation(immatriculationCamion).get();
 
-        return camion.getEntretiens().stream().map(entretienMapper::toEntretienDTO).collect(Collectors.toList());
+        return camion.getEntretiens().stream().map(entretienMapper::toEntretienViewResp).collect(Collectors.toList());
     }
 
     @Override
-    public List<EntretienDTO> getEntretiensByDateRange(LocalDate debut, LocalDate fin) {
+    public List<EntretienViewResp> getEntretiensByDateRange(LocalDate debut, LocalDate fin) {
         List<Entretien> entretiens = entretienRepository.findByDateEntretienBetween(debut, fin);
-        return entretiens.stream().map(entretienMapper::toEntretienDTO).collect(Collectors.toList());
+        return entretiens.stream().map(entretienMapper::toEntretienViewResp).collect(Collectors.toList());
     }
 
     @Override
-    public List<EntretienDTO> getEntretiensByType(String typeEntretien) {
+    public List<EntretienViewResp> getEntretiensByType(String typeEntretien) {
         List<Entretien> entretiens = entretienRepository.findByTypeEntretien(typeEntretien);
-        return entretiens.stream().map(entretienMapper::toEntretienDTO).collect(Collectors.toList());
+        return entretiens.stream().map(entretienMapper::toEntretienViewResp).collect(Collectors.toList());
     }
 
     @Override

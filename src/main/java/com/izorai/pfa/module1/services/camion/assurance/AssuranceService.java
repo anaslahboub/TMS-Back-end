@@ -1,12 +1,9 @@
 package com.izorai.pfa.module1.services.camion.assurance;
 
 import com.izorai.pfa.module1.DTO.camion.assurance.AssuranceDTO;
-import com.izorai.pfa.module1.entities.camion.Assurance;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 public interface AssuranceService {
     public AssuranceDTO addNewAssurance(AssuranceDTO assurance);

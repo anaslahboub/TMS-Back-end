@@ -17,11 +17,12 @@ public class CarteGriseController {
         this.catreGriseService = catreGriseService;
     }
 
-    @PostMapping
-    public ResponseEntity<CarteGriseDTO> addNewCarteGrise(@RequestBody CarteGriseDTO carteGrise) {
-        CarteGriseDTO newCarteGrise = catreGriseService.addNewCarteGrise(carteGrise);
-        return new ResponseEntity<>(newCarteGrise, HttpStatus.CREATED);
-    }
+        @PostMapping
+        public ResponseEntity<CarteGriseDTO> addNewCarteGrise(@RequestBody CarteGriseDTO carteGrise) {
+            System.out.println("addNewCarteGrise image  "+ carteGrise.getPhotoCarteGrise() );
+            CarteGriseDTO newCarteGrise = catreGriseService.addNewCarteGrise(carteGrise);
+            return new ResponseEntity<>(newCarteGrise, HttpStatus.CREATED);
+        }
 
     @GetMapping
     public ResponseEntity<List<CarteGriseDTO>> getAllCarteGrises() {
