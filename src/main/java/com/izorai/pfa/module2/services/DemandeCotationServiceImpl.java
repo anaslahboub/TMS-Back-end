@@ -36,18 +36,10 @@ public class DemandeCotationServiceImpl implements DemandeCotationService {
 
     @Override
     public DemandeCotationDto createDemande(DemandeCotationDto demandeDto) {
-//        // Step 1: Extract the addresses from the demandeDto
-//        Adress adresseChargement = adressRepository.save( demandeDto.getAdresseChargement());
-//        Adress adresseDechargement = adressRepository.save(demandeDto.getAdresseDechargement());
-//
 
         DemandeCotation demande = demandeMapper.fromDemandeCotationDto(demandeDto);
         demande.setDateDemande(LocalDate.now());
         demande.setStatut(StatusDemandeCotation.EN_ATTENTE);
-
-//        // Assign the addresses to the demande
-//        demande.setAdresseChargement(adresseChargement);
-//        demande.setAdresseDechargement(adresseDechargement);
 
         // Save the DemandeCotation
         DemandeCotation savedDemande = demandeRepository.save(demande);

@@ -21,7 +21,6 @@ public interface DemandeCotationService {
     // Status Management
     DemandeCotationDto updateStatus(Long id, StatusDemandeCotation newStatus);
     List<DemandeCotationDto> getDemandesByStatus(StatusDemandeCotation status);
-
     // Search & Filtering
     List<DemandeCotationDto> searchByTypeMarchandise(String type);
 
