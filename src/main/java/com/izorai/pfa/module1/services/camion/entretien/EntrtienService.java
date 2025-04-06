@@ -1,6 +1,8 @@
 package com.izorai.pfa.module1.services.camion.entretien;
 
+import com.izorai.pfa.module1.DTO.camion.camion.CamionDTO;
 import com.izorai.pfa.module1.DTO.camion.entretien.EntretienDTO;
+import com.izorai.pfa.module1.DTO.camion.entretien.EntretienViewResp;
 import com.izorai.pfa.module1.entities.camion.Entretien;
 
 import java.time.LocalDate;
@@ -11,14 +13,17 @@ public interface EntrtienService {
 
     ///  ENTRETIEN CRUD /
     public EntretienDTO createEntretien(EntretienDTO entretien);
-    public List<EntretienDTO> getAllEntretiens();
-    public Optional<EntretienDTO> getEntretienById(Long id);
+    public List<EntretienViewResp> getAllEntretiens();
+    public Optional<EntretienViewResp> getEntretienById(Long id);
     public EntretienDTO updateEntretien(Long id, EntretienDTO entretienDetails);
     public void deleteEntretien(Long id);
 
-    List<EntretienDTO> getEntretiensByCamion(String immatriculationCamion);
-    List<EntretienDTO> getEntretiensByDateRange(LocalDate debut, LocalDate fin);
-    List<EntretienDTO> getEntretiensByType(String typeEntretien);
+
+    public CamionDTO getCamionByIdEntretiens(Long id);
+
+    List<EntretienViewResp> getEntretiensByCamion(String immatriculationCamion);
+    List<EntretienViewResp> getEntretiensByDateRange(LocalDate debut, LocalDate fin);
+    List<EntretienViewResp> getEntretiensByType(String typeEntretien);
 
 
     // Statistiques

@@ -1,6 +1,7 @@
 package com.izorai.pfa.module1.services.camion.camion;
 
 import com.izorai.pfa.module1.DTO.camion.camion.CamionDTO;
+import com.izorai.pfa.module1.DTO.camion.camion.CamionRespDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,7 +13,7 @@ public interface CamionService {
     ///camion service
     public CamionDTO addNewCamion(CamionDTO camionDTO);
     public List<CamionDTO> getAllCamions();
-    public Optional<CamionDTO> getCamionById(String immatriculation);
+    public Optional<CamionRespDto> getCamionById(String immatriculation);
     public CamionDTO updateCamion(String immatriculation, CamionDTO camionDetails);
     public void deleteCamion(String immatriculation);
 

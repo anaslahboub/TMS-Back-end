@@ -1,5 +1,6 @@
 package com.izorai.pfa.module1.repository.camion;
 
+import com.izorai.pfa.module1.entities.camion.Camion;
 import com.izorai.pfa.module1.entities.camion.Carburant;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -24,6 +25,9 @@ public interface CarburantRepository extends JpaRepository<Carburant, Long> {
 
     @Query("SELECT AVG(c.prixParLitre) FROM Carburant c WHERE c.prixParLitre IS NOT NULL")
     Optional<Double> avgPrixParLitre();
+
+    void deleteAllByCamion(Camion camion);
+
 
 
 }

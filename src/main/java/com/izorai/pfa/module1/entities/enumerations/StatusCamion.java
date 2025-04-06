@@ -4,6 +4,5 @@ public enum StatusCamion {
     EN_SERVICE,
     EN_REPARATION,
     EN_MISSION,
-    HORS_SERVICE,
-    EN_ATTENTE
+    HORS_SERVICE
 }

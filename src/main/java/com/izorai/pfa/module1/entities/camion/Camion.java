@@ -28,9 +28,9 @@ public class Camion implements Serializable {
     @OneToOne
     private Assurance assurance;
 
-    @OneToMany(mappedBy = "camion")
+    @OneToMany(mappedBy = "camion", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Entretien> entretiens;
-    @OneToMany(mappedBy = "camion")
+    @OneToMany(mappedBy ="camion", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Carburant> carburants;
     @ManyToOne
     TypeCamion typeCamion;

@@ -4,6 +4,7 @@ import com.izorai.pfa.module2.DTO.marchandises.CategorieDTO;
 import com.izorai.pfa.module2.entities.marchandises.Categorie;
 import com.izorai.pfa.module2.mappers.Marchandises.CategorieMapper;
 import com.izorai.pfa.module2.repository.marchandises.CategorieRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,16 +14,13 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@AllArgsConstructor
 public class CategorieServiceImpl implements CategorieService {
 
     private final CategorieRepository categorieRepository;
     private final CategorieMapper categorieMapper;
 
-    public CategorieServiceImpl(CategorieRepository categorieRepository,
-                                CategorieMapper categorieMapper) {
-        this.categorieRepository = categorieRepository;
-        this.categorieMapper = categorieMapper;
-    }
+
 
     @Override
     public CategorieDTO createCategorie(CategorieDTO categorieDTO) {
@@ -49,7 +47,7 @@ public class CategorieServiceImpl implements CategorieService {
     @Override
     @Transactional(readOnly = true)
     public Optional<CategorieDTO> getCategorieByNom(String nom) {
-        return categorieRepository.findByCategorie(nom)
+        return categorieRepository.findByLibelle(nom)
                 .map(categorieMapper::toDto);
     }
 
@@ -72,6 +70,6 @@ public class CategorieServiceImpl implements CategorieService {
 
     @Override
     public boolean existsByNom(String nom) {
-        return categorieRepository.existsByCategorie(nom);
+        return categorieRepository.existsByLibelle(nom);
     }
 }

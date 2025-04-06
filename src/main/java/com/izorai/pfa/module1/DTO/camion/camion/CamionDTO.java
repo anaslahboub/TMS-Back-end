@@ -13,8 +13,8 @@ import lombok.NoArgsConstructor;
 public class CamionDTO {
         String immatriculation;
         int poidsMax;
+        StatusCamion status;
         AssuranceDTO assurance;
         CarteGriseDTO carteGrise;
         TypeCamionDTO typeCamion;
-        StatusCamion status;
 }

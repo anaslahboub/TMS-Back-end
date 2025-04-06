@@ -1,10 +1,16 @@
 package com.izorai.pfa.module1.services.camion.camion;
 
 import com.izorai.pfa.module1.DTO.camion.camion.CamionDTO;
+import com.izorai.pfa.module1.DTO.camion.camion.CamionRespDto;
 import com.izorai.pfa.module1.entities.camion.Camion;
 import com.izorai.pfa.module1.entities.camion.Entretien;
+import com.izorai.pfa.module1.exceptions.camion.CamionNotFoundException;
+import com.izorai.pfa.module1.exceptions.partenaire.ChaufeurNotFoundException;
 import com.izorai.pfa.module1.mappers.camion.CamionMapper;
 import com.izorai.pfa.module1.repository.camion.CamionRepository;
+import com.izorai.pfa.module1.repository.camion.CarburantRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,15 +21,14 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 @Service
 @Transactional
+@AllArgsConstructor
 public class CamionServiceImpl implements CamionService {
 
     private final CamionRepository camionRepository;
     private final CamionMapper camionMapper;
+    private final CarburantRepository CarburantRepository;
+    private final CarburantRepository carburantRepository;
 
-    public CamionServiceImpl(CamionRepository camionRepository, CamionMapper camionMapper) {
-        this.camionRepository = camionRepository;
-        this.camionMapper = camionMapper;
-    }
 
     @Override
     public CamionDTO addNewCamion(CamionDTO camionDTO) {
@@ -46,9 +51,9 @@ public class CamionServiceImpl implements CamionService {
 
     @Override
     @Transactional(readOnly = true) // Optimize for read-only operations
-    public Optional<CamionDTO> getCamionById(String immatriculation) {
+    public Optional<CamionRespDto> getCamionById(String immatriculation) {
         return camionRepository.findByImmatriculation(immatriculation)
-                .map(camionMapper::toCamionDto);
+                .map(camionMapper::toCamionRespDto);
     }
 
     @Override
@@ -68,11 +73,17 @@ public class CamionServiceImpl implements CamionService {
 
     @Override
     public void deleteCamion(String immatriculation) {
-        if (!camionRepository.existsByImmatriculation(immatriculation)) {
-            throw new RuntimeException("Camion non trouvé avec l'immatriculation: " + immatriculation);
-        }
+        Camion camion = camionRepository.findByImmatriculation(immatriculation)
+                .orElseThrow(() -> new CamionNotFoundException(
+                        "Camion not found with immatriculation: " + immatriculation,
+                        null,
+                        "Tried to delete camion with immatriculation '" + immatriculation + "', but it does not exist."
+                ));
+
+        carburantRepository.deleteAllByCamion(camion);
         // Delete the camion
-        camionRepository.deleteByImmatriculation(immatriculation);    }
+        camionRepository.deleteByImmatriculation(immatriculation);
+    }
 
 
     @Override

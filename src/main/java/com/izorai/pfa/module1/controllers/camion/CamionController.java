@@ -1,6 +1,7 @@
 package com.izorai.pfa.module1.controllers.camion;
 
 import com.izorai.pfa.module1.DTO.camion.camion.CamionDTO;
+import com.izorai.pfa.module1.DTO.camion.camion.CamionRespDto;
 import com.izorai.pfa.module1.services.camion.camion.CamionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,8 +36,8 @@ public class CamionController {
     }
 
     @GetMapping("/{immatriculation}")
-    public ResponseEntity<CamionDTO> getCamionById(@PathVariable String immatriculation) {
-        Optional<CamionDTO> camionDTO = camionService.getCamionById(immatriculation);
+    public ResponseEntity<CamionRespDto> getCamionById(@PathVariable String immatriculation) {
+        Optional<CamionRespDto> camionDTO = camionService.getCamionById(immatriculation);
         return camionDTO.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }

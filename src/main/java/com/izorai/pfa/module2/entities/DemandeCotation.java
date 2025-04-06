@@ -8,14 +8,16 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class DemandeCotation {
+public class DemandeCotation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,12 +27,12 @@ public class DemandeCotation {
     private String exigencesParticulieres; // Transport réfrigéré, fragile, ADR..
     private boolean transitEtranger; // true si le transport traverse une frontière
     private LocalDate dateDemande;
-    private LocalDate periodeTransport; // Période souhaitée pour le transport
+    private String periodeTransport; // Période souhaitée pour le transport
     private StatusDemandeCotation statut;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Adress adresseChargement;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Adress adresseDechargement;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Physique physique;
 }
