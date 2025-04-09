@@ -17,7 +17,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Create admin user if not exists
-        if (userAuthRep.findByUsername("admin") == null) {
+        if (userAuthRep.findByUsername("admin").isEmpty()) {
             UserAuth admin = new UserAuth();
             admin.setUsername("admin");
             admin.setPassword(passwordEncoder.encode("admin123")); // Encodage sécurisé
@@ -27,7 +27,7 @@ public class DataInitializer implements CommandLineRunner {
         }
 
         // Create regular user if not exists
-        if (userAuthRep.findByUsername("user") == null) {
+        if (userAuthRep.findByUsername("user").isEmpty()) {
             UserAuth user = new UserAuth();
             user.setUsername("user");
             user.setPassword(passwordEncoder.encode("user123")); // Encodage sécurisé

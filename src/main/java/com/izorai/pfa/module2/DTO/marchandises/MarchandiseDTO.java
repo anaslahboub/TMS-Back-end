@@ -1,6 +1,8 @@
 package com.izorai.pfa.module2.DTO.marchandises;
 
 import com.izorai.pfa.module2.entities.marchandises.Categorie;
+import com.izorai.pfa.module2.entities.marchandises.Emballage;
+import com.izorai.pfa.module2.entities.marchandises.Unite;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,5 +16,6 @@ public class MarchandiseDTO {
         String description;
         String codeMarchandise;
         Categorie categorie;
-
+        Unite unite;
+        Emballage emballage;
 }

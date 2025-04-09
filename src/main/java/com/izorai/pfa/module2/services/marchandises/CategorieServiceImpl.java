@@ -25,9 +25,9 @@ public class CategorieServiceImpl implements CategorieService {
     @Override
     public CategorieDTO createCategorie(CategorieDTO categorieDTO) {
         Categorie categorie = categorieMapper.toEntity(categorieDTO);
-        System.out.println("categorie : " + categorie.getCategorie());
+        System.out.println("categorie : " + categorie.getLibelle());
         Categorie saved = categorieRepository.save(categorie);
-        System.out.println("saved : " + saved.getCategorie());
+        System.out.println("saved : " + saved.getLibelle());
         return categorieMapper.toDto(saved);
     }
 

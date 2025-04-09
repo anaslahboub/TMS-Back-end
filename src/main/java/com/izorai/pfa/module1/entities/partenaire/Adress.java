@@ -21,5 +21,4 @@
         private String ville;
         private String pays;
         private String codePostal;
-
     }

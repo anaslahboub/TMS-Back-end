@@ -1,4 +1,4 @@
-package com.izorai.pfa.module2.services.marchandises;
+package com.izorai.pfa.module2.services.Emballage;
 
 import com.izorai.pfa.module2.DTO.marchandises.EmballageDTO;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.izorai.pfa.module2.controllers;
 
 import com.izorai.pfa.module2.DTO.marchandises.EmballageDTO;
-import com.izorai.pfa.module2.services.marchandises.EmballageService;
+import com.izorai.pfa.module2.services.Emballage.EmballageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

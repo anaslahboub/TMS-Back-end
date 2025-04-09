@@ -20,4 +20,8 @@ public class Marchandise {
     private String codeMarchandise;
     @ManyToOne
     private Categorie categorie;
+    @ManyToOne
+    private Unite unite;
+    @ManyToOne
+    private Emballage emballage;
 }
