@@ -15,8 +15,8 @@ public class TypePartenaire implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTypePartenaire;
+    @Column(nullable = false)
     private String libelle;
     private String definition;
     private String genre;
-
 }

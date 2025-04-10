@@ -16,6 +16,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = false)
 
 public class Morale extends Partenaire {
+    @Column(nullable = false)
     private Long ice;
     private Long numeroRC;
     private String abreviation;

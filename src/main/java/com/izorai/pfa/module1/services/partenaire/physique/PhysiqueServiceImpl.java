@@ -27,7 +27,7 @@ public class PhysiqueServiceImpl implements PhysiqueService {
 
     @Override
     public PhysiqueRespDTO addNewPhysique(PhysiqueCreateDTO physiqueCreateDTO) {
-        Physique physique =physiqueRepository.save( physiqueMapper.fromPhysiqueCreateDTO(physiqueCreateDTO));
+        Physique physique = physiqueRepository.save( physiqueMapper.fromPhysiqueCreateDTO(physiqueCreateDTO));
         return physiqueMapper.toPhysiqueRespDTO(physique);
     }
 

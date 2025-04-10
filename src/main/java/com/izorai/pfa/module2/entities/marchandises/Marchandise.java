@@ -13,10 +13,11 @@ public class Marchandise {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String libelle;
     private String description;
-    private String codeMarchandise; // Code unique pour la marchandise
-
+    @Column(nullable = false)
+    private String codeMarchandise;
     @ManyToOne
     private Categorie categorie;
 }

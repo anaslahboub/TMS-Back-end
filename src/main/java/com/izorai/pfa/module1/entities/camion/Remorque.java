@@ -16,8 +16,11 @@ public class Remorque  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idRemorque;
+    @Column(nullable = false)
     private int volumeStockage;
+    @Column(nullable = false)
     private int poidsVide;
+    @Column(nullable = false)
     private int poidsChargeMax;
     private boolean disponible;
     @ManyToOne
