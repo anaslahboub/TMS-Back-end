@@ -1,9 +1,15 @@
 package com.izorai.pfa.module2.DTO.voyage;
 
+import com.izorai.pfa.module1.DTO.camion.camion.CamionDTO;
+import com.izorai.pfa.module1.DTO.camion.remorque.RemorqueDTO;
+import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurCreateDTO;
+import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurRespDTO;
+import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurVoyageDTO;
 import com.izorai.pfa.module1.entities.camion.Camion;
 import com.izorai.pfa.module1.entities.camion.Chaufeur;
 import com.izorai.pfa.module1.entities.camion.Remorque;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
+import com.izorai.pfa.module2.DTO.contient.ContientDTO;
 import com.izorai.pfa.module2.entities.contient.Contient;
 import com.izorai.pfa.module2.enumerations.EtatVoyage;
 
@@ -21,10 +27,10 @@ public record VoyageDTO(
         Adress lieuArrive,
         int distance,
         EtatVoyage etat,
-        List<Contient> listMarchandises,
+        List<ContientDTO> listMarchandises,
         boolean estUrgent,
         boolean estFragile,
-        Camion camion,
-        Chaufeur chaufeur,
-        Remorque remorque
+        CamionDTO camion,
+        ChaufeurRespDTO chaufeur,
+        RemorqueDTO remorque
 ) {}

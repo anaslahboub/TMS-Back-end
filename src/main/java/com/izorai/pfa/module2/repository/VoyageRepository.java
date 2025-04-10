@@ -24,15 +24,15 @@ public interface VoyageRepository extends JpaRepository<Voyage, Long> {
     long countByEtat(EtatVoyage etat);
 
     // Custom query to find voyages with a specific chauffeur
-    @Query("SELECT v FROM Voyage v WHERE v.chaufeur.id = :chauffeurId")
+    @Query("SELECT v FROM Voyage v WHERE v.chaufeur.idPartenaire = :chauffeurId")
     List<Voyage> findByChauffeurId(Long chauffeurId);
 
     // Custom query to find voyages with a specific camion
-    @Query("SELECT v FROM Voyage v WHERE v.camion.id = :camionId")
+    @Query("SELECT v FROM Voyage v WHERE v.camion.immatriculation = :camionId")
     List<Voyage> findByCamionId(Long camionId);
 
     // Custom query to find voyages with a specific remorque
-    @Query("SELECT v FROM Voyage v WHERE v.remorque.id = :remorqueId")
+    @Query("SELECT v FROM Voyage v WHERE v.remorque.idRemorque = :remorqueId")
     List<Voyage> findByRemorqueId(Long remorqueId);
 
     // Custom query to find upcoming voyages

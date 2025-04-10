@@ -27,10 +27,10 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "id"
+//)
 public class Voyage implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,23 +38,31 @@ public class Voyage implements Serializable {
     private LocalDate dateDepart;
     private LocalDate dateArrivePrevue;
     private LocalDate dateArriveReelle;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "lieu_depart_id_adress")
     private Adress lieuDepart;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "lieu_arrive_id_adress")
     private Adress lieuArrive;
     private int distance;
+
     @Enumerated(EnumType.STRING)
     private EtatVoyage etat;
     private boolean estUrgent;
     private boolean estFragile;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.DETACH)
     private Chaufeur chaufeur;
+
     @ManyToOne
     private Remorque remorque;
+
     @ManyToOne
     private Camion camion;
-    @OneToMany(mappedBy = "voyage", cascade = CascadeType.ALL, orphanRemoval = true)
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contient> listMarchandises = new ArrayList<>();
+
 }

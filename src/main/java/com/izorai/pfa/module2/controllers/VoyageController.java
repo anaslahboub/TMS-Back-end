@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -101,4 +102,12 @@ public class VoyageController {
         VoyageDTO updatedVoyage = voyageService.assignRemorque(voyageId, remorqueId);
         return new ResponseEntity<>(updatedVoyage, HttpStatus.OK);
     }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<Map<EtatVoyage, Long>> getVoyageStatistics() {
+        Map<EtatVoyage, Long> statistics = voyageService.getVoyagesStatistics();
+        return ResponseEntity.ok(statistics);
+    }
+
+
 }

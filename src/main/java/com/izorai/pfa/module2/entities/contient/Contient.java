@@ -16,10 +16,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "id"
+//)
 public class Contient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +28,5 @@ public class Contient {
 
     @ManyToOne
     private Marchandise marchandise;
-    @ManyToOne
-    @JoinColumn(name = "voyage_id")
-    private Voyage voyage;
 
 }

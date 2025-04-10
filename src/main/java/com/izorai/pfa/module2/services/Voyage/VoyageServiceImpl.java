@@ -21,9 +21,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -159,11 +161,11 @@ public class VoyageServiceImpl implements VoyageService {
 
     @Override
     public Map<EtatVoyage, Long> getVoyagesStatistics() {
-        return voyageRepository.findAll()
-                .stream()
-                .collect(Collectors.groupingBy(
-                        Voyage::getEtat,
-                        Collectors.counting()
+        // More efficient implementation using JPA aggregation
+        return Arrays.stream(EtatVoyage.values())
+                .collect(Collectors.toMap(
+                        Function.identity(),
+                        etat -> voyageRepository.countByEtat(etat)
                 ));
     }
 }
