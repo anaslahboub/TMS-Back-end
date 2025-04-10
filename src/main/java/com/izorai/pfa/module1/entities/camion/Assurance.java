@@ -20,6 +20,7 @@
         private String typeCouverture;
         private int montant;
         private LocalDate dateDebut;
+        @Column(nullable = false)
         private LocalDate dateExpiration;
         private int primeAnnuelle;
         private Long numCarteVerte;
