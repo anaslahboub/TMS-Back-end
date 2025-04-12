@@ -103,4 +103,10 @@ public class CarburantController {
         return new ResponseEntity<>(tauxConsommation, HttpStatus.OK);
     }
 
+    @GetMapping("/{immatriculation}/last-kilometrage")
+    public ResponseEntity<Double> getLastKilometrage(@PathVariable String immatriculation) {
+        double lastKm = carburantService.getLastKilometrageForCamion(immatriculation);
+        return ResponseEntity.ok(lastKm);
+    }
+
 }

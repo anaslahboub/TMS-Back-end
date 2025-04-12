@@ -81,7 +81,7 @@ public class ChaufeurController {
 
     // Insurance Management
     @GetMapping("/{idPartenaire}/permis/valid")
-    public ResponseEntity<Boolean> checkPermisValidity(@PathVariable Long idPartenaire) {
+    public ResponseEntity<Boolean> icheckPermisValidity(@PathVariable Long idPartenaire) {
         Boolean isValid = chaufeurService.isPermisValid(idPartenaire);
         return ResponseEntity.ok(isValid);
     }

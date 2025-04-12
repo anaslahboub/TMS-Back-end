@@ -49,7 +49,7 @@ public class CategorieServiceImpl implements CategorieService {
     @Override
     @Transactional(readOnly = true)
     public Optional<CategorieDTO> getCategorieByNom(String nom) {
-        return categorieRepository.findByLibelle(nom)
+        return categorieRepository.findByCategorie(nom)
                 .map(categorieMapper::toDto);
     }
 
@@ -72,6 +72,6 @@ public class CategorieServiceImpl implements CategorieService {
 
     @Override
     public boolean existsByNom(String nom) {
-        return categorieRepository.existsByLibelle(nom);
+        return categorieRepository.existsByCategorie(nom);
     }
 }

@@ -153,6 +153,17 @@ public class CarburantServiceImpl implements CarburantService {
         return maxKm - minKm;
     }
 
+    @Override
+    public double getLastKilometrageForCamion(String  immatriculation) {
+        Camion camion = camionRepository.findByImmatriculation(immatriculation).get();
+        if (camion == null || camion.getImmatriculation() == null) {
+            return 0;
+        }
+
+        return carburantRepository.findLastKilometrageByCamionImmatriculation(immatriculation)
+                .orElse(0.0);
+    }
+
     @Transactional
     @Override
     public double getQuantityTotal() {

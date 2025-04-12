@@ -26,6 +26,8 @@ public interface CarburantRepository extends JpaRepository<Carburant, Long> {
     @Query("SELECT AVG(c.prixParLitre) FROM Carburant c WHERE c.prixParLitre IS NOT NULL")
     Optional<Double> avgPrixParLitre();
 
+    @Query("SELECT c.kilometrageActuel FROM Carburant c WHERE c.camion.immatriculation = :immatriculation ORDER BY c.dateRemplissage DESC LIMIT 1")
+    Optional<Double> findLastKilometrageByCamionImmatriculation(@Param("immatriculation") String immatriculation);
     void deleteAllByCamion(Camion camion);
 
 

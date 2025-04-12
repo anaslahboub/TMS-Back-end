@@ -31,4 +31,7 @@ public class CarteGrise implements Serializable {
     private int poidsVide;
     private int poidsAutorise;
     private LocalDate dateDelivrance;
+    @Lob
+    private byte[] photoCarteGrise;
+
 }

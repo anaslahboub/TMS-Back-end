@@ -2,6 +2,7 @@ package com.izorai.pfa.module1.services.camion.carburant;
 
 import com.izorai.pfa.module1.DTO.camion.carburant.CarburantDTO;
 import com.izorai.pfa.module1.DTO.camion.carburant.CarburantRespDto;
+import com.izorai.pfa.module1.entities.camion.Camion;
 import com.izorai.pfa.module1.entities.camion.Carburant;
 
 import java.time.LocalDate;
@@ -50,6 +51,9 @@ public interface CarburantService {
     double getPrixMoyenne();
 
     double getTauxConsommationMoyenne();
+
+
+    public double getLastKilometrageForCamion(String immatriculation);
 
 
 

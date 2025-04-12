@@ -114,14 +114,15 @@ public class ChaufeurServiceImpl implements ChaufeurService {
     // Insurance Management
     @Override
     public boolean isPermisValid(Long idPartenaire) {
-        logger.info("Checking permis  validity for driver {}", idPartenaire);
+        logger.info("Vérification de la validité du permis pour le chauffeur {}", idPartenaire);
 
         Chaufeur chaufeur = chaufeurRepository.findById(idPartenaire)
                 .orElseThrow(() -> new ChaufeurNotFoundException(idPartenaire));
 
-        return chaufeur.getDateExpirationPermis() != null &&
-                !chaufeur.getDateExpirationPermis().isBefore(LocalDate.now());
+        LocalDate expiration = chaufeur.getDateExpirationPermis();
+        return expiration != null && !expiration.isBefore(LocalDate.now());
     }
+
 
     @Override
     public List<ChaufeurRespDTO> findDriversWithExpiredPermis() {
