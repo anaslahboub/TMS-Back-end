@@ -18,8 +18,10 @@ public class CarteGrise implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate dateMiseEnCirculation;
+    @Column(nullable = false)
     private String marque;
     private String genre;
+    @Column(nullable = false)
     private Long numeroSerie;
     private String Couleur;
     private int nombrePlace;
@@ -31,4 +33,5 @@ public class CarteGrise implements Serializable {
     private LocalDate dateDelivrance;
     @Lob
     private byte[] photoCarteGrise;
+
 }

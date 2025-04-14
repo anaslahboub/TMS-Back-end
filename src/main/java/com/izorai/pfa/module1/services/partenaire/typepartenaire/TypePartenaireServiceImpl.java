@@ -3,24 +3,29 @@ package com.izorai.pfa.module1.services.partenaire.typepartenaire;
 import com.izorai.pfa.module1.DTO.partenaire.typePartenaire.TypePartenaireCreateDTO;
 import com.izorai.pfa.module1.DTO.partenaire.typePartenaire.TypePartenaireNomDto;
 import com.izorai.pfa.module1.DTO.partenaire.typePartenaire.TypePartenaireRespDTO;
+import com.izorai.pfa.module1.entities.partenaire.Morale;
+import com.izorai.pfa.module1.entities.partenaire.Physique;
 import com.izorai.pfa.module1.entities.partenaire.TypePartenaire;
 import com.izorai.pfa.module1.mappers.partenaire.TypePartenaireMapper;
+import com.izorai.pfa.module1.repository.partenaire.MoraleRepository;
+import com.izorai.pfa.module1.repository.partenaire.PhysiqueRepository;
 import com.izorai.pfa.module1.repository.partenaire.TypePartenaireRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class TypePartenaireServiceImpl implements TypePartenaireService {
     private final TypePartenaireRepository typePartenaireRepository;
     private final TypePartenaireMapper typePartenaireMapper;
-
-    public TypePartenaireServiceImpl(TypePartenaireRepository typePartenaireRepository, TypePartenaireMapper typePartenaireMapper) {
-        this.typePartenaireRepository = typePartenaireRepository;
-        this.typePartenaireMapper = typePartenaireMapper;
-    }
+    private final MoraleRepository MoraleRepository;
+    private final PhysiqueRepository PhysiqueRepository;
+    private final PhysiqueRepository physiqueRepository;
+    private final MoraleRepository moraleRepository;
 
 
     @Override
@@ -62,8 +67,16 @@ public class TypePartenaireServiceImpl implements TypePartenaireService {
     @Override
     @Transactional
     public void deleteTypePartenaire(Long id) {
-        typePartenaireRepository.findById(id)
-                .ifPresent(typePartenaire -> typePartenaireRepository.delete(typePartenaire));
+        TypePartenaire typePartenaire = typePartenaireRepository.findById(id).get();
+        List<Physique> physiques = physiqueRepository.findAllByTypePartenaire(typePartenaire);
+        List<Morale> morales = moraleRepository.findAllByTypePartenaire(typePartenaire);
+        for(Physique physique : physiques){
+            physique.setTypePartenaire(null);
+        }
+        for ( Morale morale : morales){
+            morale.setTypePartenaire(null);
+        }
+        typePartenaireRepository.delete(typePartenaire);
     }
 
     @Override
