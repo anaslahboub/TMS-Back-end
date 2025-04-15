@@ -1,6 +1,8 @@
 package com.izorai.pfa.module2.services;
 
 import com.izorai.pfa.module2.DTO.voyage.VoyageDTO;
+import com.izorai.pfa.module2.DTO.voyage.VoyageEtatDTO;
+import com.izorai.pfa.module2.entities.Voyage;
 import com.izorai.pfa.module2.entities.contient.Contient;
 import com.izorai.pfa.module2.enumerations.EtatVoyage;
 
@@ -32,4 +34,9 @@ public interface VoyageService {
     // Statistics & Reporting
     long countVoyagesByStatus(EtatVoyage status);
     Map<EtatVoyage, Long> getVoyagesStatistics();
+
+
+    VoyageEtatDTO changeVoyageEtat(VoyageEtatDTO voyageEtatDTO);
+
+    VoyageDTO checkVoyageWarnings(Long voyageId);
 }

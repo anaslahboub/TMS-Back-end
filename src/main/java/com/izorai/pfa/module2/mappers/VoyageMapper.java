@@ -1,6 +1,7 @@
 package com.izorai.pfa.module2.mappers;
 
 import com.izorai.pfa.module2.DTO.voyage.VoyageDTO;
+import com.izorai.pfa.module2.DTO.voyage.VoyageEtatDTO;
 import com.izorai.pfa.module2.entities.Voyage;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -12,4 +13,7 @@ public interface VoyageMapper {
     Voyage toEntity(VoyageDTO voyageDTO);
     @Mapping(target = "id", ignore = true)
     void updateFromDto(VoyageDTO dto, @MappingTarget Voyage entity);
+
+    Voyage fromVoyageEtatDTO(VoyageEtatDTO voyageEtatDTO);
+    VoyageEtatDTO toVoyageEtatDTO(Voyage voyage);
 }

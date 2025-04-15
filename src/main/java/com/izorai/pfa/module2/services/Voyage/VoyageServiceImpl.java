@@ -8,6 +8,7 @@ import com.izorai.pfa.module1.repository.camion.RemorqueRepository;
 import com.izorai.pfa.module1.repository.partenaire.ChaufeurRepository;
 import com.izorai.pfa.module1.services.partenaire.chaufeur.ChaufeurService;
 import com.izorai.pfa.module2.DTO.voyage.VoyageDTO;
+import com.izorai.pfa.module2.DTO.voyage.VoyageEtatDTO;
 import com.izorai.pfa.module2.entities.Voyage;
 import com.izorai.pfa.module2.entities.contient.Contient;
 import com.izorai.pfa.module2.enumerations.EtatVoyage;
@@ -15,6 +16,7 @@ import com.izorai.pfa.module2.exceptions.VoyageNotFoundException;
 import com.izorai.pfa.module2.mappers.VoyageMapper;
 import com.izorai.pfa.module2.repository.VoyageRepository;
 import com.izorai.pfa.module2.services.VoyageService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -42,6 +44,7 @@ public class VoyageServiceImpl implements VoyageService {
     public VoyageDTO createVoyage(VoyageDTO voyageDTO) {
         Voyage voyage = voyageMapper.toEntity(voyageDTO);
         voyage.setEtat(EtatVoyage.PLANIFIE);
+        voyage.checkForWarnings();
         Voyage savedVoyage = voyageRepository.save(voyage);
         return voyageMapper.toDto(savedVoyage);
     }
@@ -167,5 +170,22 @@ public class VoyageServiceImpl implements VoyageService {
                         Function.identity(),
                         etat -> voyageRepository.countByEtat(etat)
                 ));
+    }
+
+    @Override
+    public VoyageEtatDTO changeVoyageEtat(VoyageEtatDTO voyageEtatDTO) {
+        Voyage voyage = voyageRepository.findById(voyageEtatDTO.id()).orElseThrow();
+        voyage.setEtat(voyageEtatDTO.etat());
+        voyageRepository.save(voyage);
+        return voyageEtatDTO ;
+    }
+
+    @Override
+    public VoyageDTO checkVoyageWarnings(Long voyageId) {
+        Voyage voyage = voyageRepository.findById(voyageId)
+                .orElseThrow(() -> new EntityNotFoundException("Voyage not found"));
+
+        voyage.checkForWarnings();
+        return voyageMapper.toDto(voyage);
     }
 }

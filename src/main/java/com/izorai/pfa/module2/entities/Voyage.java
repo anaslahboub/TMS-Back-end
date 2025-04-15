@@ -65,4 +65,40 @@ public class Voyage implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contient> listMarchandises = new ArrayList<>();
 
+    // Add to Voyage entity
+    @ElementCollection
+    private List<String> warnings = new ArrayList<>();
+
+    // Add this method to Voyage entity
+    public void checkForWarnings() {
+        this.warnings.clear();
+
+        LocalDate voyageEnd = this.dateArrivePrevue != null ?
+                this.dateArrivePrevue : this.dateDepart.plusDays(1);
+
+        // Check assurance expiration
+        if (this.camion != null && this.camion.getAssurance() != null) {
+            LocalDate assuranceExpiry = this.camion.getAssurance().getDateExpiration();
+            if (assuranceExpiry.isBefore(voyageEnd)) {
+                warnings.add("Assurance expires on " + assuranceExpiry);
+            }
+        }
+
+        // Check carte grise 10-year limit
+        if (this.camion != null && this.camion.getCarteGrise() != null) {
+            LocalDate carteGriseExpiry = this.camion.getCarteGrise()
+                    .getDateMiseEnCirculation().plusYears(10);
+            if (carteGriseExpiry.isBefore(voyageEnd)) {
+                warnings.add("Carte grise exceeds 10 years on " + carteGriseExpiry);
+            }
+        }
+
+        // Check driver's license
+        if (this.chaufeur != null) {
+            LocalDate permisExpiry = this.chaufeur.getDateExpirationPermis();
+            if (permisExpiry.isBefore(voyageEnd)) {
+                warnings.add("Driver license expires on " + permisExpiry);
+            }
+        }
+    }
 }

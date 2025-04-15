@@ -15,6 +15,7 @@ import com.izorai.pfa.module2.enumerations.EtatVoyage;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -32,5 +33,6 @@ public record VoyageDTO(
         boolean estFragile,
         CamionDTO camion,
         ChaufeurRespDTO chaufeur,
-        RemorqueDTO remorque
+        RemorqueDTO remorque,
+        List<String> warnings
 ) {}
