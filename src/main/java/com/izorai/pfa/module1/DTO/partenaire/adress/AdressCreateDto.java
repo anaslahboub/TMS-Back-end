@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AdressCreateDto {
-    private String type;
     private String rue;
     private String ville;
     private String pays;

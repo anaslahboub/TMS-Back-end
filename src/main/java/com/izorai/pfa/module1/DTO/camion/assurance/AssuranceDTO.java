@@ -1,5 +1,6 @@
 package com.izorai.pfa.module1.DTO.camion.assurance;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 @NoArgsConstructor // Génère un constructeur sans paramètres
 @AllArgsConstructor // Génère un constructeur avec tous les paramètres
 public class AssuranceDTO {
+    @JsonIgnore
     private Long numeroContrat;
     private String company;
     private String typeCouverture;

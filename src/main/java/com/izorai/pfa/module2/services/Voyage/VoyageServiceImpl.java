@@ -3,8 +3,15 @@ package com.izorai.pfa.module2.services.Voyage;
 import com.izorai.pfa.module1.entities.camion.Camion;
 import com.izorai.pfa.module1.entities.camion.Chaufeur;
 import com.izorai.pfa.module1.entities.camion.Remorque;
+import com.izorai.pfa.module1.entities.partenaire.Adress;
+import com.izorai.pfa.module1.mappers.camion.AssuranceMapper;
+import com.izorai.pfa.module1.mappers.camion.CamionMapper;
+import com.izorai.pfa.module1.mappers.camion.RemorqueMapper;
+import com.izorai.pfa.module1.mappers.partenaire.AdressMapper;
+import com.izorai.pfa.module1.mappers.partenaire.ChaufeurMapper;
 import com.izorai.pfa.module1.repository.camion.CamionRepository;
 import com.izorai.pfa.module1.repository.camion.RemorqueRepository;
+import com.izorai.pfa.module1.repository.partenaire.AdressRepository;
 import com.izorai.pfa.module1.repository.partenaire.ChaufeurRepository;
 import com.izorai.pfa.module1.services.partenaire.chaufeur.ChaufeurService;
 import com.izorai.pfa.module2.DTO.voyage.VoyageDTO;
@@ -13,6 +20,7 @@ import com.izorai.pfa.module2.entities.Voyage;
 import com.izorai.pfa.module2.entities.contient.Contient;
 import com.izorai.pfa.module2.enumerations.EtatVoyage;
 import com.izorai.pfa.module2.exceptions.VoyageNotFoundException;
+import com.izorai.pfa.module2.mappers.ContientMapper;
 import com.izorai.pfa.module2.mappers.VoyageMapper;
 import com.izorai.pfa.module2.repository.VoyageRepository;
 import com.izorai.pfa.module2.services.VoyageService;
@@ -36,6 +44,10 @@ public class VoyageServiceImpl implements VoyageService {
     private final ChaufeurRepository chauffeurRepository;
     private final CamionRepository camionRepository;
     private final RemorqueRepository remorqueRepository;
+    private final ContientMapper contientMapper;
+    private final CamionMapper camionMapper;
+    private final RemorqueMapper remorqueMapper;
+    private final ChaufeurMapper chaufeurMapper;
 
 
     private boolean isValidTransition(EtatVoyage current, EtatVoyage next) {
@@ -66,14 +78,39 @@ public class VoyageServiceImpl implements VoyageService {
 
     @Override
     public VoyageDTO updateVoyage(Long id, VoyageDTO voyageDTO) {
-        return voyageRepository.findById(id)
-                .map(existingVoyage -> {
-                    voyageMapper.updateFromDto(voyageDTO, existingVoyage);
-                    Voyage updated = voyageRepository.save(existingVoyage);
-                    return voyageMapper.toDto(updated);
-                })
-                .orElseThrow(() -> new VoyageNotFoundException(id));
+        Voyage existingVoyage = voyageRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Voyage with ID " + id + " not found"));
+
+        // Update the fields
+        existingVoyage.setDateDepart(voyageDTO.dateDepart());
+        existingVoyage.setDateArrivePrevue(voyageDTO.dateArrivePrevue());
+        existingVoyage.setLieuDepart(voyageDTO.lieuDepart());
+        existingVoyage.setLieuArrive(voyageDTO.lieuArrive());
+        existingVoyage.setDistance(voyageDTO.distance());
+        existingVoyage.setEtat(voyageDTO.etat());
+        existingVoyage.setEstUrgent(voyageDTO.estUrgent());
+        existingVoyage.setEstFragile(voyageDTO.estFragile());
+
+        // Convert DTOs to entities if necessary
+        existingVoyage.setCamion(camionMapper.fromCamionDTO(voyageDTO.camion()));
+        existingVoyage.setChaufeur(chaufeurMapper.fromChaufeurRespDTO(voyageDTO.chaufeur()));
+        existingVoyage.setRemorque(remorqueMapper.toEntity(voyageDTO.remorque()));
+
+        // Update the list of marchandises without replacing the collection
+        existingVoyage.getListMarchandises().clear(); // Clear existing items
+        voyageDTO.listMarchandises().stream()
+                .map(contientMapper::toEntity)
+                .forEach(existingVoyage.getListMarchandises()::add); // Add new items
+
+        System.out.println(existingVoyage);
+
+        // Save the updated voyage
+        Voyage updatedVoyage = voyageRepository.save(existingVoyage);
+
+        // Convert back to DTO
+        return voyageMapper.toDto(updatedVoyage);
     }
+
 
     @Override
     public void deleteVoyage(Long id) {

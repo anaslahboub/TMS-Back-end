@@ -16,7 +16,6 @@ public class Adress implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAdress;
-    private String type;
     private String rue;
     private String ville;
     private String pays;
