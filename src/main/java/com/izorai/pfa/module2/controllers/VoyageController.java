@@ -63,14 +63,6 @@ public class VoyageController {
         return new ResponseEntity<>(voyages, HttpStatus.OK);
     }
 
-    @PutMapping("/{id}/statut")
-    public ResponseEntity<VoyageDTO> updateVoyageStatus(
-            @PathVariable Long id,
-            @RequestParam EtatVoyage newStatus) {
-        VoyageDTO updatedVoyage = voyageService.updateStatus(id, newStatus);
-        return new ResponseEntity<>(updatedVoyage, HttpStatus.OK);
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<VoyageDTO> updateVoyage(
             @PathVariable Long id,

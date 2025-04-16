@@ -23,10 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -39,6 +36,24 @@ public class VoyageServiceImpl implements VoyageService {
     private final ChaufeurRepository chauffeurRepository;
     private final CamionRepository camionRepository;
     private final RemorqueRepository remorqueRepository;
+
+
+    private boolean isValidTransition(EtatVoyage current, EtatVoyage next) {
+        // Define all valid state transitions
+        Map<EtatVoyage, Set<EtatVoyage>> validTransitions = Map.of(
+                EtatVoyage.PLANIFIE, Set.of(EtatVoyage.EN_COURS, EtatVoyage.ANNULE),
+                EtatVoyage.EN_COURS, Set.of(EtatVoyage.EN_INCIDENT, EtatVoyage.TERMINE),
+                EtatVoyage.EN_INCIDENT, Set.of(EtatVoyage.EN_COURS, EtatVoyage.TERMINE)
+        );
+
+        // No transitions allowed from TERMINE or ANNULE
+        if (current == EtatVoyage.TERMINE || current == EtatVoyage.ANNULE) {
+            return false;
+        }
+
+        // Check if the requested transition is valid
+        return validTransitions.getOrDefault(current, Set.of()).contains(next);
+    }
 
     @Override
     public VoyageDTO createVoyage(VoyageDTO voyageDTO) {
@@ -86,9 +101,14 @@ public class VoyageServiceImpl implements VoyageService {
     public VoyageDTO updateStatus(Long id, EtatVoyage newStatus) {
         return voyageRepository.findById(id)
                 .map(voyage -> {
-                    voyage.setEtat(newStatus);
-                    Voyage updated = voyageRepository.save(voyage);
-                    return voyageMapper.toDto(updated);
+                    if (!voyage.getWarnings().isEmpty() && newStatus.equals(EtatVoyage.EN_COURS)) {
+                        return null ;
+                    }else{
+                        voyage.setEtat(newStatus);
+                        Voyage updated = voyageRepository.save(voyage);
+                        return voyageMapper.toDto(updated);
+                    }
+
                 })
                 .orElseThrow(() -> new VoyageNotFoundException(id));
     }
@@ -174,10 +194,26 @@ public class VoyageServiceImpl implements VoyageService {
 
     @Override
     public VoyageEtatDTO changeVoyageEtat(VoyageEtatDTO voyageEtatDTO) {
-        Voyage voyage = voyageRepository.findById(voyageEtatDTO.id()).orElseThrow();
+        Voyage voyage = voyageRepository.findById(voyageEtatDTO.id())
+                .orElseThrow(() -> new EntityNotFoundException("Voyage not found"));
+
+        // Check if trying to change to EN_COURS with warnings
+        if (voyageEtatDTO.etat() == EtatVoyage.EN_COURS && !voyage.getWarnings().isEmpty()) {
+            throw new IllegalStateException("Cannot start voyage with active warnings");
+        }
+
+        // Validate state transition
+        if (!isValidTransition(voyage.getEtat(), voyageEtatDTO.etat())) {
+            throw new IllegalStateException("Invalid state transition");
+        }
+        // Set arrival date if changing to TERMINE
+        if (voyageEtatDTO.etat() == EtatVoyage.TERMINE) {
+            voyage.setDateArriveReelle(LocalDate.now());
+        }
+
         voyage.setEtat(voyageEtatDTO.etat());
-        voyageRepository.save(voyage);
-        return voyageEtatDTO ;
+        voyage = voyageRepository.save(voyage);
+        return voyageMapper.toVoyageEtatDTO(voyage);
     }
 
     @Override

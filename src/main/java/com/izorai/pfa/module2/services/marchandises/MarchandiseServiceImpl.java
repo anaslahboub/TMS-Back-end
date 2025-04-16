@@ -1,9 +1,12 @@
 package com.izorai.pfa.module2.services.marchandises;
 
 import com.izorai.pfa.module2.DTO.marchandises.MarchandiseDTO;
+import com.izorai.pfa.module2.entities.contient.Contient;
 import com.izorai.pfa.module2.entities.marchandises.Marchandise;
 import com.izorai.pfa.module2.mappers.Marchandises.MarchandiseMapper;
+import com.izorai.pfa.module2.repository.ContientRepository;
 import com.izorai.pfa.module2.repository.marchandises.MarchandiseRepository;
+import com.izorai.pfa.module2.services.contient.ContientServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,11 +20,13 @@ public class MarchandiseServiceImpl implements MarchandiseService {
 
     private final MarchandiseRepository marchandiseRepository;
     private final MarchandiseMapper marchandiseMapper;
+    private final ContientRepository contientRepository;
 
     public MarchandiseServiceImpl(MarchandiseRepository marchandiseRepository,
-                                  MarchandiseMapper marchandiseMapper) {
+                                  MarchandiseMapper marchandiseMapper, ContientRepository contientRepository) {
         this.marchandiseRepository = marchandiseRepository;
         this.marchandiseMapper = marchandiseMapper;
+        this.contientRepository =  contientRepository;
     }
 
     @Override
@@ -66,7 +71,21 @@ public class MarchandiseServiceImpl implements MarchandiseService {
     }
 
     @Override
+    @Transactional
     public void deleteMarchandise(Long id) {
+        // First find all Contient entities that reference this marchandise
+        List<Contient> contientList = contientRepository.findByMarchandiseId(id);
+
+        // Option 1: Set marchandise to null in all Contient entities
+        for (Contient contient : contientList) {
+            contient.setMarchandise(null);
+            contientRepository.save(contient);
+        }
+
+        // OR Option 2: Delete all Contient entities that reference this marchandise
+        // contientRepository.deleteAll(contientList);
+
+        // Then delete the marchandise
         marchandiseRepository.deleteById(id);
     }
 
