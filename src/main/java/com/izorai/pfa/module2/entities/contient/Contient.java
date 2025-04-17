@@ -1,5 +1,8 @@
 package com.izorai.pfa.module2.entities.contient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.izorai.pfa.module2.entities.Voyage;
 import com.izorai.pfa.module2.entities.marchandises.Emballage;
 import com.izorai.pfa.module2.entities.marchandises.Marchandise;
@@ -13,11 +16,17 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "id"
+//)
 public class Contient {
-    @EmbeddedId
-    private ContientId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private long quantite;
 
-    private long qte;
-
+    @ManyToOne
+    private Marchandise marchandise;
 
 }

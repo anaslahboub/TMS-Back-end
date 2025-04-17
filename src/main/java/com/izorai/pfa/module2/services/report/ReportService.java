@@ -1,4 +1,4 @@
-package com.izorai.pfa.module2.services;
+package com.izorai.pfa.module2.services.report;
 
 import com.izorai.pfa.module1.entities.camion.*;
 import com.izorai.pfa.module1.services.camion.assurance.AssuranceService;
@@ -11,8 +11,8 @@ import com.izorai.pfa.module2.DTO.report.DocumentAlert;
 import com.izorai.pfa.module2.DTO.report.ReportDto;
 import com.izorai.pfa.module2.DTO.report.VoyageInfo;
 import com.izorai.pfa.module2.entities.Voyage;
+import com.izorai.pfa.module2.services.Voyage.VoyageService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

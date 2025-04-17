@@ -5,7 +5,7 @@ import com.izorai.pfa.module2.DTO.voyage.VoyageEtatDTO;
 import com.izorai.pfa.module2.entities.Voyage;
 import com.izorai.pfa.module2.enumerations.EtatVoyage;
 import com.izorai.pfa.module2.mappers.VoyageMapper;
-import com.izorai.pfa.module2.services.VoyageService;
+import com.izorai.pfa.module2.services.Voyage.VoyageService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,14 +61,6 @@ public class VoyageController {
     public ResponseEntity<List<VoyageDTO>> getVoyagesByStatut(@PathVariable EtatVoyage statut) {
         List<VoyageDTO> voyages = voyageService.getVoyagesByStatus(statut);
         return new ResponseEntity<>(voyages, HttpStatus.OK);
-    }
-
-    @PutMapping("/{id}/statut")
-    public ResponseEntity<VoyageDTO> updateVoyageStatus(
-            @PathVariable Long id,
-            @RequestParam EtatVoyage newStatus) {
-        VoyageDTO updatedVoyage = voyageService.updateStatus(id, newStatus);
-        return new ResponseEntity<>(updatedVoyage, HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

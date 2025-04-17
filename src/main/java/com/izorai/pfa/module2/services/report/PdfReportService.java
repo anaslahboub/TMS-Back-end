@@ -1,4 +1,4 @@
-package com.izorai.pfa.module2.services;
+package com.izorai.pfa.module2.services.report;
 
 import com.izorai.pfa.module2.DTO.report.CamionInfo;
 import com.izorai.pfa.module2.DTO.report.DocumentAlert;
@@ -16,7 +16,6 @@ import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.io.File;

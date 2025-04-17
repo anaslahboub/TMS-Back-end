@@ -17,12 +17,10 @@ public class Entretien implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
     private LocalDate dateEntretien;
     @Enumerated(EnumType.STRING)
     private TypeEntretien typeEntretien;
     private String description;
-    @Column(nullable = false)
     private int cout;
     private LocalDate dateProchainEntretien;
     @Enumerated(EnumType.STRING)

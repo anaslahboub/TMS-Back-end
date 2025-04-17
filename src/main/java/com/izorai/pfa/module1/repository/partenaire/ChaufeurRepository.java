@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface ChaufeurRepository extends JpaRepository<Chaufeur, Long> {
     Chaufeur findByIdPartenaire(Long idPartenaire);
+
     /**
      * Find drivers by their availability status
      * @param disponibilite Availability status to filter

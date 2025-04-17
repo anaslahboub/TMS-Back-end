@@ -20,5 +20,4 @@ public class Physique extends Partenaire {
     private String cni;
     @Column(nullable = false)
     private String prenom;
-
 }

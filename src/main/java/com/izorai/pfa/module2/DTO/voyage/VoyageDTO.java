@@ -26,4 +26,4 @@ public record VoyageDTO(
         ChaufeurRespDTO chaufeur,
         RemorqueDTO remorque,
         List<String> warnings
-){}
+) {}

@@ -1,4 +1,4 @@
-package com.izorai.pfa.module2.services;
+package com.izorai.pfa.module2.services.demande;
 
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.entities.partenaire.Physique;
