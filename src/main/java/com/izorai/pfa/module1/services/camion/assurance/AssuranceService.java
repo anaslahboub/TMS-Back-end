@@ -1,6 +1,7 @@
 package com.izorai.pfa.module1.services.camion.assurance;
 
 import com.izorai.pfa.module1.DTO.camion.assurance.AssuranceDTO;
+import com.izorai.pfa.module1.entities.camion.Assurance;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,11 +21,14 @@ public interface AssuranceService {
     AssuranceDTO renouvelerAssurance(Long id, LocalDate nouvelleDate);
 
     // Vérification des assurances expirées
-    void checkExpirationAssurances();
+//    void checkExpirationAssurances();
 
     // Calcul du coût total des assurances
     double getTotalPrimesAnnuelles();
 
 
-    public List<AssuranceDTO> getAssurancesExpirantDans30Jours();
+    public List<Assurance> getAssurancesExpirantDans30Jours();
+    public List<Assurance> getAssurancesExpirantBefore30Jours();
+
+
 }

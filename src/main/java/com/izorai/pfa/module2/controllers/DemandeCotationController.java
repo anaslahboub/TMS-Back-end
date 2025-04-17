@@ -3,11 +3,9 @@ package com.izorai.pfa.module2.controllers;
 
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module2.DTO.demande.DemandeCotationDto;
-import com.izorai.pfa.module2.entities.enumeartions.StatusDemandeCotation;
+import com.izorai.pfa.module2.enumerations.StatusDemandeCotation;
 import com.izorai.pfa.module2.services.DemandeCotationService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

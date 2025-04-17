@@ -1,11 +1,8 @@
 package com.izorai.pfa.module2.DTO.demande;
 
-import com.izorai.pfa.module1.entities.camion.Remorque;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.entities.partenaire.Physique;
-import com.izorai.pfa.module2.entities.enumeartions.StatusDemandeCotation;
-import com.izorai.pfa.module2.entities.marchandises.Marchandise;
-import jakarta.persistence.OneToOne;
+import com.izorai.pfa.module2.enumerations.StatusDemandeCotation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

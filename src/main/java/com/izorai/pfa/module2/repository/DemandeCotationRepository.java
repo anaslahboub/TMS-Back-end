@@ -1,7 +1,7 @@
 package com.izorai.pfa.module2.repository;
 
 import com.izorai.pfa.module2.entities.DemandeCotation;
-import com.izorai.pfa.module2.entities.enumeartions.StatusDemandeCotation;
+import com.izorai.pfa.module2.enumerations.StatusDemandeCotation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

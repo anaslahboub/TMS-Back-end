@@ -9,6 +9,7 @@ import com.izorai.pfa.module1.repository.camion.CarteGriseRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -72,5 +73,24 @@ public class CarteGriseServiceImpl implements CarteGriseService {
         }
         carteGriseRepository.deleteById(id); // Supprime la carte grise par son ID
     }
+
+    @Override
+    public List<CarteGrise> catreGriseExpireIn30Days() {
+        LocalDate today = LocalDate.now();
+        LocalDate day30 = today.plusDays(30);
+
+        return carteGriseRepository.findCarteGriseByDateDelivranceBetween(day30, today);
+    }
+
+    @Override
+    public  List<CarteGrise> catreGriseExpireBefore30Days(){
+        LocalDate today = LocalDate.now();
+        LocalDate day30 = today.minusDays(30);
+
+        return carteGriseRepository.findCarteGriseByDateDelivranceBetween(today, day30);
+
+    }
+
+
 
 }

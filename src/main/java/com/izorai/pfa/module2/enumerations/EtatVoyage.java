@@ -1,0 +1,4 @@
+package com.izorai.pfa.module2.enumerations;
+
+public enum EtatVoyage {
+}

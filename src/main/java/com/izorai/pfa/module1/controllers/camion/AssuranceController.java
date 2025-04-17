@@ -81,17 +81,5 @@ public class AssuranceController {
         return ResponseEntity.ok(totalPrimes);
     }
 
-    // Endpoint pour vérifier l'expiration des assurances et envoyer des alertes
-    @GetMapping("/check-expiration")
-    public ResponseEntity<Void> checkExpirationAssurances() {
-        assuranceService.checkExpirationAssurances();
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-    }
 
-    // Endpoint pour récupérer les assurances expirant dans les 30 jours
-    @GetMapping("/expirant-dans-30-jours")
-    public ResponseEntity<List<AssuranceDTO>> getAssurancesExpirantDans30Jours() {
-        List<AssuranceDTO> assurancesExpirant = assuranceService.getAssurancesExpirantDans30Jours();
-        return ResponseEntity.ok(assurancesExpirant);
-    }
 }

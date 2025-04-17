@@ -2,9 +2,7 @@ package com.izorai.pfa.module2.services;
 
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module2.DTO.demande.DemandeCotationDto;
-import com.izorai.pfa.module2.entities.DemandeCotation;
-import com.izorai.pfa.module2.entities.enumeartions.StatusDemandeCotation;
-import com.izorai.pfa.module2.mappers.DemandeCotationMapper;
+import com.izorai.pfa.module2.enumerations.StatusDemandeCotation;
 
 import java.util.List;
 import java.util.Map;

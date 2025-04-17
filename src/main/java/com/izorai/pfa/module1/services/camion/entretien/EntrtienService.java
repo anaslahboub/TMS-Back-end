@@ -25,6 +25,8 @@ public interface EntrtienService {
     List<EntretienViewResp> getEntretiensByDateRange(LocalDate debut, LocalDate fin);
     List<EntretienViewResp> getEntretiensByType(String typeEntretien);
 
+    List<Entretien> getProchainsEntertiensIn30Days();
+    List<Entretien> getProchainsEntertiensBefore30Days();
 
     // Statistiques
     double getCoutTotalEntretiensByCamion(String immatriculationCamion  );

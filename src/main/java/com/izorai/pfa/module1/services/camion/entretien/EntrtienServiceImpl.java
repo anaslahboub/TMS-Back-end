@@ -96,6 +96,22 @@ private final CamionMapper camionMapper;
     }
 
     @Override
+    public List<Entretien> getProchainsEntertiensIn30Days() {
+        LocalDate today = LocalDate.now();
+        LocalDate day = today.plusDays(30);
+        List<Entretien> entretiens = entretienRepository.findByDateEntretienBetween(day, today);
+        return entretiens;
+    }
+
+    @Override
+    public List<Entretien> getProchainsEntertiensBefore30Days(){
+        LocalDate today = LocalDate.now();
+        LocalDate day = today.minusDays(30);
+        return entretienRepository.findByDateEntretienBetween(today, day);
+    }
+
+
+    @Override
     public double getCoutTotalEntretiensByCamion(String immatriculationCamion) {
         List<Entretien> entretiens = entretienRepository.findByCamionImmatriculation(immatriculationCamion);
 

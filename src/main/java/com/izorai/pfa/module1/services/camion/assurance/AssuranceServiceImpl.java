@@ -104,43 +104,10 @@ public class AssuranceServiceImpl implements AssuranceService {
     }
 
 
-    @Override
-    @Scheduled(fixedRate = 86400000)
-    public void checkExpirationAssurances() {
-        LocalDate today = LocalDate.now();
-        LocalDate alertDate = today.plusDays(30); // Alerte 30 jours avant expiration
 
-        // Récupérer les assurances qui expirent dans moins de 30 jours
-        List<Assurance> assurancesExpirant = assuranceRepository.findByDateExpirationBetweenAndActive(today, alertDate, true);
-
-        for (Assurance assurance : assurancesExpirant) {
-            long joursRestants = ChronoUnit.DAYS.between(today, assurance.getDateExpiration());
-
-            // Envoyer une notification différente selon l'urgence
-            if (joursRestants <= 7) {
-                notificationService.envoyerAlerteStandard(assurance,joursRestants);
-            } else if (joursRestants <= 15) {
-                notificationService.envoyerAlerteStandard(assurance,joursRestants);
-            } else {
-                notificationService.envoyerAlerteStandard(assurance,joursRestants);
-            }
-        }
-
-        // Vérifier les assurances expirées
-        List<Assurance> assurancesExpirees = assuranceRepository.findByDateExpirationBeforeAndActive(today, true);
-
-        for (Assurance assurance : assurancesExpirees) {
-            // Marquer comme inactive
-            assurance.setActive(false);
-            assuranceRepository.save(assurance);
-
-            // Notifier de l'expirationg
-            notificationService.notifierExpirationAssurance(assurance);
-        }
-    }
 
     @Override
-    public List<AssuranceDTO> getAssurancesExpirantDans30Jours() {
+    public List<Assurance> getAssurancesExpirantDans30Jours() {
         LocalDate today = LocalDate.now();
         LocalDate alertDate = today.plusDays(30); // Calcul de la date dans 30 jours
 
@@ -149,8 +116,12 @@ public class AssuranceServiceImpl implements AssuranceService {
                 .findByDateExpirationBetweenAndActive(today, alertDate, true);
 
         // Mapper les entités Assurance vers AssuranceDTO
-        return assurancesExpirantDans30Jours.stream()
-                .map(assuranceMapper::toAssuranceDto)
-                .collect(Collectors.toList());
+        return assurancesExpirantDans30Jours;
+    }
+    @Override
+    public List<Assurance> getAssurancesExpirantBefore30Jours(){
+        LocalDate today = LocalDate.now();
+        LocalDate alertDate = today.minusDays(30);
+        return assuranceRepository.findByDateExpirationBetweenAndActive(today, alertDate, true);
     }
 }

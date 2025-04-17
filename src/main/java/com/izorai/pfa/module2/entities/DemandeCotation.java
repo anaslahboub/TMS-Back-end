@@ -3,12 +3,11 @@ package com.izorai.pfa.module2.entities;
 
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.entities.partenaire.Physique;
-import com.izorai.pfa.module2.entities.enumeartions.StatusDemandeCotation;
+import com.izorai.pfa.module2.enumerations.StatusDemandeCotation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Cascade;
 
 import java.io.Serializable;
 import java.time.LocalDate;

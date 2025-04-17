@@ -187,6 +187,22 @@ public class ChaufeurServiceImpl implements ChaufeurService {
         return chaufeurPermisDto;
     }
 
+    @Override
+
+    public List<Chaufeur> getChauffeurPermisExpiranteBefore30Days(){
+        LocalDate today = LocalDate.now();
+        LocalDate day =  today.minusDays(30);
+        return chaufeurRepository.findAllByDateExpirationPermisBetween(today,day);
+    }
+
+    @Override
+    public List<Chaufeur> getChauffeurPermisExpiranteAfter30Days(){
+        LocalDate today = LocalDate.now();
+        LocalDate day =  today.plusDays(30);
+        return chaufeurRepository.findAllByDateExpirationPermisBetween(day,today);
+
+    }
+
 
 
 

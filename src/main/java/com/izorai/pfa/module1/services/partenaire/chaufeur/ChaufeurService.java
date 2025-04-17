@@ -75,4 +75,7 @@ public interface ChaufeurService {
      *retourne le permet de chaffeur
      * */
     ChaufeurPermisDto getPermisPhoto(Long idChaufeur);
+
+    List<Chaufeur> getChauffeurPermisExpiranteBefore30Days();
+    List<Chaufeur> getChauffeurPermisExpiranteAfter30Days();
 }
