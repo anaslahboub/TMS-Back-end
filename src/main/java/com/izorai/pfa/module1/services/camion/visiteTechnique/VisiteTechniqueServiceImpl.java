@@ -89,35 +89,19 @@ public class VisiteTechniqueServiceImpl implements VisiteTechniqueService {
         VisiteTechnique existing = visiteTechniqueRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Visite technique with ID " + id + " not found"));
 
-        // Update fields if provided
-        if (visiteTechnique.getDateVisite() != null) {
-            existing.setDateVisite(visiteTechnique.getDateVisite());
-        }
-        if (visiteTechnique.getDateExpiration() != null) {
-            existing.setDateExpiration(visiteTechnique.getDateExpiration());
-        }
-        if (visiteTechnique.getResultatVisite() != null) {
-            existing.setResultatVisite(visiteTechnique.getResultatVisite());
-        }
-        if (visiteTechnique.getObservations() != null) {
-            existing.setObservations(visiteTechnique.getObservations());
-        }
-        if (visiteTechnique.getDocumentUrl() != null) {
-            existing.setDocumentUrl(visiteTechnique.getDocumentUrl());
+
+        existing.setObservations(visiteTechnique.getObservations());
+        existing.setResultatVisite(visiteTechnique.getResultatVisite());
+        existing.setDateExpiration(visiteTechnique.getDateExpiration());
+        existing.setCentreVisite(visiteTechnique.getCentreVisite());
+        existing.setDateVisite(visiteTechnique.getDateVisite());
+        existing.setDocumentUrl(visiteTechnique.getDocumentUrl());
+        if (visiteTechnique.getCamion().equals( existing.getCamion())) {
+            existing.setCamion(visiteTechnique.getCamion());
+
         }
 
-        // Validate updated fields
-        if (existing.getDateVisite() == null || existing.getDateExpiration() == null) {
-            throw new IllegalArgumentException("Date de visite and date d'expiration are required");
-        }
-        if (existing.getDateExpiration().isBefore(existing.getDateVisite())) {
-            throw new IllegalArgumentException("Expiration date must be after visite date");
-        }
-        if (existing.getResultatVisite() == null) {
-            throw new IllegalArgumentException("Resultat visite is required");
-        }
-
-        return  visiteTechniqueMapper.toDto(visiteTechniqueRepository.save(existing));
+        return  visiteTechniqueMapper.toDto(existing);
     }
 
 

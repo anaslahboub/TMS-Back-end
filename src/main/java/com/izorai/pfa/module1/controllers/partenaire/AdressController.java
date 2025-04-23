@@ -4,6 +4,7 @@ import com.izorai.pfa.module1.DTO.partenaire.adress.AdressCreateDto;
 import com.izorai.pfa.module1.DTO.partenaire.adress.AdressUpdateDto;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module1.services.partenaire.adress.AdressService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,14 +13,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/adresses")
+@RequiredArgsConstructor
 public class AdressController {
 
-    private final AdressService adressService;
-
-
-    public AdressController(AdressService adressService) {
-        this.adressService = adressService;}
-
+         private final AdressService adressService;
 
         @PostMapping
         public ResponseEntity<Adress> addNewAdress(@RequestBody AdressCreateDto adress) {

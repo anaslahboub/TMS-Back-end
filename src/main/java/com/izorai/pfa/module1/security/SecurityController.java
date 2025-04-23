@@ -4,7 +4,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
-import org.springframework.security.oauth2.jwt.*;
+import org.springframework.security.oauth2.jwt.JwsHeader;
+import org.springframework.security.oauth2.jwt.JwtClaimsSet;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
@@ -24,7 +27,7 @@ public class SecurityController {
         this.jwtEncoder = jwtEncoder;
     }
 
-    @PostMapping("/login")
+    @PostMapping(   "/login")
     public Map<String, String> login(@RequestBody LoginRequest request) {
         Authentication authentication = authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -37,8 +40,10 @@ public class SecurityController {
                 .map(a -> a.getAuthority())
                 .collect(Collectors.joining(" "));
 
+        System.out.println(authorities);
+
         JwtClaimsSet claims = JwtClaimsSet.builder()
-                .issuer("your-app")
+                .issuer("AgileApp")
                 .issuedAt(Instant.now())
                 .expiresAt(Instant.now().plus(10, ChronoUnit.MINUTES))
                 .subject(request.username())
@@ -49,7 +54,16 @@ public class SecurityController {
                 JwsHeader.with(MacAlgorithm.HS512).build(),
                 claims)).getTokenValue();
 
-        return Map.of("access_token", token);
+        JwtClaimsSet refreshClaims = JwtClaimsSet.builder()
+                .issuer("AgileApp")
+                .issuedAt(Instant.now())
+                .expiresAt(Instant.now().plus(7, ChronoUnit.DAYS))
+                .subject(request.username())
+                .build();
+        String refreshToken = jwtEncoder.encode(JwtEncoderParameters.from(
+                JwsHeader.with(MacAlgorithm.HS512).build(), refreshClaims)).getTokenValue();
+
+        return Map.of("access_token", token , "refresh_token", refreshToken);
     }
 
     @GetMapping("/profile")

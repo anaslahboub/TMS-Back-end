@@ -17,7 +17,7 @@ public class VisiteTechnique {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    private String centreVisite;
     @Column(nullable = false)
     private LocalDate dateVisite;
     @Column(nullable = false)
@@ -25,17 +25,12 @@ public class VisiteTechnique {
     @Enumerated(EnumType.STRING)
     private ResultatVisite resultatVisite;
     private String observations;
+
     private String documentUrl;
+
     @ManyToOne
-    @JoinColumn(name = "immatriculation", nullable = false)
+    @JoinColumn(name = "immatriculation")
     private Camion camion;
 
-
-
-//    @ElementCollection
-//    @MapKeyEnumerated(EnumType.STRING)
-//    @Enumerated(EnumType.STRING)
-//    @CollectionTable(name = "visite_technique_controle_results")
-//    private Map<TypeControle, ResultatVisite> typeControleResultatVisite;
 
 }
