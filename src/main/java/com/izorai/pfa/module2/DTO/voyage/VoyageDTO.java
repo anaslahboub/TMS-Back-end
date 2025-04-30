@@ -2,6 +2,7 @@ package com.izorai.pfa.module2.DTO.voyage;
 
 import com.izorai.pfa.module1.DTO.camion.camion.CamionDTO;
 import com.izorai.pfa.module1.DTO.camion.remorque.RemorqueDTO;
+import com.izorai.pfa.module1.DTO.partenaire.adress.AdressCreateDto;
 import com.izorai.pfa.module1.DTO.partenaire.chaufeur.ChaufeurRespDTO;
 import com.izorai.pfa.module1.entities.partenaire.Adress;
 import com.izorai.pfa.module2.DTO.contient.ContientDTO;
@@ -15,8 +16,8 @@ public record VoyageDTO(
         LocalDate dateDepart,
         LocalDate dateArrivePrevue,
         LocalDate dateArriveReelle,
-        Adress lieuDepart,
-        Adress lieuArrive,
+        AdressCreateDto lieuDepart,
+        AdressCreateDto lieuArrive,
         int distance,
         EtatVoyage etat,
         List<ContientDTO> listMarchandises,

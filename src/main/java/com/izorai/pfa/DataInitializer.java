@@ -1,5 +1,7 @@
 package com.izorai.pfa;
 
+import com.izorai.pfa.module1.security.UserAuth;
+import com.izorai.pfa.module1.security.UserAuthRep;
 import lombok.AllArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;

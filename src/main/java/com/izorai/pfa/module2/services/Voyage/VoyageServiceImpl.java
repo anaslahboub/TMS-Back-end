@@ -1,10 +1,12 @@
 package com.izorai.pfa.module2.services.Voyage;
 
+import com.izorai.pfa.module1.DTO.partenaire.adress.AdressCreateDto;
 import com.izorai.pfa.module1.entities.camion.Camion;
 import com.izorai.pfa.module1.entities.camion.Chaufeur;
 import com.izorai.pfa.module1.entities.camion.Remorque;
 import com.izorai.pfa.module1.mappers.camion.CamionMapper;
 import com.izorai.pfa.module1.mappers.camion.RemorqueMapper;
+import com.izorai.pfa.module1.mappers.partenaire.AdressMapper;
 import com.izorai.pfa.module1.mappers.partenaire.ChaufeurMapper;
 import com.izorai.pfa.module1.repository.camion.CamionRepository;
 import com.izorai.pfa.module1.repository.camion.RemorqueRepository;
@@ -42,6 +44,7 @@ public class VoyageServiceImpl implements VoyageService {
     private final CamionMapper camionMapper;
     private final RemorqueMapper remorqueMapper;
     private final ChaufeurMapper chaufeurMapper;
+    private final AdressMapper adressMapper;
 
 
     private boolean isValidTransition(EtatVoyage current, EtatVoyage next) {
@@ -78,8 +81,8 @@ public class VoyageServiceImpl implements VoyageService {
         // Update the fields
         existingVoyage.setDateDepart(voyageDTO.dateDepart());
         existingVoyage.setDateArrivePrevue(voyageDTO.dateArrivePrevue());
-        existingVoyage.setLieuDepart(voyageDTO.lieuDepart());
-        existingVoyage.setLieuArrive(voyageDTO.lieuArrive());
+        existingVoyage.setLieuDepart(adressMapper.fromAdressCreateDto(voyageDTO.lieuDepart()));
+        existingVoyage.setLieuArrive(adressMapper.fromAdressCreateDto(voyageDTO.lieuArrive()));
         existingVoyage.setDistance(voyageDTO.distance());
         existingVoyage.setEtat(voyageDTO.etat());
         existingVoyage.setEstUrgent(voyageDTO.estUrgent());

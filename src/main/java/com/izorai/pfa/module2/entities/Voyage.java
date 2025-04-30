@@ -39,12 +39,10 @@ public class Voyage implements Serializable {
     private LocalDate dateArrivePrevue;
     private LocalDate dateArriveReelle;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "lieu_depart_id_adress")
+    @OneToOne(cascade = CascadeType.ALL)  // Changé de REMOVE à ALL
     private Adress lieuDepart;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "lieu_arrive_id_adress")
+    @OneToOne(cascade = CascadeType.ALL)  // Changé de REMOVE à ALL
     private Adress lieuArrive;
     private int distance;
 
