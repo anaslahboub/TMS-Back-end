@@ -55,7 +55,7 @@ public class DemandeCotationController {
         return ResponseEntity.ok(demandes);
     }
 
-    @PatchMapping("/{id}/status")
+    @PutMapping("/{id}/status")
     public ResponseEntity<DemandeCotationDto> updateStatus(
             @PathVariable Long id,
             @RequestParam StatusDemandeCotation newStatus) {

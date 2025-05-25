@@ -87,7 +87,7 @@ public class Voyage implements Serializable {
             LocalDate carteGriseExpiry = this.camion.getCarteGrise()
                     .getDateMiseEnCirculation().plusYears(10);
             if (carteGriseExpiry.isBefore(voyageEnd)) {
-                warnings.add("Carte grise exceeds 10 years on " + carteGriseExpiry);
+                warnings.add("Carte grise expirés " + carteGriseExpiry);
             }
         }
 
@@ -95,7 +95,7 @@ public class Voyage implements Serializable {
         if (this.chaufeur != null) {
             LocalDate permisExpiry = this.chaufeur.getDateExpirationPermis();
             if (permisExpiry.isBefore(voyageEnd)) {
-                warnings.add("Driver license expires on " + permisExpiry);
+                warnings.add("le permit de chauffeur  expirés on " + permisExpiry);
             }
         }
     }
